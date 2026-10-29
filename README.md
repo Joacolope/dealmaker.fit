@@ -31,3 +31,19 @@ Google Tag Manager `GTM-NQ8RKDRH` en todas las páginas (desde ahí cargan GA4 y
 ## Deploy
 
 Vercel, proyecto conectado a este repo. Cada push a `main` despliega.
+
+## Test A/B del título
+
+En la Presentación cada visitante ve una de dos promesas (título y texto del botón), sorteada 50/50 y recordada en su navegador:
+
+- **A:** "Convertí tu profesión en un negocio online de $5.000 al mes en 120 días"
+- **B:** "Convertí tu profesión en un negocio online de $60.000 al año en 4 meses"
+
+Para ver una variante a mano: `/?v=a` o `/?v=b`. La variante viaja en el PageView del pixel `1034841362227406`
+como parámetro `headline_variant` y en el dataLayer (evento `headline_variant`). Los textos están en `index.html`
+(clases `headline-a` / `headline-b`).
+
+## Pixel
+
+Meta Pixel `1034841362227406` cargado directo en todas las páginas, solo con PageView. GTM sigue cargando además el pixel
+`1083063284052786` con sus propios eventos.

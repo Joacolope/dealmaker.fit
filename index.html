@@ -11,6 +11,30 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-NQ8RKDRH');</script>
 <!-- End Google Tag Manager -->
+<!-- Test A/B del título: ?v=a o ?v=b fuerza una variante; si no, se sortea 50/50 y se recuerda en este navegador -->
+<script>
+(function () {
+  var v = (location.search.match(/[?&]v=(a|b)(?:&|$)/i) || [])[1];
+  if (v) v = v.toUpperCase();
+  if (!v) { try { v = localStorage.getItem('dm_headline'); } catch (e) {} }
+  if (v !== 'A' && v !== 'B') v = Math.random() < 0.5 ? 'A' : 'B';
+  try { localStorage.setItem('dm_headline', v); } catch (e) {}
+  window.dmHeadline = v;
+  document.documentElement.setAttribute('data-headline', v);
+  (window.dataLayer = window.dataLayer || []).push({ event: 'headline_variant', headline_variant: v });
+})();
+</script>
+<!-- Meta Pixel 1034841362227406: solo PageView (trackSingle para no mezclarse con el pixel que carga GTM) -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1034841362227406');
+fbq('trackSingle', '1034841362227406', 'PageView', { headline_variant: window.dmHeadline });
+</script>
+<!-- End Meta Pixel -->
 <link rel="icon" href="/assets/logo-dm.svg" type="image/svg+xml">
 <link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
@@ -25,6 +49,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NQ8RKDRH" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
+<noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=1034841362227406&ev=PageView&noscript=1"></noscript>
 <header class="topbar">
   <div class="topbar-inner">
     <a class="brand" href="#inicio"><img src="/assets/logo-dm.svg" alt="" width="34" height="34">DealMaker</a>
@@ -42,7 +67,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <!-- ===== Hero + VSL ===== -->
   <section class="hero">
     <p class="eyebrow">Profesional de la salud deportiva que ya ejerce</p>
-    <h1>Convertí tu profesión en un negocio online que dé <mark>5.000 dólares al mes</mark> en 4 meses.</h1>
+    <h1><span class="headline-a">Convertí tu profesión en un negocio online de <mark>$5.000 al mes</mark> en 120 días.</span><span class="headline-b">Convertí tu profesión en un negocio online de <mark>$60.000 al año</mark> en 4 meses.</span></h1>
 
     <!-- VSL: pegar la URL del embed en el src (data-video-slot="presentacion-vsl") -->
     <div class="video-frame vsl">
@@ -50,7 +75,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </div>
 
     <div class="cta-card" id="cta-principal">
-      <p class="cta-text">Convierte tu profesión en un negocio online de <mark>3.000 a 5.000 dólares al mes</mark> en 4 meses</p>
+      <p class="cta-text"><span class="headline-a">Convertí tu profesión en un negocio online de <mark>$5.000 al mes</mark> en 120 días</span><span class="headline-b">Convertí tu profesión en un negocio online de <mark>$60.000 al año</mark> en 4 meses</span></p>
       <a class="btn" href="#agenda">Agendar llamada</a>
     </div>
   </section>
@@ -243,7 +268,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <!-- ===== Barra fija con la promesa + botón (se oculta al llegar a la agenda) ===== -->
 <div class="sticky-cta" id="sticky-cta" hidden>
-  <p class="cta-text">Convierte tu profesión en un negocio online de <mark>3.000 a 5.000 dólares al mes</mark> en 4 meses</p>
+  <p class="cta-text"><span class="headline-a">Convertí tu profesión en un negocio online de <mark>$5.000 al mes</mark> en 120 días</span><span class="headline-b">Convertí tu profesión en un negocio online de <mark>$60.000 al año</mark> en 4 meses</span></p>
   <a class="btn" href="#agenda">Agendar llamada</a>
 </div>
 

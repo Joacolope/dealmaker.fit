@@ -1,7 +1,12 @@
 /* Presentación — estructura: hero + VSL + CTA, casos de éxito, preguntas, agenda */
 
+/* Test A/B del título y del texto del botón (la variante la elige el script del <head>) */
+.headline-b { display: none; }
+html[data-headline="B"] .headline-a { display: none; }
+html[data-headline="B"] .headline-b { display: inline; }
+
 mark {
-  background: linear-gradient(transparent 58%, var(--yellow) 58%, var(--yellow) 92%, transparent 92%);
+  background: linear-gradient(transparent 60%, rgba(255, 238, 7, .5) 60%, rgba(255, 238, 7, .5) 90%, transparent 90%);
   color: inherit;
   padding: 0 .06em;
   -webkit-box-decoration-break: clone;
