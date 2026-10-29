@@ -10,6 +10,16 @@
     });
   });
 
+  // Pixel de Meta (lo carga GTM): InitiateCheckout la primera vez que tocan "Agendar llamada"
+  var checkoutSent = false;
+  document.querySelectorAll('a[href="#agenda"]').forEach(function (link) {
+    link.addEventListener('click', function () {
+      if (checkoutSent || typeof window.fbq !== 'function') return;
+      checkoutSent = true;
+      window.fbq('track', 'InitiateCheckout');
+    });
+  });
+
   // La barra fija aparece después del botón principal y se esconde al llegar a la agenda
   var bar = document.getElementById('sticky-cta');
   var cta = document.getElementById('cta-principal');
