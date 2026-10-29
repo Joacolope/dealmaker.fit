@@ -2,6 +2,8 @@
 
 Embudo de dealmakerconsulting.com como sitio estático en Vercel (réplica de las páginas de GoHighLevel).
 
+Estilo: paleta DealMaker (fondo `#0A0A0A`, acento amarillo `#FFEE07`, texto `#F5F5F0`, tarjetas `#161616`) y tipografía estilo Apple (SF Pro, con Inter como respaldo). Variables en `assets/base.css`.
+
 | Paso | Ruta | Archivo |
 |---|---|---|
 | Presentación | `/` (y `/presentacion`) | `index.html` |
