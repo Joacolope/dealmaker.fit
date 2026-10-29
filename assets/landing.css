@@ -1,4 +1,4 @@
-/* Presentación — estructura: hero + VSL + CTA, casos de éxito, preguntas, agenda */
+/* Estilos compartidos de las landings (Presentación y Gracias): barra superior, secciones, video, casos, preguntas, barra fija */
 
 /* Test A/B del título y del texto del botón (la variante la elige el script del <head>) */
 .headline-b { display: none; }
@@ -200,7 +200,6 @@ mark {
 
 /* Agenda */
 .agenda { background: var(--soft); }
-.agenda-note { margin: 12px 0 0; font-size: 14px; font-weight: 600; color: var(--ink); }
 .calendar-card {
   max-width: 1000px;
   margin: 0 auto;

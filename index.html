@@ -16,9 +16,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 (function () {
   var v = (location.search.match(/[?&]v=(a|b)(?:&|$)/i) || [])[1];
   if (v) v = v.toUpperCase();
-  if (!v) { try { v = localStorage.getItem('dm_headline'); } catch (e) {} }
+  if (!v) { try { v = localStorage.getItem('dm_headline_60k'); } catch (e) {} }
   if (v !== 'A' && v !== 'B') v = Math.random() < 0.5 ? 'A' : 'B';
-  try { localStorage.setItem('dm_headline', v); } catch (e) {}
+  try { localStorage.setItem('dm_headline_60k', v); } catch (e) {}
   window.dmHeadline = v;
   document.documentElement.setAttribute('data-headline', v);
   (window.dataLayer = window.dataLayer || []).push({ event: 'headline_variant', headline_variant: v });
@@ -43,7 +43,7 @@ fbq('trackSingle', '1034841362227406', 'PageView', { headline_variant: window.dm
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/base.css">
-<link rel="stylesheet" href="/assets/presentacion.css">
+<link rel="stylesheet" href="/assets/landing.css">
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
@@ -67,7 +67,7 @@ fbq('trackSingle', '1034841362227406', 'PageView', { headline_variant: window.dm
   <!-- ===== Hero + VSL ===== -->
   <section class="hero">
     <p class="eyebrow">Profesional de la salud deportiva que ya ejerce</p>
-    <h1><span class="headline-a">Convertí tu profesión en un negocio online de <mark>$5.000 al mes</mark> en 120 días.</span><span class="headline-b">Convertí tu profesión en un negocio online de <mark>$60.000 al año</mark> en 4 meses.</span></h1>
+    <h1><span class="headline-a">Convertí tu profesión en un negocio de <mark>$60.000 al año</mark> en 4 meses.</span><span class="headline-b">Convertí tu profesión en un negocio online de <mark>$60K al año</mark> en 4 meses.</span></h1>
 
     <!-- VSL: pegar la URL del embed en el src (data-video-slot="presentacion-vsl") -->
     <div class="video-frame vsl">
@@ -250,8 +250,7 @@ fbq('trackSingle', '1034841362227406', 'PageView', { headline_variant: window.dm
     <div class="section-head">
       <p class="kicker">Agendá tu llamada</p>
       <h2>Elegí día y horario</h2>
-      <p class="section-sub">Si eres entrenador presencial y quieres dar el salto a lo online para facturar entre 3.000 y 5.000 dólares al mes, agenda una llamada.</p>
-      <p class="agenda-note">Esto es una consultoría paga, no un curso gratis.</p>
+      <p class="section-sub">Si sos entrenador presencial y querés dar el salto a lo online para facturar $5.000 al mes, agendá una llamada.</p>
     </div>
     <div class="calendar-card">
       <iframe src="https://api.leadconnectorhq.com/widget/booking/JdrYfF1pF3JpMgoEW1Sv" style="width:100%;border:none;overflow:hidden" scrolling="no" id="JdrYfF1pF3JpMgoEW1Sv_presentacion" title="Calendario"></iframe>
@@ -267,11 +266,11 @@ fbq('trackSingle', '1034841362227406', 'PageView', { headline_variant: window.dm
 
 <!-- ===== Barra fija con la promesa + botón (se oculta al llegar a la agenda) ===== -->
 <div class="sticky-cta" id="sticky-cta" hidden>
-  <p class="cta-text"><span class="headline-a">Convertí tu profesión en un negocio online de <mark>$5.000 al mes</mark> en 120 días</span><span class="headline-b">Convertí tu profesión en un negocio online de <mark>$60.000 al año</mark> en 4 meses</span></p>
+  <p class="cta-text"><span class="headline-a">Convertí tu profesión en un negocio de <mark>$60.000 al año</mark> en 4 meses</span><span class="headline-b">Convertí tu profesión en un negocio online de <mark>$60K al año</mark> en 4 meses</span></p>
   <a class="btn" href="#agenda">Agendar llamada</a>
 </div>
 
 <script src="https://link.msgsndr.com/js/form_embed.js"></script>
-<script src="/assets/presentacion.js"></script>
+<script src="/assets/landing.js"></script>
 </body>
 </html>
