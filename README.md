@@ -2,7 +2,7 @@
 
 Embudo de dealmakerconsulting.com como sitio estático en Vercel (réplica de las páginas de GoHighLevel).
 
-Estilo: paleta DealMaker (fondo `#0A0A0A`, acento amarillo `#FFEE07`, texto `#F5F5F0`, tarjetas `#161616`) y tipografía estilo Apple (SF Pro, con Inter como respaldo). Variables en `assets/base.css`.
+Estilo: paleta DealMaker sobre fondo blanco (texto `#0A0A0A`, acento amarillo `#FFEE07`) y tipografía estilo Apple (SF Pro, con Inter como respaldo). Variables en `assets/base.css`. Logo y favicon: `assets/logo-dm.svg`.
 
 | Paso | Ruta | Archivo |
 |---|---|---|
@@ -14,8 +14,7 @@ Estilo: paleta DealMaker (fondo `#0A0A0A`, acento amarillo `#FFEE07`, texto `#F5
 
 ## Flujo
 
-1. **Presentación**: el botón abre un popup con el formulario de GHL `Enrrutamiento` (`EaoXT2Uws3t2CyLltwDq`).
-   La lógica de calificación está en GHL: califica → `/booking-page`, no califica → `/nc`.
+1. **Presentación**: hero + VSL, debajo la promesa con el botón "Agendar llamada", casos de éxito, preguntas frecuentes y al final el calendario de GHL (`#agenda`). Todos los botones bajan al calendario.
 2. **Agenda**: calendario de GHL `Sesión de Diagnóstico Profesional` (`JdrYfF1pF3JpMgoEW1Sv`).
    La redirección después de agendar se configura en GHL (Calendario → Confirmación → redirect a `/gracias`).
 3. **Gracias** / **Nutrición**: contenido + botón de WhatsApp.
