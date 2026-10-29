@@ -121,3 +121,6 @@
   .more-card { flex-direction: column; align-items: stretch; text-align: center; padding: 22px 18px; gap: 16px; }
   .more-card p { font-size: 17px; }
 }
+
+/* Nutrición: aviso de WhatsApp al final */
+.notice { padding-top: 0 !important; }
