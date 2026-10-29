@@ -46,5 +46,11 @@ como parámetro `headline_variant` y en el dataLayer (evento `headline_variant`)
 
 ## Pixel
 
-Meta Pixel `1034841362227406` cargado directo en todas las páginas, solo con PageView. GTM sigue cargando además el pixel
+Meta Pixel `1034841362227406` cargado directo en todas las páginas, solo con PageView (eventos automáticos desactivados con `autoConfig`). GTM sigue cargando además el pixel
 `1083063284052786` con sus propios eventos.
+
+## Casos de éxito
+
+La lista de testimonios está en `assets/casos.js` (una sola lista para la Presentación y Gracias).
+Cada caso tiene nombre, resultado (opcional) y video: Loom (`loom`, `thumb`, `ratio` alto/ancho) o Drive (`drive`).
+Al tocar un caso el video se abre en una ventana respetando si es vertical u horizontal.

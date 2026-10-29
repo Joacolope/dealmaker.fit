@@ -1,15 +1,5 @@
-// Landings (Presentación y Gracias): videos de casos de éxito y barra fija
+// Landings (Presentación y Gracias): barra fija
 (function () {
-  // Al tocar un caso, se reemplaza la miniatura por el video de Drive
-  document.querySelectorAll('.case-video[data-drive-id]').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      var id = btn.getAttribute('data-drive-id');
-      btn.classList.add('is-playing');
-      btn.innerHTML = '<iframe src="https://drive.google.com/file/d/' + id + '/preview" ' +
-        'allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
-    });
-  });
-
   // La barra fija aparece después del botón principal (#cta-principal)
   // y, si la página tiene agenda (#agenda), se esconde al llegar a ella
   var bar = document.getElementById('sticky-cta');
