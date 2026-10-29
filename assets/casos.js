@@ -16,10 +16,10 @@ var CASOS = [
   { name: 'Lucas', win: 'Armó su estrategia para sumar más clientes', video: { loom: '5ccca0b574224b8eb1ec6154bea6fb29', thumb: 'https://cdn.loom.com/sessions/thumbnails/5ccca0b574224b8eb1ec6154bea6fb29-9d05dc1c5995d0a6.jpg', ratio: 1.7778 } },
   { name: 'Coco', win: 'Multiplicó por 5 sus resultados', video: { loom: '4427b37806884a9297683736922812cc', thumb: 'https://cdn.loom.com/sessions/thumbnails/4427b37806884a9297683736922812cc-6611b712fec66333.jpg', ratio: 1.7778 } },
   { name: 'Andrés', win: 'Logró su independencia económica', video: { loom: 'b596b77d223941aab5c4d95e4f1b491d', thumb: 'https://cdn.loom.com/sessions/thumbnails/b596b77d223941aab5c4d95e4f1b491d-56a17502ac66e3f7.jpg', ratio: 1.7931 } },
+  { name: 'Joaco', win: 'Encontró su nicho y duplicó sus clientes', video: { loom: 'a323d54ff98548cf8ee7ea2b795e407b', thumb: 'https://cdn.loom.com/sessions/thumbnails/a323d54ff98548cf8ee7ea2b795e407b-69d0d5f875483ca1.jpg', ratio: 1.7778 } },
   { name: 'Ramón', win: 'Pasó a triplicar sus ingresos', video: { drive: '10BAWPkZkqKmNkQRt0q8w1L0WGZ4Y6ZVf' } },
   { name: 'Ian', win: 'Alcanzó su pico de facturación', video: { drive: '14IiviRlMXaPP-tgTXE7XskqFfFV-tkoB' } },
-  { name: 'Nahue', win: 'Estructuró su servicio y pudo cobrar más', video: { drive: '1cDeagsvxRVpSto-B64b_iycz40-FeLK4' } },
-  { name: 'Joaco', win: 'Encontró su nicho y duplicó sus clientes', video: { drive: '1NN8__eFnn6E5q-TiZ6Uwb5Xtudb6SH99' } }
+  { name: 'Nahue', win: 'Estructuró su servicio y pudo cobrar más', video: { drive: '1cDeagsvxRVpSto-B64b_iycz40-FeLK4' } }
 ];
 
 (function () {
