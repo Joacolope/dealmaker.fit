@@ -15,9 +15,9 @@ var CASOS = [
   { name: 'Lucas', win: 'Armó su estrategia para sumar más clientes', video: { loom: '5ccca0b574224b8eb1ec6154bea6fb29', thumb: 'https://cdn.loom.com/sessions/thumbnails/5ccca0b574224b8eb1ec6154bea6fb29-9d05dc1c5995d0a6.jpg', ratio: 1.7778 } },
   { name: 'Gonza', win: 'Llevó su servicio a otro nivel', video: { loom: '354073a7275048ac894d8799566b0d48', thumb: 'https://cdn.loom.com/sessions/thumbnails/354073a7275048ac894d8799566b0d48-40d9f326fa741601.jpg', ratio: 1.7778 } },
   { name: 'Carlos', win: 'Ganó claridad y mejoró sus resultados', video: { loom: '8a06a9996dad446b9158ffe9697d8271', thumb: 'https://cdn.loom.com/sessions/thumbnails/8a06a9996dad446b9158ffe9697d8271-4bc25ee1e174a2fd.jpg', ratio: 0.5625 } },
-  { name: 'Alan', win: '', video: { loom: '6bdd492806a44b7ea092f15cb7e1f345', thumb: 'https://cdn.loom.com/sessions/thumbnails/6bdd492806a44b7ea092f15cb7e1f345-5cf91843e8bfe4cb.jpg', ratio: 1.7782 } },
-  { name: 'Cris', win: '', video: { loom: '0866776f2dcc4bf59a95c366e026fd9f', thumb: 'https://cdn.loom.com/sessions/thumbnails/0866776f2dcc4bf59a95c366e026fd9f-ea10ec0864f0c3b2.jpg', ratio: 1.7778 } },
-  { name: 'Juan Cruz', win: '', video: { loom: '4063144bda0141b597df2a1e25b21220', thumb: 'https://cdn.loom.com/sessions/thumbnails/4063144bda0141b597df2a1e25b21220-49e2c98ac702b65d.jpg', ratio: 1.7778 } }
+  { name: 'Alan', win: 'Escaló su negocio y se está mudando gracias a eso', video: { loom: '6bdd492806a44b7ea092f15cb7e1f345', thumb: 'https://cdn.loom.com/sessions/thumbnails/6bdd492806a44b7ea092f15cb7e1f345-5cf91843e8bfe4cb.jpg', ratio: 1.7782 } },
+  { name: 'Cris', win: 'Creció en vistas y ventas, y lanzó su mentoría', video: { loom: '0866776f2dcc4bf59a95c366e026fd9f', thumb: 'https://cdn.loom.com/sessions/thumbnails/0866776f2dcc4bf59a95c366e026fd9f-ea10ec0864f0c3b2.jpg', ratio: 1.7778 } },
+  { name: 'Juan Cruz', win: 'De la facultad a ganar $4.000 por mes', video: { loom: '4063144bda0141b597df2a1e25b21220', thumb: 'https://cdn.loom.com/sessions/thumbnails/4063144bda0141b597df2a1e25b21220-49e2c98ac702b65d.jpg', ratio: 1.7778 } }
 ];
 
 (function () {
@@ -43,6 +43,7 @@ var CASOS = [
       '</div>' +
     '</article>';
   }).join('');
+  grid.insertAdjacentHTML('afterend', '<p class="cases-hint">Deslizá para ver más →</p>');
 
   // Reproductor en ventana: respeta si el video es vertical u horizontal
   var modal = document.createElement('div');

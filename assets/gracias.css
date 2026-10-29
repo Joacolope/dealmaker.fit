@@ -2,41 +2,16 @@
 
 /* Confirmación */
 .confirm { padding-top: 40px !important; text-align: center; }
-.alert {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  margin: 0 0 14px;
-  padding: 8px 16px 8px 8px;
-  border-radius: 999px;
-  background: #FEECEC;
-  color: #B91C1C;
-  font-size: 15px;
-  font-weight: 600;
-}
-.alert-icon {
-  display: grid;
-  place-items: center;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background: #EF4444;
-  color: #FFFFFF;
-  font-size: 14px;
-  font-weight: 700;
-}
 .status {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  margin: 0 0 28px;
+  display: inline-flex;
+  margin: 0 0 22px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: #E9F9EF;
   font-size: 14px;
   font-weight: 600;
 }
 .status-ok { color: #16A34A; }
-.status-arrow { color: var(--text-3); }
-.status-pending { color: #DC2626; }
 .confirm h1 {
   max-width: 900px;
   margin: 0 auto 18px;
@@ -73,13 +48,23 @@
 }
 .wa-logo svg { width: 30px; height: 30px; fill: #FFFFFF; }
 .wa-copy { flex: 1; }
-.wa-tag { margin: 0 0 4px; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #15803D; }
 .wa-copy h2 { margin: 0 0 4px; font-size: 22px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.2; }
 .wa-copy p { margin: 0; font-size: 16px; color: var(--text-2); }
 
-.btn-wa { background: #25D366; color: #052E16; gap: 8px; }
-.btn-wa:hover { background: #20C05C; }
-.btn-wa svg { width: 20px; height: 20px; fill: currentColor; }
+.wa-logo-sm { flex: 0 0 40px; width: 40px; height: 40px; border-radius: 12px; }
+.wa-logo-sm svg { width: 22px; height: 22px; }
+.sticky-wa {
+  left: 12px;
+  right: 12px;
+  width: fit-content;
+  margin: 0 auto;
+  justify-content: center;
+  padding: 10px 22px 10px 10px;
+  transform: translateY(16px);
+}
+.sticky-wa.is-visible { transform: translateY(0); }
+.sticky-wa .cta-text { flex: none; }
+.sticky-wa mark { color: #25D366; }
 
 /* Videos antes de la llamada */
 .watch { background: var(--soft); }
@@ -130,14 +115,12 @@
 }
 @media (max-width: 640px) {
   .confirm { padding-top: 24px !important; }
-  .alert { font-size: 14px; }
   .status { font-size: 13px; margin-bottom: 20px; }
   .confirm h1 { font-size: clamp(25px, 7.4vw, 32px); line-height: 1.12; margin-bottom: 14px; }
   .confirm-sub { font-size: 17px; margin-bottom: 24px; }
   .wa-card { flex-direction: column; align-items: stretch; text-align: center; gap: 14px; padding: 22px 18px; }
   .wa-logo { margin: 0 auto; }
   .wa-copy h2 { font-size: 20px; }
-  .wa-card .btn { width: 100%; }
   .watch-second { margin-top: 48px; }
   .pillar { padding: 22px; }
   .more-card { flex-direction: column; align-items: stretch; text-align: center; padding: 22px 18px; gap: 16px; }

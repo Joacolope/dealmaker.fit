@@ -17,7 +17,7 @@ Estilo: paleta DealMaker sobre fondo blanco (texto `#0A0A0A`, acento amarillo `#
 1. **Presentación**: hero + VSL, debajo el botón "Agendar llamada" (la promesa aparece en la barra fija al scrollear), casos de éxito, preguntas frecuentes y al final el calendario de GHL (`#agenda`). Todos los botones bajan al calendario.
 2. **Agenda**: calendario de GHL `Sesión de Diagnóstico Profesional` (`JdrYfF1pF3JpMgoEW1Sv`).
    La redirección después de agendar se configura en GHL (Calendario → Confirmación → redirect a `/gracias`).
-3. **Gracias**: confirmación por WhatsApp (tarjeta + barra fija), videos antes de la llamada, propuesta de valor, preguntas y casos de éxito. Usa el mismo diseño que la Presentación (`assets/landing.css` + `assets/gracias.css`).
+3. **Gracias**: aviso de que les hablamos por WhatsApp (sin botones), videos antes de la llamada, propuesta de valor, preguntas y casos de éxito. Usa el mismo diseño que la Presentación (`assets/landing.css` + `assets/gracias.css`).
 4. **Nutrición**: videos previos a la llamada + botón de WhatsApp.
 
 ## Videos
@@ -38,7 +38,7 @@ Vercel, proyecto conectado a este repo. Cada push a `main` despliega.
 En la Presentación cada visitante ve una de dos promesas (título y texto del botón), sorteada 50/50 y recordada en su navegador:
 
 - **A:** "Convertí tu profesión en un negocio de $60.000 al año en 4 meses"
-- **B:** "Convertí tu profesión en un negocio online de $60K al año en 4 meses"
+- **B:** "Convertí tu profesión en un negocio online de $60k al año en 4 meses"
 
 Para ver una variante a mano: `/?v=a` o `/?v=b`. La variante viaja en el PageView del pixel `1034841362227406`
 como parámetro `headline_variant` y en el dataLayer (evento `headline_variant`). Los textos están en `index.html`

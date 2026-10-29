@@ -1,19 +1,32 @@
 // Landings (Presentación y Gracias): barra fija
 (function () {
-  // La barra fija aparece después del botón principal (#cta-principal)
-  // y, si la página tiene agenda (#agenda), se esconde al llegar a ella
+  // Cuándo aparece la barra (con fade):
+  //   data-show="scroll" -> apenas se empieza a scrollear (Presentación)
+  //   por defecto       -> después de pasar el botón principal (#cta-principal) (Gracias)
+  // Si la página tiene agenda (#agenda), se esconde al llegar a ella para no tapar el calendario.
   var bar = document.getElementById('sticky-cta');
+  if (!bar) return;
   var cta = document.getElementById('cta-principal');
   var agenda = document.getElementById('agenda');
-  if (!bar || !cta || !('IntersectionObserver' in window)) return;
-  var pastCta = false, atAgenda = false;
-  function update() { bar.hidden = !(pastCta && !atAgenda); }
-  new IntersectionObserver(function (entries) {
-    var e = entries[0];
-    pastCta = !e.isIntersecting && e.boundingClientRect.top < 0;
-    update();
-  }).observe(cta);
-  if (agenda) {
+  var onScroll = bar.getAttribute('data-show') === 'scroll';
+  var shown = false, atAgenda = false;
+
+  bar.hidden = false;
+  function update() { bar.classList.toggle('is-visible', shown && !atAgenda); }
+
+  if (onScroll || !cta || !('IntersectionObserver' in window)) {
+    var check = function () { shown = window.scrollY > 120; update(); };
+    window.addEventListener('scroll', check, { passive: true });
+    check();
+  } else {
+    new IntersectionObserver(function (entries) {
+      var e = entries[0];
+      shown = !e.isIntersecting && e.boundingClientRect.top < 0;
+      update();
+    }).observe(cta);
+  }
+
+  if (agenda && 'IntersectionObserver' in window) {
     new IntersectionObserver(function (entries) {
       atAgenda = entries[0].isIntersecting;
       update();
