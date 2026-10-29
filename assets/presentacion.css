@@ -225,7 +225,7 @@ mark {
   .landing section { padding: 56px 16px; }
   .hero { padding-top: 28px !important; }
   .eyebrow { font-size: 13px; margin-bottom: 18px; }
-  .hero h1 { font-size: 30px; line-height: 1.12; letter-spacing: -0.03em; margin-bottom: 24px; }
+  .hero h1 { font-size: clamp(21px, 6.4vw, 30px); line-height: 1.14; text-wrap: balance; letter-spacing: -0.03em; margin-bottom: 24px; }
   .section-head { margin-bottom: 28px; }
   .section-head h2 { font-size: 30px; line-height: 1.1; }
   .section-sub { font-size: 17px; }
