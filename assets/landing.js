@@ -33,3 +33,29 @@
     }, { rootMargin: '0px 0px -30% 0px' }).observe(agenda);
   }
 })();
+
+// Aparición suave de los bloques al scrollear
+(function () {
+  if (!('IntersectionObserver' in window)) return;
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var items = document.querySelectorAll(
+    '.landing section:not(.hero):not(.confirm) .section-head, .case-grid, .cases-foot, .faq-list, .more-card, ' +
+    '.pillar, .watch .video-frame, .calendar-card'
+  );
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+    });
+  }, { rootMargin: '0px 0px -10% 0px' });
+  items.forEach(function (el) { el.classList.add('reveal'); io.observe(el); });
+
+  // Respaldo: si se saltea un bloque (por ejemplo con el link a #agenda), se muestra igual
+  function revealPassed() {
+    var pending = document.querySelectorAll('.reveal:not(.is-in)');
+    if (!pending.length) { window.removeEventListener('scroll', revealPassed); return; }
+    pending.forEach(function (el) {
+      if (el.getBoundingClientRect().top < window.innerHeight) { el.classList.add('is-in'); io.unobserve(el); }
+    });
+  }
+  window.addEventListener('scroll', revealPassed, { passive: true });
+})();
