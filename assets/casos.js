@@ -3,6 +3,7 @@
 //   video: { loom: '<id del embed>', thumb: '<url de la miniatura>', ratio: alto/ancho }  (ratio 1.7931 = vertical, 0.5625 = horizontal)
 //      o:  { drive: '<id del archivo de Drive>' }
 var CASOS = [
+  { name: 'Alan', win: '', video: { loom: '6bdd492806a44b7ea092f15cb7e1f345', thumb: 'https://cdn.loom.com/sessions/thumbnails/6bdd492806a44b7ea092f15cb7e1f345-5cf91843e8bfe4cb.jpg', ratio: 1.7782 } },
   { name: 'Cris', win: '', video: { loom: '0866776f2dcc4bf59a95c366e026fd9f', thumb: 'https://cdn.loom.com/sessions/thumbnails/0866776f2dcc4bf59a95c366e026fd9f-ea10ec0864f0c3b2.jpg', ratio: 1.7778 } },
   { name: 'Juan Cruz', win: '', video: { loom: '4063144bda0141b597df2a1e25b21220', thumb: 'https://cdn.loom.com/sessions/thumbnails/4063144bda0141b597df2a1e25b21220-49e2c98ac702b65d.jpg', ratio: 1.7778 } },
   { name: 'Jan', win: 'Definió su cliente ideal y creció rápido', video: { loom: '1373f3e982fc4320b3ace29aea92a7b7', thumb: 'https://cdn.loom.com/sessions/thumbnails/1373f3e982fc4320b3ace29aea92a7b7-227f6c6862ad6898.jpg', ratio: 0.5625 } },
