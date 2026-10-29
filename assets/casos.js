@@ -5,7 +5,7 @@
 var CASOS = [
   { name: 'Yuki', win: 'Hizo crecer su marca personal con estructura', video: { loom: 'be390ac0ae564a0ea97393b2f399b60d', thumb: 'https://cdn.loom.com/sessions/thumbnails/be390ac0ae564a0ea97393b2f399b60d-89875e5e50895e2e.jpg', ratio: 1.7778 } },
   { name: 'Coco', win: 'Multiplicó por 5 sus resultados', video: { loom: '4427b37806884a9297683736922812cc', thumb: 'https://cdn.loom.com/sessions/thumbnails/4427b37806884a9297683736922812cc-6611b712fec66333.jpg', ratio: 1.7778 } },
-  { name: 'Ramón', win: 'Pasó a triplicar sus ingresos', video: { drive: '10BAWPkZkqKmNkQRt0q8w1L0WGZ4Y6ZVf' } },
+  { name: 'Tatto', win: 'Pasó a triplicar sus ingresos', video: { loom: 'b45b99d4c2c644dca0ef3c7d92fe7cdb', thumb: 'https://cdn.loom.com/sessions/thumbnails/b45b99d4c2c644dca0ef3c7d92fe7cdb-8fb555347e0626da.jpg', ratio: 1.7931 } },
   { name: 'Héctor', win: 'Triplicó sus resultados', video: { loom: '704f980c5e744b8f90d2865d098783c2', thumb: 'https://cdn.loom.com/sessions/thumbnails/704f980c5e744b8f90d2865d098783c2-cd9fcadc5675b578.jpg', ratio: 1.7931 } },
   { name: 'Joaco', win: 'Encontró su nicho y duplicó sus clientes', video: { loom: 'a323d54ff98548cf8ee7ea2b795e407b', thumb: 'https://cdn.loom.com/sessions/thumbnails/a323d54ff98548cf8ee7ea2b795e407b-69d0d5f875483ca1.jpg', ratio: 1.7778 } },
   { name: 'Ian', win: 'Alcanzó su pico de facturación', video: { loom: '1373f3e982fc4320b3ace29aea92a7b7', thumb: 'https://cdn.loom.com/sessions/thumbnails/1373f3e982fc4320b3ace29aea92a7b7-227f6c6862ad6898.jpg', ratio: 0.5625 } },
@@ -17,8 +17,7 @@ var CASOS = [
   { name: 'Carlos', win: 'Ganó claridad y mejoró sus resultados', video: { loom: '8a06a9996dad446b9158ffe9697d8271', thumb: 'https://cdn.loom.com/sessions/thumbnails/8a06a9996dad446b9158ffe9697d8271-4bc25ee1e174a2fd.jpg', ratio: 0.5625 } },
   { name: 'Alan', win: '', video: { loom: '6bdd492806a44b7ea092f15cb7e1f345', thumb: 'https://cdn.loom.com/sessions/thumbnails/6bdd492806a44b7ea092f15cb7e1f345-5cf91843e8bfe4cb.jpg', ratio: 1.7782 } },
   { name: 'Cris', win: '', video: { loom: '0866776f2dcc4bf59a95c366e026fd9f', thumb: 'https://cdn.loom.com/sessions/thumbnails/0866776f2dcc4bf59a95c366e026fd9f-ea10ec0864f0c3b2.jpg', ratio: 1.7778 } },
-  { name: 'Juan Cruz', win: '', video: { loom: '4063144bda0141b597df2a1e25b21220', thumb: 'https://cdn.loom.com/sessions/thumbnails/4063144bda0141b597df2a1e25b21220-49e2c98ac702b65d.jpg', ratio: 1.7778 } },
-  { name: 'Tatto', win: '', video: { loom: 'b45b99d4c2c644dca0ef3c7d92fe7cdb', thumb: 'https://cdn.loom.com/sessions/thumbnails/b45b99d4c2c644dca0ef3c7d92fe7cdb-8fb555347e0626da.jpg', ratio: 1.7931 } }
+  { name: 'Juan Cruz', win: '', video: { loom: '4063144bda0141b597df2a1e25b21220', thumb: 'https://cdn.loom.com/sessions/thumbnails/4063144bda0141b597df2a1e25b21220-49e2c98ac702b65d.jpg', ratio: 1.7778 } }
 ];
 
 (function () {
