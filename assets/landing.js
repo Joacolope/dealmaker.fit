@@ -40,7 +40,7 @@
   if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   var items = document.querySelectorAll(
     '.landing section:not(.hero):not(.confirm) .section-head, .case-grid, .cases-foot, .faq-list, .more-card, ' +
-    '.pillar, .watch .video-frame, .calendar-card'
+    '.pillar, .calendar-card'
   );
   var io = new IntersectionObserver(function (entries) {
     entries.forEach(function (e) {
