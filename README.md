@@ -14,7 +14,7 @@ Estilo: paleta DealMaker sobre fondo blanco (texto `#0A0A0A`, acento amarillo `#
 
 ## Flujo
 
-1. **Presentación**: hero + VSL, debajo la promesa con el botón "Agendar llamada", casos de éxito, preguntas frecuentes y al final el calendario de GHL (`#agenda`). Todos los botones bajan al calendario.
+1. **Presentación**: hero + VSL, debajo el botón "Agendar llamada" (la promesa aparece en la barra fija al scrollear), casos de éxito, preguntas frecuentes y al final el calendario de GHL (`#agenda`). Todos los botones bajan al calendario.
 2. **Agenda**: calendario de GHL `Sesión de Diagnóstico Profesional` (`JdrYfF1pF3JpMgoEW1Sv`).
    La redirección después de agendar se configura en GHL (Calendario → Confirmación → redirect a `/gracias`).
 3. **Gracias** / **Nutrición**: contenido + botón de WhatsApp.
