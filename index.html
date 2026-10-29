@@ -44,6 +44,10 @@ fbq('trackSingle', '1034841362227406', 'PageView', { headline_variant: window.dm
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/base.css">
 <link rel="stylesheet" href="/assets/landing.css">
+<!-- Wistia: reproductor del VSL -->
+<script src="https://fast.wistia.com/player.js" async></script>
+<script src="https://fast.wistia.com/embed/oe3asyv4rr.js" async type="module"></script>
+<style>wistia-player[media-id='oe3asyv4rr']:not(:defined) { background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/oe3asyv4rr/swatch'); display: block; filter: blur(5px); padding-top:56.25%; }</style>
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
@@ -69,9 +73,9 @@ fbq('trackSingle', '1034841362227406', 'PageView', { headline_variant: window.dm
     <p class="eyebrow">Profesional de la salud deportiva que ya ejerce</p>
     <h1><span class="headline-a">Convertí tu profesión en un negocio de <mark>$60.000 al año</mark> en 4 meses.</span><span class="headline-b">Convertí tu profesión en un negocio online de <mark>$60K al año</mark> en 4 meses.</span></h1>
 
-    <!-- VSL: pegar la URL del embed en el src (data-video-slot="presentacion-vsl") -->
+    <!-- VSL: Wistia oe3asyv4rr -->
     <div class="video-frame vsl">
-      <iframe src="about:blank" data-video-slot="presentacion-vsl" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen title="Video de presentación"></iframe>
+      <wistia-player media-id="oe3asyv4rr" aspect="1.7777777777777777"></wistia-player>
     </div>
 
     <div class="cta-row" id="cta-principal">
