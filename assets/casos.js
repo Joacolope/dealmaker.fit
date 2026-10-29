@@ -11,14 +11,14 @@ var CASOS = [
   { name: 'Gonza', win: 'Llevó su servicio a otro nivel', video: { loom: '354073a7275048ac894d8799566b0d48', thumb: 'https://cdn.loom.com/sessions/thumbnails/354073a7275048ac894d8799566b0d48-40d9f326fa741601.jpg', ratio: 1.7778 } },
   { name: 'Héctor', win: 'Triplicó sus resultados', video: { loom: '704f980c5e744b8f90d2865d098783c2', thumb: 'https://cdn.loom.com/sessions/thumbnails/704f980c5e744b8f90d2865d098783c2-cd9fcadc5675b578.jpg', ratio: 1.7931 } },
   { name: 'Carlos', win: 'Ganó claridad y mejoró sus resultados', video: { loom: '8a06a9996dad446b9158ffe9697d8271', thumb: 'https://cdn.loom.com/sessions/thumbnails/8a06a9996dad446b9158ffe9697d8271-4bc25ee1e174a2fd.jpg', ratio: 0.5625 } },
+  { name: 'Yuki', win: 'Hizo crecer su marca personal con estructura', video: { loom: 'be390ac0ae564a0ea97393b2f399b60d', thumb: 'https://cdn.loom.com/sessions/thumbnails/be390ac0ae564a0ea97393b2f399b60d-89875e5e50895e2e.jpg', ratio: 1.7778 } },
+  { name: 'Lucas', win: 'Armó su estrategia para sumar más clientes', video: { loom: '5ccca0b574224b8eb1ec6154bea6fb29', thumb: 'https://cdn.loom.com/sessions/thumbnails/5ccca0b574224b8eb1ec6154bea6fb29-9d05dc1c5995d0a6.jpg', ratio: 1.7778 } },
   { name: 'Ramón', win: 'Pasó a triplicar sus ingresos', video: { drive: '10BAWPkZkqKmNkQRt0q8w1L0WGZ4Y6ZVf' } },
   { name: 'Ian', win: 'Alcanzó su pico de facturación', video: { drive: '14IiviRlMXaPP-tgTXE7XskqFfFV-tkoB' } },
   { name: 'Andrés', win: 'Logró su independencia económica', video: { drive: '1zyf4gA5hiBG6gIoVl5q3NO_mAf0_Y3N4' } },
   { name: 'Nahue', win: 'Estructuró su servicio y pudo cobrar más', video: { drive: '1cDeagsvxRVpSto-B64b_iycz40-FeLK4' } },
   { name: 'Joaco', win: 'Encontró su nicho y duplicó sus clientes', video: { drive: '1NN8__eFnn6E5q-TiZ6Uwb5Xtudb6SH99' } },
-  { name: 'Coco', win: 'Multiplicó por 5 sus resultados', video: { drive: '1N32JAim9Ty_RAWNRGstRQQ4iexUDwzWI' } },
-  { name: 'Yuki', win: 'Hizo crecer su marca personal con estructura', video: { drive: '1iGB7XVqMbFA9UWRCe5kfCJLXBFr2rm7d' } },
-  { name: 'Luca', win: 'Armó su estrategia para sumar más clientes', video: { drive: '1i8Z6s0w4GCanxx9XJ7qFwGhCxbbZHtuG' } }
+  { name: 'Coco', win: 'Multiplicó por 5 sus resultados', video: { drive: '1N32JAim9Ty_RAWNRGstRQQ4iexUDwzWI' } }
 ];
 
 (function () {
