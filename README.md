@@ -18,7 +18,7 @@ Estilo: paleta DealMaker sobre fondo blanco (texto `#0A0A0A`, acento amarillo `#
 2. **Agenda**: calendario de GHL `Sesión de Diagnóstico Profesional` (`JdrYfF1pF3JpMgoEW1Sv`).
    La redirección después de agendar se configura en GHL (Calendario → Confirmación → redirect a `/gracias`).
 3. **Gracias**: aviso de que les hablamos por WhatsApp (sin botones), videos antes de la llamada, propuesta de valor, preguntas y casos de éxito. Usa el mismo diseño que la Presentación (`assets/landing.css` + `assets/gracias.css`).
-4. **Nutrición**: videos previos a la llamada + botón de WhatsApp.
+4. **Nutrición**: videos previos a la llamada + aviso de que les escribimos por WhatsApp (sin botón).
 
 ## Videos
 
