@@ -61,12 +61,13 @@ src="https://www.facebook.com/tr?id=1034841362227406&ev=PageView&noscript=1"
   var WHATSAPP = '5492235910559';   // +54 9 2235 91-0559
   // Rango declarado (c) -> texto del mensaje
   var RANGO = { 'menos-1000': 'menos de 1.000', '1000-3000': 'entre 1.000 y 3.000', '3000-5000': 'entre 3.000 y 5.000', 'mas-5000': 'más de 5.000' };
-  // Cuello de botella elegido en el paso 5 (b), en primera persona. Con "otro" no va en el mensaje.
+  // Cuello de botella elegido en el paso 5 (b), para "mi cuello de botella es …"
   var CUELLO = {
-    leads: 'que no consigo suficientes leads',
-    anuncios: 'que no sé hacer anuncios para potenciar mi contenido que ya funciona',
-    cierre: 'que me llegan leads pero no logro cerrar las llamadas',
-    tiempo: 'que todo depende de mí y no tengo tiempo para crecer'
+    diferenciacion: 'diferenciarme en mi mercado',
+    leads: 'que no tengo suficientes leads',
+    calificados: 'que tengo leads pero no son calificados',
+    conversion: 'convertir mejor a los leads que ya genero',
+    escalar: 'escalar sin depender de mí'
   };
   var PROFESION = { entrenador: 'coach fitness', nutricionista: 'nutricionista', kinesiologo: 'kinesiólogo', osteopata: 'osteópata' };
 
@@ -79,7 +80,7 @@ src="https://www.facebook.com/tr?id=1034841362227406&ev=PageView&noscript=1"
   var cuello = CUELLO[q.get('b')] || CUELLO[lm.cb];
 
   // Plantilla: "Hola, envíame mi plan personalizado. Soy {profesión}, estoy facturando {rango} USD al mes y mi cuello de botella es {cuello}."
-  // Sin cuello (eligió "otro"): "Soy {profesión} y estoy facturando {rango} USD al mes." Si falta un dato, esa parte no va.
+  // Sin cuello: "Soy {profesión} y estoy facturando {rango} USD al mes." Si falta un dato, esa parte no va.
   var partes = [];
   if (rango) partes.push('estoy facturando ' + rango + ' USD al mes');
   if (cuello) partes.push('mi cuello de botella es ' + cuello);

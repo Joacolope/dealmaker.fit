@@ -1,6 +1,6 @@
 // Formulario del Roadmap DealMaker FIT: 5 pasos, valida solo el formato y la calificación la decide el servidor.
-// Orden: datos de contacto → profesión → ¿ya trabaja con clientes? → facturación (se saltea si no trabaja) → cuello de botella (4 opciones u "otro" escrito).
-// Tocar una opción del paso 5 envía todo; con "otro" se envía con el botón. Nada personal viaja en la URL: nombre, Instagram y profesión van por sessionStorage.
+// Orden: datos de contacto → profesión → ¿ya trabaja con clientes? → facturación (se saltea si no trabaja) → cuello de botella.
+// Tocar una opción del paso 5 envía todo. Nada personal viaja en la URL: nombre, Instagram y profesión van por sessionStorage.
 (function () {
   var form = document.getElementById('lm-form');
   if (!form) return;
@@ -35,9 +35,7 @@
   }
   function anterior(n) { return n === 5 && respuestas.ejerce === 'no' ? 3 : n - 1; }
 
-  // Opciones: al tocar una, pasa al siguiente paso con 160 ms de demora.
-  // En el último paso una opción envía todo; "Otro" abre el campo para escribirlo y se envía con el botón.
-  var otroTexto = form.querySelector('.otro-texto');
+  // Opciones: al tocar una, pasa al siguiente paso con 160 ms de demora. En el último paso, envía todo.
   form.querySelectorAll('.paso[data-campo]').forEach(function (paso) {
     var n = +paso.getAttribute('data-paso');
     paso.querySelectorAll('.opcion').forEach(function (b) {
@@ -45,14 +43,8 @@
         if (b.disabled) return;
         paso.querySelectorAll('.opcion').forEach(function (x) { x.classList.remove('elegida'); });
         b.classList.add('elegida');
-        var valor = b.getAttribute('data-valor');
-        respuestas[paso.getAttribute('data-campo')] = valor;
-        if (n !== ULTIMO) return setTimeout(function () { ir(siguiente(n)); }, 160);
-        paso.querySelector('.error').hidden = true;
-        form.elements.cuello.classList.remove('invalido');
-        otroTexto.hidden = valor !== 'otro';
-        if (valor === 'otro') return form.elements.cuello.focus();
-        setTimeout(function () { enviar(paso, b); }, 160);
+        respuestas[paso.getAttribute('data-campo')] = b.getAttribute('data-valor');
+        setTimeout(function () { n === ULTIMO ? enviar(paso, b) : ir(siguiente(n)); }, 160);
       });
     });
   });
@@ -84,14 +76,13 @@
     var e = paso.querySelector('.error'); e.textContent = t; e.hidden = false;
     if (campo) { campo.classList.add('invalido'); campo.focus(); }
   }
-  form.querySelectorAll('.campo input, .campo select, .campo textarea').forEach(function (c) {
+  form.querySelectorAll('.campo input, .campo select').forEach(function (c) {
     c.addEventListener(c.tagName === 'SELECT' ? 'change' : 'input', function () { c.classList.remove('invalido'); });
   });
 
   // Paso 1: datos de contacto. Enter o "Continuar" valida y pasa a las preguntas. Paso 5: "Recibir mi roadmap" envía
   form.addEventListener('submit', function (e) {
     e.preventDefault();
-    if (actual === ULTIMO) return enviar(form.querySelector('.paso[data-paso="' + ULTIMO + '"]'));  // solo con "otro" hay botón de enviar
     if (actual !== 1) return;
     var paso = form.querySelector('.paso[data-paso="1"]');
     paso.querySelector('.error').hidden = true;
@@ -114,18 +105,12 @@
     ir(2);
   });
 
-  // Paso 5: cuello de botella (una de las 4 opciones, u "otro" escrito con sus palabras); valida y manda todo.
-  // "boton" es lo que muestra "Un segundo…": la opción tocada o, en "otro", el botón de enviar.
+  // Paso 5: al elegir el cuello de botella se manda todo. La opción tocada muestra "Un segundo…".
   function enviar(paso, boton) {
     if (!datos) return ir(1);
     if (!respuestas.profesion || !respuestas.ejerce || !respuestas.facturacion) return ir(2);
-    if (!respuestas.bottleneck) return;
-    var campo = form.elements.cuello;
-    var cuello = respuestas.bottleneck === 'otro' ? campo.value.trim().replace(/\s+/g, ' ') : '';
     paso.querySelector('.error').hidden = true;
-    if (respuestas.bottleneck === 'otro' && cuello.length < 10) return mostrarError(paso, 'Contanos un poco más sobre tu cuello de botella.', campo);
-    boton = boton || paso.querySelector('button[type="submit"]');
-    var controles = paso.querySelectorAll('button, textarea');
+    var controles = paso.querySelectorAll('button');
     var texto = boton.textContent;
     controles.forEach(function (x) { x.disabled = true; });
     boton.textContent = 'Un segundo…';
@@ -135,7 +120,7 @@
       nombre: datos.nombre, email: datos.email, instagram: datos.ig,
       telefono: datos.telefono, pais: datos.pais, codigo_pais: datos.codigo_pais, zona_horaria: zona,
       ejerce: respuestas.ejerce, profesion: respuestas.profesion, facturacion: respuestas.facturacion,
-      bottleneck: respuestas.bottleneck, bottleneck_texto: cuello,
+      bottleneck: respuestas.bottleneck,
       utm_source: q.get('utm_source') || '', utm_medium: q.get('utm_medium') || '',
       utm_campaign: q.get('utm_campaign') || '', utm_content: q.get('utm_content') || '',
       fbclid: q.get('fbclid') || '', fbp: cookie('_fbp'), fbc: cookie('_fbc'),
@@ -156,7 +141,7 @@
         try {
           sessionStorage.setItem('lm', JSON.stringify({ n: datos.nombre.split(/\s+/)[0], ig: datos.ig, pr: respuestas.profesion, cb: respuestas.bottleneck }));
         } catch (err) {}
-        // b = opción del cuello de botella (no es un dato personal); el texto de "otro" no viaja
+        // b = opción del cuello de botella (no es un dato personal)
         location.href = '/confirmacion-2?e=' + j.etapa + '&c=' + c + '&v=' + encodeURIComponent(respuestas.profesion) + '&b=' + encodeURIComponent(respuestas.bottleneck);
       })
       .catch(function () {

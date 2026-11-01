@@ -10,13 +10,13 @@ const SITIO_PLAN = 'https://plan.dealmakerconsulting.com';
 const EJERCE = ['si', 'no'];
 const PROFESION = ['entrenador', 'nutricionista', 'kinesiologo', 'osteopata', 'otro'];
 const FACTURACION = ['menos-1000', '1000-3000', '3000-5000', 'mas-5000'];
-// Cuello de botella (paso 5): el texto que va a GHL sale de acá; con "otro" es lo que escribió el lead
+// Cuello de botella (paso 5): valor → texto que va a GHL como bottleneck_texto
 const BOTTLENECK = {
-  leads: 'No consigo suficientes leads',
-  anuncios: 'No sé hacer anuncios para potenciar mi contenido que ya funciona',
-  cierre: 'Me llegan leads pero no logro cerrar las llamadas',
-  tiempo: 'Todo depende de mí y no tengo tiempo para crecer',
-  otro: null,
+  diferenciacion: 'Diferenciarme en mi mercado',
+  leads: 'No tengo suficientes leads',
+  calificados: 'Tengo leads pero no son calificados',
+  conversion: 'Convertir mejor a los leads que ya genero',
+  escalar: 'Escalar sin depender de mí',
 };
 
 // La etapa sale solo del rango de facturación
@@ -53,19 +53,18 @@ module.exports = async (req, res) => {
     facturacion: texto(b.facturacion, 20),
     // Cuello de botella: se guarda en GHL, no va a Meta
     bottleneck: texto(b.bottleneck, 20),
-    bottleneck_texto: texto(b.bottleneck_texto, 600).replace(/\s+/g, ' '),
     utm_source: texto(b.utm_source), utm_medium: texto(b.utm_medium), utm_campaign: texto(b.utm_campaign),
     utm_content: texto(b.utm_content), fbclid: texto(b.fbclid, 300), pagina: texto(b.pagina, 500),
   };
 
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || !d.nombre || !d.telefono ||
       !EJERCE.includes(d.ejerce) || !PROFESION.includes(d.profesion) || !FACTURACION.includes(d.facturacion) ||
-      !Object.prototype.hasOwnProperty.call(BOTTLENECK, d.bottleneck) || (d.bottleneck === 'otro' && d.bottleneck_texto.length < 10) ||
+      !Object.prototype.hasOwnProperty.call(BOTTLENECK, d.bottleneck) ||
       (d.instagram && !/^[a-z0-9._]{1,30}$/.test(d.instagram))) {
     return res.status(400).json({ ok: false, error: 'Datos incompletos o inválidos' });
   }
 
-  if (d.bottleneck !== 'otro') d.bottleneck_texto = BOTTLENECK[d.bottleneck];
+  d.bottleneck_texto = BOTTLENECK[d.bottleneck];
 
   // Califica el profesional de la salud deportiva (no "otro") que factura más de $1k al mes. El cuello de botella no califica ni descalifica.
   // La etapa no cambia por un "no": sale solo de la facturación. Si no trabaja con clientes, no factura.
