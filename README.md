@@ -53,3 +53,14 @@ Meta Pixel `1034841362227406` cargado directo en todas las páginas, solo con Pa
 La lista de testimonios está en `assets/casos.js` (una sola lista para la Presentación y Gracias).
 Cada caso tiene nombre, resultado (opcional) y video: Loom (`loom`, `thumb`, `ratio` alto/ancho) o Drive (`drive`).
 Al tocar un caso el video se abre en una ventana respetando si es vertical u horizontal.
+
+## Subdominio plan.dealmakerconsulting.com (lead magnet)
+
+Carpeta `plan/`, servida por `middleware.js` según el dominio (en el dominio principal, `/plan` redirige al subdominio).
+
+- `/` → `plan/index.html`: registro (nombre, email, WhatsApp).
+- `/gracias` → `plan/gracias.html`: descarga del PDF.
+- `/plan.pdf` → `plan/plan.pdf`: el lead magnet (subir el archivo con ese nombre).
+
+Los datos del formulario se mandan al webhook configurado en `WEBHOOK_URL` dentro de `assets/plan.js`
+(campos: nombre, email, telefono, origen y UTMs, como form-urlencoded).

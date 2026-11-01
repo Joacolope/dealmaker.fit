@@ -6,8 +6,17 @@ export const config = {
 
 export default function middleware(request) {
   const url = new URL(request.url);
-  if (!url.hostname.startsWith('plan.')) return;
-  if (url.pathname === '/plan' || url.pathname.startsWith('/plan/')) return;
+  const inPlanFolder = url.pathname === '/plan' || url.pathname.startsWith('/plan/');
+
+  if (!url.hostname.startsWith('plan.')) {
+    // En el dominio principal, /plan lleva al subdominio para que haya una sola dirección
+    if (url.hostname === 'dealmakerconsulting.com' && inPlanFolder) {
+      const rest = url.pathname.replace(/^\/plan/, '') || '/';
+      return Response.redirect('https://plan.dealmakerconsulting.com' + rest + url.search, 308);
+    }
+    return;
+  }
+  if (inPlanFolder) return;
 
   const target = new URL(url.pathname === '/' ? '/plan' : '/plan' + url.pathname, url);
   target.search = url.search;

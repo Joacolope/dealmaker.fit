@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>DealMaker · Plan</title>
+<title>DealMaker · Plan gratuito</title>
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -32,6 +32,7 @@ fbq('trackSingle', '1034841362227406', 'PageView');
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/base.css">
 <link rel="stylesheet" href="/assets/landing.css">
+<link rel="stylesheet" href="/assets/plan.css">
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
@@ -45,15 +46,64 @@ fbq('trackSingle', '1034841362227406', 'PageView');
 </header>
 
 <main class="landing">
-  <!-- Página provisoria de plan.dealmakerconsulting.com: acá va el embudo del lead magnet -->
-  <section class="hero">
-    <p class="eyebrow">Muy pronto</p>
-    <h1>Estamos preparando <mark>tu plan</mark></h1>
+
+  <!-- ===== Registro para el lead magnet (PDF) ===== -->
+  <section class="hero plan-hero">
+    <p class="eyebrow">Plan gratuito · PDF</p>
+    <h1>El plan para convertir tu profesión en un negocio online de <mark>$5.000 al mes</mark></h1>
+    <p class="plan-sub">Para profesionales de la salud deportiva que ya ejercen. Dejanos tus datos y descargalo gratis.</p>
+
+    <form class="plan-form" id="plan-form" novalidate>
+      <label>
+        <span>Nombre</span>
+        <input type="text" name="nombre" autocomplete="given-name" required placeholder="Tu nombre">
+      </label>
+      <label>
+        <span>Email</span>
+        <input type="email" name="email" autocomplete="email" required placeholder="tu@email.com">
+      </label>
+      <label>
+        <span>WhatsApp</span>
+        <input type="tel" name="telefono" autocomplete="tel" required placeholder="+54 9 11 1234 5678">
+      </label>
+      <button type="submit" class="btn btn-lg">Quiero el plan</button>
+      <p class="plan-form-error" role="alert" hidden></p>
+      <p class="plan-form-note">Tus datos están seguros. Sin spam.</p>
+    </form>
   </section>
+
+  <!-- ===== Qué incluye ===== -->
+  <section class="plan-inside">
+    <div class="section-head">
+      <p class="kicker">Qué vas a encontrar</p>
+      <h2>Los 3 pilares para pasar de lo presencial a lo online</h2>
+    </div>
+    <div class="plan-pillars">
+      <article>
+        <p class="plan-num">01</p>
+        <h3>Posicionamiento</h3>
+        <p>Cómo definir a quién ayudás, qué problema resolvés y cómo comunicar tu valor.</p>
+      </article>
+      <article>
+        <p class="plan-num">02</p>
+        <h3>Sistema de atracción</h3>
+        <p>Cómo generar conversaciones con personas interesadas sin depender solo de tus seguidores.</p>
+      </article>
+      <article>
+        <p class="plan-num">03</p>
+        <h3>Criterio de negocio</h3>
+        <p>Cómo ordenar procesos y métricas para crecer sin depender únicamente de tus horas.</p>
+      </article>
+    </div>
+    <div class="cta-row"><a class="btn btn-lg" href="#plan-form">Descargar el plan gratis</a></div>
+  </section>
+
 </main>
 
 <footer class="site-footer">
   <p>Copyright 2024, All rights reserved.This site is not a part of the Facebook™ website or Facebook™ Inc. Additionally, this site is NOT endorsed by Facebook™ in any way. FACEBOOK™ is a trademark of FACEBOOK™, Inc</p>
 </footer>
+
+<script src="/assets/plan.js"></script>
 </body>
 </html>
