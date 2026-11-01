@@ -3,26 +3,6 @@
   "trailingSlash": false,
   "rewrites": [
     {
-      "source": "/",
-      "has": [
-        {
-          "type": "host",
-          "value": "plan.dealmakerconsulting.com"
-        }
-      ],
-      "destination": "/plan/index.html"
-    },
-    {
-      "source": "/:path((?!assets/|plan/).+)",
-      "has": [
-        {
-          "type": "host",
-          "value": "plan.dealmakerconsulting.com"
-        }
-      ],
-      "destination": "/plan/:path"
-    },
-    {
       "source": "/presentacion",
       "destination": "/"
     }
