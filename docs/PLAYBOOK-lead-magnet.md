@@ -27,8 +27,9 @@ Slugs: `tecnico` (Etapa 01), `crecimiento` (02), `emprendedor` (03), `empresario
 
 A GHL llegan **solo los leads que califican**, recién al terminar el paso 5. El que no califica recibe su roadmap y no se guarda en ningún lado; el que abandona en las preguntas, tampoco.
 
-`califica = profesion !== "otro" && ejerce === "si" && facturacion !== "menos-1000" && momento !== "mirando"`.
-Cualquier respuesta negativa → confirmación 1 con el botón a su roadmap. Solo el que califica → confirmación 2 (WhatsApp)
+`califica = profesion !== "otro" && facturacion !== "menos-1000"` (el que no trabaja con clientes queda en `menos-1000`).
+El paso 5 (cuándo empezar) se guarda y viaja a GHL, pero no descalifica.
+No califica → confirmación 1 con el botón a su roadmap. Solo el que califica → confirmación 2 (WhatsApp)
 y Lead por CAPI. La etapa (qué documento recibe) sale siempre de la facturación.
 
 ## Diferencias con el original

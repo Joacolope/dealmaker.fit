@@ -55,10 +55,10 @@ module.exports = async (req, res) => {
     return res.status(400).json({ ok: false, error: 'Datos incompletos o inválidos' });
   }
 
-  // Un solo fallo descalifica (otra profesión, no trabaja con clientes, menos de $1k o solo está mirando).
+  // Califica el profesional de la salud deportiva (no "otro") que factura más de $1k al mes. "Cuándo empezar" se guarda pero no descalifica.
   // La etapa no cambia por un "no": sale solo de la facturación. Si no trabaja con clientes, no factura.
   if (d.ejerce === 'no') d.facturacion = 'menos-1000';
-  const califica = d.profesion !== 'otro' && d.ejerce === 'si' && d.facturacion !== 'menos-1000' && d.momento !== 'mirando';
+  const califica = d.profesion !== 'otro' && d.facturacion !== 'menos-1000';
   const etapa = ETAPA[d.facturacion];
   const url = SITIO_PLAN + '/roadmap/' + SLUG[etapa] + '?c=' + d.facturacion;
   const prueba = email.endsWith('@resend.dev') || d.utm_source === 'prueba-tecnica';
