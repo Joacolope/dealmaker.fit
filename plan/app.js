@@ -154,9 +154,10 @@
           return;
         }
         try {
-          sessionStorage.setItem('lm', JSON.stringify({ n: datos.nombre.split(/\s+/)[0], ig: datos.ig, pr: respuestas.profesion }));
+          sessionStorage.setItem('lm', JSON.stringify({ n: datos.nombre.split(/\s+/)[0], ig: datos.ig, pr: respuestas.profesion, cb: respuestas.bottleneck }));
         } catch (err) {}
-        location.href = '/confirmacion-2?e=' + j.etapa + '&c=' + c + '&v=' + encodeURIComponent(respuestas.profesion);
+        // b = opción del cuello de botella (no es un dato personal); el texto de "otro" no viaja
+        location.href = '/confirmacion-2?e=' + j.etapa + '&c=' + c + '&v=' + encodeURIComponent(respuestas.profesion) + '&b=' + encodeURIComponent(respuestas.bottleneck);
       })
       .catch(function () {
         controles.forEach(function (x) { x.disabled = false; });

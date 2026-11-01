@@ -61,11 +61,12 @@ src="https://www.facebook.com/tr?id=1034841362227406&ev=PageView&noscript=1"
   var WHATSAPP = '5492235910559';   // +54 9 2235 91-0559
   // Rango declarado (c) -> texto del mensaje
   var RANGO = { 'menos-1000': 'menos de 1.000', '1000-3000': 'entre 1.000 y 3.000', '3000-5000': 'entre 3.000 y 5.000', 'mas-5000': 'más de 5.000' };
-  // Cuello de botella por etapa que califica (e), en primera persona: el problema de la etapa en el roadmap, no el objetivo
+  // Cuello de botella elegido en el paso 5 (b), en primera persona. Con "otro" no va en el mensaje.
   var CUELLO = {
-    2: 'que vendo de forma aislada y no tengo un sistema que me traiga clientes todos los meses',
-    3: 'que mi negocio todavía no es predecible y me cuesta retener a mis clientes',
-    4: 'que el negocio depende completamente de mí'
+    leads: 'que no consigo suficientes leads',
+    anuncios: 'que no sé hacer anuncios para potenciar mi contenido que ya funciona',
+    cierre: 'que me llegan leads pero no logro cerrar las llamadas',
+    tiempo: 'que todo depende de mí y no tengo tiempo para crecer'
   };
   var PROFESION = { entrenador: 'coach fitness', nutricionista: 'nutricionista', kinesiologo: 'kinesiólogo', osteopata: 'osteópata' };
 
@@ -75,16 +76,16 @@ src="https://www.facebook.com/tr?id=1034841362227406&ev=PageView&noscript=1"
   // La profesión viene en el link (v); si no, de lo que guardó el formulario
   var profesion = PROFESION[q.get('v')] || PROFESION[lm.pr];
   var rango = RANGO[q.get('c')];
-  var cuello = CUELLO[parseInt(q.get('e'), 10)];
+  var cuello = CUELLO[q.get('b')] || CUELLO[lm.cb];
 
   // Plantilla: "Hola, envíame mi plan personalizado. Soy {profesión}, estoy facturando {rango} USD al mes y mi cuello de botella es {cuello}."
-  // Si falta un dato, esa parte no va y la puntuación cierra bien.
+  // Sin cuello (eligió "otro"): "Soy {profesión} y estoy facturando {rango} USD al mes." Si falta un dato, esa parte no va.
   var partes = [];
   if (rango) partes.push('estoy facturando ' + rango + ' USD al mes');
   if (cuello) partes.push('mi cuello de botella es ' + cuello);
   var cuerpo = partes.join(' y ');
   var mensaje = 'Hola, envíame mi plan personalizado.';
-  if (profesion) mensaje += ' Soy ' + profesion + (cuerpo ? ', ' + cuerpo : '') + '.';
+  if (profesion) mensaje += ' Soy ' + profesion + (cuerpo ? (partes.length > 1 ? ', ' : ' y ') + cuerpo : '') + '.';
   else if (cuerpo) mensaje += ' ' + cuerpo.charAt(0).toUpperCase() + cuerpo.slice(1) + '.';
   document.getElementById('mensaje').textContent = mensaje;
 
