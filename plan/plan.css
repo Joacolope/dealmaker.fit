@@ -1,0 +1,98 @@
+/* plan.dealmakerconsulting.com — landing y confirmaciones del Roadmap DealMaker FIT
+   Estilo Apple: un solo color de acento (amarillo) y solo para resaltar o subrayar palabras.
+   Botones de conversión negros, píldora. El de WhatsApp, verde. */
+:root {
+  --lienzo: #ffffff;
+  --banda: #f5f5f7;
+  --tinta: #1d1d1f;
+  --sec: #707070;
+  --borde: #86868b;
+  --div: #d6d6d6;
+  --acento: #FFEE07;
+  --acento-vivo: #FFE100;
+  --acento-claro: #FFF7B0;
+  --wa: #1FBF5A;
+  --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "Helvetica Neue", Arial, sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--lienzo); color: var(--tinta); font-family: var(--font); font-size: 17px; line-height: 1.47; -webkit-font-smoothing: antialiased; }
+img { max-width: 100%; display: block; }
+button { font: inherit; color: inherit; }
+
+main { display: flex; flex-direction: column; align-items: center; overflow-x: clip; padding: 18px 16px 40px; }
+main > * { width: 100%; max-width: 560px; min-width: 0; }
+
+.marca { display: flex; justify-content: center; margin: 4px 0 14px; }
+.marca img { width: 34px; height: 34px; border-radius: 9px; }
+
+/* Resaltados */
+.subraya { background: linear-gradient(transparent 62%, var(--acento-vivo) 62%, var(--acento-vivo) 90%, transparent 90%); -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+.cifra { background: var(--acento-claro); border-radius: 6px; padding: 0 .1em; }
+
+/* ===== Landing ===== */
+.prueba { display: flex; flex-wrap: nowrap; white-space: nowrap; align-items: center; justify-content: center; gap: 10px; margin: 0 auto 14px; width: auto; max-width: none; padding: 5px 14px 5px 6px; border-radius: 999px; background: var(--banda); font-size: 13.5px; font-weight: 600; }
+.avatares { display: flex; }
+.avatares img { width: 32px; height: 32px; border-radius: 50%; border: 2px solid var(--banda); object-fit: cover; margin-left: -9px; }
+.avatares img:first-child { margin-left: 0; }
+
+.titular { margin: 0 0 16px; max-width: 760px; text-align: center; font-size: min(41px, 5.15vw); font-weight: 800; line-height: 1.12; letter-spacing: -.025em; }
+.titular span { display: block; white-space: nowrap; }
+
+.previa { position: relative; height: 250px; margin: 0 auto 6px; perspective: 1200px; max-width: 330px; }
+.previa img { position: absolute; top: 8px; width: 46%; height: auto; aspect-ratio: 560 / 792; border-radius: 4px; box-shadow: 0 18px 36px -16px rgba(0, 0, 0, .45), 0 2px 6px rgba(0, 0, 0, .12); background: #fff; }
+.previa .p1 { left: 2%; transform: rotateY(18deg) rotateZ(-6deg) translateY(14px); z-index: 1; }
+.previa .p2 { left: 27%; transform: translateZ(40px); z-index: 3; }
+.previa .p3 { right: 2%; transform: rotateY(-18deg) rotateZ(6deg) translateY(14px); z-index: 2; }
+
+/* Formulario */
+.lm-form { position: relative; padding: 22px 20px 20px; border-radius: 28px; background: var(--banda); }
+.paso[hidden] { display: none; }
+.paso-n { margin: 0 0 6px; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--sec); }
+.paso h2 { margin: 0 0 14px; font-size: 21px; font-weight: 700; line-height: 1.2; letter-spacing: -.01em; }
+.opciones { display: grid; gap: 8px; }
+.opcion { width: 100%; min-height: 52px; padding: 12px 16px; border: 1px solid var(--div); border-radius: 14px; background: #fff; font-size: 16px; font-weight: 600; text-align: left; cursor: pointer; transition: border-color .15s, box-shadow .15s; }
+.opcion:hover { border-color: var(--tinta); }
+.opcion.elegida { border-color: var(--tinta); box-shadow: inset 0 0 0 1px var(--tinta); }
+.volver { margin-top: 12px; padding: 6px 0; border: 0; background: none; color: var(--sec); font-size: 14px; cursor: pointer; }
+.campo { display: grid; gap: 5px; margin-bottom: 10px; }
+.campo span { font-size: 14px; font-weight: 600; }
+.campo input, .campo select { width: 100%; min-height: 50px; padding: 12px 14px; border: 1px solid var(--borde); border-radius: 12px; background: #fff; font: inherit; font-size: 16px; color: var(--tinta); }
+.campo input:focus, .campo select:focus { outline: none; border-color: var(--tinta); box-shadow: 0 0 0 3px rgba(29, 29, 31, .12); }
+.tel { display: grid; grid-template-columns: 112px 1fr; gap: 8px; }
+.trampa-bot { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+.error { margin: 4px 0 10px; font-size: 14px; font-weight: 600; color: #B42318; }
+
+.boton { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; min-height: 54px; padding: 14px 24px; border: 0; border-radius: 999px; background: var(--tinta); color: #fff; font-size: 17px; font-weight: 700; text-decoration: none; cursor: pointer; }
+.boton:disabled { opacity: .55; cursor: wait; }
+.boton--wa { background: var(--wa); }
+.boton--wa svg { width: 22px; height: 22px; fill: currentColor; }
+
+.bullets { margin: 22px 0 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+.bullets li { position: relative; padding-left: 30px; font-size: 16px; }
+.bullets li::before { content: "✓"; position: absolute; left: 0; top: 0; width: 20px; height: 20px; border-radius: 50%; background: var(--tinta); color: #fff; font-size: 12px; font-weight: 800; display: grid; place-items: center; margin-top: 2px; }
+.legal--lm { margin: 18px 0 0; font-size: 12.5px; line-height: 1.45; color: var(--sec); }
+
+.pie { width: 100%; max-width: 560px; margin: 0 auto; padding: 22px 16px 32px; border-top: 1px solid var(--div); text-align: center; font-size: 12px; color: var(--sec); }
+.pie p { margin: 0 0 6px; }
+
+/* ===== Confirmaciones ===== */
+.conf { text-align: center; padding-top: 24px; }
+.antetitulo { margin: 0 0 8px; font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--sec); }
+.conf h1 { margin: 0 0 14px; font-size: clamp(34px, 9vw, 52px); font-weight: 800; line-height: 1.05; letter-spacing: -.03em; }
+.conf .bajada { margin: 0 auto 24px; max-width: 480px; color: var(--sec); }
+.nota { margin: 12px 0 0; font-size: 14px; color: var(--sec); }
+.cuenta { margin: 14px 0 0; font-size: 15px; font-weight: 600; }
+.vista { margin: 34px 0 0; padding: 22px 18px; border-radius: 28px; background: var(--banda); text-align: left; }
+.vista h2 { margin: 0 0 14px; font-size: 17px; font-weight: 700; text-align: center; }
+.burbuja { position: relative; margin: 0 0 12px auto; max-width: 92%; padding: 12px 14px; border-radius: 16px 16px 4px 16px; background: #DCF8C6; color: #111; font-size: 15px; line-height: 1.4; box-shadow: 0 1px 1px rgba(0, 0, 0, .08); }
+.vista p { margin: 0; text-align: center; font-size: 14px; color: var(--sec); }
+.privacidad { margin: 22px 0 0; font-size: 13px; color: var(--sec); }
+
+@media (min-width: 700px) {
+  main { padding-top: 30px; }
+  .previa { max-width: 520px; height: 378px; }
+}
+@media (max-width: 380px) {
+  .prueba { font-size: 12px; gap: 8px; padding-right: 10px; }
+  .avatares img { width: 28px; height: 28px; }
+}
