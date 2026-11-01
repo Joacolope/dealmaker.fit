@@ -10,6 +10,7 @@ const SITIO_PLAN = 'https://plan.dealmakerconsulting.com';
 const EJERCE = ['si', 'no'];
 const PROFESION = ['entrenador', 'nutricionista', 'kinesiologo', 'osteopata', 'otro'];
 const FACTURACION = ['menos-1000', '1000-3000', '3000-5000', 'mas-5000'];
+const MOMENTO = ['ahora', '3-meses', 'mirando'];
 
 // La etapa sale solo del rango de facturación
 const ETAPA = { 'menos-1000': 1, '1000-3000': 2, '3000-5000': 3, 'mas-5000': 4 };
@@ -43,18 +44,21 @@ module.exports = async (req, res) => {
     ejerce: texto(b.ejerce, 10),
     profesion: texto(b.profesion, 20),
     facturacion: texto(b.facturacion, 20),
+    momento: texto(b.momento, 20),
     utm_source: texto(b.utm_source), utm_medium: texto(b.utm_medium), utm_campaign: texto(b.utm_campaign),
     utm_content: texto(b.utm_content), fbclid: texto(b.fbclid, 300), pagina: texto(b.pagina, 500),
   };
 
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || !d.nombre || !d.telefono ||
-      !EJERCE.includes(d.ejerce) || !PROFESION.includes(d.profesion) || !FACTURACION.includes(d.facturacion) ||
+      !EJERCE.includes(d.ejerce) || !PROFESION.includes(d.profesion) || !FACTURACION.includes(d.facturacion) || !MOMENTO.includes(d.momento) ||
       (d.instagram && !/^[a-z0-9._]{1,30}$/.test(d.instagram))) {
     return res.status(400).json({ ok: false, error: 'Datos incompletos o inválidos' });
   }
 
-  // Un solo fallo descalifica. La etapa no cambia por un "no".
-  const califica = d.ejerce === 'si' && d.profesion !== 'otro' && d.facturacion !== 'menos-1000';
+  // Un solo fallo descalifica (otra profesión, no trabaja con clientes, menos de $1k o solo está mirando).
+  // La etapa no cambia por un "no": sale solo de la facturación. Si no trabaja con clientes, no factura.
+  if (d.ejerce === 'no') d.facturacion = 'menos-1000';
+  const califica = d.profesion !== 'otro' && d.ejerce === 'si' && d.facturacion !== 'menos-1000' && d.momento !== 'mirando';
   const etapa = ETAPA[d.facturacion];
   const url = SITIO_PLAN + '/roadmap/' + SLUG[etapa] + '?c=' + d.facturacion;
   const prueba = email.endsWith('@resend.dev') || d.utm_source === 'prueba-tecnica';
@@ -75,7 +79,7 @@ module.exports = async (req, res) => {
         fbp: texto(b.fbp, 200), fbc: texto(b.fbc, 300), fbclid: d.fbclid, pagina: d.pagina,
         ip: (req.headers['x-forwarded-for'] || '').split(',')[0].trim(), userAgent: req.headers['user-agent'],
         testEventCode,
-        custom: { recurso: RECURSO, califica, etapa, ejerce: d.ejerce, profesion: d.profesion, facturacion: d.facturacion },
+        custom: { recurso: RECURSO, califica, etapa, ejerce: d.ejerce, profesion: d.profesion, facturacion: d.facturacion, momento: d.momento },
       });
       capi = r.ok ? (r.prueba ? 'prueba' : true) : r.motivo;
     } else {

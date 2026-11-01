@@ -18,14 +18,16 @@ Slugs: `tecnico` (Etapa 01), `crecimiento` (02), `emprendedor` (03), `empresario
 
 ## Formulario y calificación
 
-1. ¿Ya ejercés como profesional de la salud deportiva? `si` / `no` (no descalifica)
-2. ¿Cuál es tu profesión? `entrenador` / `nutricionista` / `kinesiologo` / `osteopata` / `otro` (otro descalifica)
-3. ¿Cuánto facturás hoy por mes? `menos-1000` / `1000-3000` / `3000-5000` / `mas-5000` → define la etapa 1 a 4;
-   `menos-1000` descalifica.
-4. Nombre · Email · Instagram · prefijo + WhatsApp.
+1. ¿Cuál es tu profesión? `entrenador` (Coach fitness) / `nutricionista` / `kinesiologo` / `osteopata` / `otro`
+2. ¿Ya trabajás como <profesión> con clientes? `si` / `no`
+3. ¿Cuánto facturás hoy por mes? `menos-1000` / `1000-3000` / `3000-5000` / `mas-5000` → define la etapa 1 a 4.
+   Si en el paso 2 respondió `no`, este paso se saltea y la facturación queda en `menos-1000`.
+4. ¿Cuándo querés empezar a llevar tu profesión a lo online? `ahora` / `3-meses` / `mirando`
+5. Nombre · Email · Instagram · prefijo + WhatsApp.
 
-`califica = ejerce === 'si' && profesion !== 'otro' && facturacion !== 'menos-1000'`.
-El ruteo va por calificación: cualquier respuesta negativa (no ejerce, otra profesión o menos de $1k) → confirmación 1 con el botón a su roadmap; solo el que califica → confirmación 2 (WhatsApp) y Lead por CAPI. La etapa (qué documento recibe) sale siempre de la facturación. Diferencia con el original: allá el ruteo era por etapa.
+`califica = profesion !== "otro" && ejerce === "si" && facturacion !== "menos-1000" && momento !== "mirando"`.
+Cualquier respuesta negativa → confirmación 1 con el botón a su roadmap. Solo el que califica → confirmación 2 (WhatsApp)
+y Lead por CAPI. La etapa (qué documento recibe) sale siempre de la facturación.
 
 ## Diferencias con el original
 

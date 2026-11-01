@@ -1,4 +1,5 @@
-// Formulario del Roadmap DealMaker FIT: 4 pasos, valida solo el formato y la calificación la decide el servidor.
+// Formulario del Roadmap DealMaker FIT: 5 pasos, valida solo el formato y la calificación la decide el servidor.
+// Orden: profesión → ¿ya trabaja con clientes? → facturación (se saltea si no trabaja) → cuándo quiere empezar → datos.
 // Nada personal viaja en la URL: nombre, Instagram y profesión van por sessionStorage.
 (function () {
   var form = document.getElementById('lm-form');
@@ -12,6 +13,21 @@
     pasos.forEach(function (p) { p.hidden = p.getAttribute('data-paso') !== String(n); });
   }
 
+  var NOMBRE_PROFESION = { entrenador: 'coach fitness', nutricionista: 'nutricionista', kinesiologo: 'kinesiólogo/a', osteopata: 'osteópata' };
+  var preguntaEjerce = document.getElementById('pregunta-ejerce');
+
+  // Siguiente paso según lo respondido: si todavía no trabaja con clientes, no factura y se saltea la facturación
+  function siguiente(n) {
+    if (n === 1) {
+      var p = NOMBRE_PROFESION[respuestas.profesion];
+      preguntaEjerce.textContent = p ? '¿Ya trabajás como ' + p + ' con clientes?' : '¿Ya trabajás en tu profesión con clientes?';
+    }
+    if (n === 2 && respuestas.ejerce === 'no') { respuestas.facturacion = 'menos-1000'; return 4; }
+    if (n === 2) delete respuestas.facturacion;
+    return n + 1;
+  }
+  function anterior(n) { return n === 4 && respuestas.ejerce === 'no' ? 2 : n - 1; }
+
   // Opciones: al tocar una, pasa al siguiente paso con 160 ms de demora
   form.querySelectorAll('.paso[data-campo]').forEach(function (paso) {
     var n = +paso.getAttribute('data-paso');
@@ -20,12 +36,12 @@
         paso.querySelectorAll('.opcion').forEach(function (x) { x.classList.remove('elegida'); });
         b.classList.add('elegida');
         respuestas[paso.getAttribute('data-campo')] = b.getAttribute('data-valor');
-        setTimeout(function () { ir(n + 1); }, 160);
+        setTimeout(function () { ir(siguiente(n)); }, 160);
       });
     });
   });
   form.querySelectorAll('.volver').forEach(function (b) {
-    b.addEventListener('click', function () { ir(+b.closest('.paso').getAttribute('data-paso') - 1); });
+    b.addEventListener('click', function () { ir(anterior(+b.closest('.paso').getAttribute('data-paso'))); });
   });
 
   // Prefijo: cookie del país de la IP, si no la zona horaria, si no Argentina
@@ -64,13 +80,13 @@
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return mostrarError('Revisá tu email.');
     if (!/^[A-Za-z0-9._]{1,30}$/.test(ig)) return mostrarError('Revisá tu usuario de Instagram.');
     if (digitos.length < 6) return mostrarError('Revisá tu número de WhatsApp.');
-    if (!respuestas.ejerce || !respuestas.profesion || !respuestas.facturacion) return ir(1);
+    if (!respuestas.profesion || !respuestas.ejerce || !respuestas.facturacion || !respuestas.momento) return ir(1);
 
     var q = new URLSearchParams(location.search);
     var cuerpo = {
       nombre: nombre, email: email, instagram: ig,
       telefono: pre[1] + ' ' + digitos, pais: pre[0], codigo_pais: pre[1], zona_horaria: zona,
-      ejerce: respuestas.ejerce, profesion: respuestas.profesion, facturacion: respuestas.facturacion,
+      ejerce: respuestas.ejerce, profesion: respuestas.profesion, facturacion: respuestas.facturacion, momento: respuestas.momento,
       utm_source: q.get('utm_source') || '', utm_medium: q.get('utm_medium') || '',
       utm_campaign: q.get('utm_campaign') || '', utm_content: q.get('utm_content') || '',
       fbclid: q.get('fbclid') || '', fbp: cookie('_fbp'), fbc: cookie('_fbc'),
@@ -84,7 +100,7 @@
       .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
       .then(function (j) {
         var c = encodeURIComponent(respuestas.facturacion);
-        // Cualquier respuesta negativa (no ejerce, otra profesión o menos de $1k) = no califica: va directo a su roadmap.
+        // Cualquier respuesta negativa (otra profesión, no trabaja con clientes, menos de $1k o solo está mirando) = no califica: va directo a su roadmap.
         // Solo el que califica pasa a WhatsApp. La etapa (qué documento recibe) sale siempre de la facturación.
         if (!j.califica) {
           location.href = '/confirmacion-1?e=' + (j.etapa || 1) + '&c=' + c;

@@ -64,17 +64,8 @@ fbq('track', 'PageView');
   <form class="lm-form" id="lm-form" novalidate>
     <input class="trampa-bot" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
 
-    <div class="paso" data-paso="1" data-campo="ejerce">
-      <p class="paso-n">Paso 1 de 4</p>
-      <h2>¿Ya ejercés como profesional de la salud deportiva?</h2>
-      <div class="opciones">
-          <button type="button" class="opcion" data-valor="si">Sí</button>
-          <button type="button" class="opcion" data-valor="no">Todavía no</button>
-      </div>
-    </div>
-
-    <div class="paso" data-paso="2" data-campo="profesion" hidden>
-      <p class="paso-n">Paso 2 de 4</p>
+    <div class="paso" data-paso="1" data-campo="profesion">
+      <p class="paso-n">Paso 1 de 5</p>
       <h2>¿Cuál es tu profesión?</h2>
       <div class="opciones">
           <button type="button" class="opcion" data-valor="entrenador">Coach fitness</button>
@@ -83,11 +74,20 @@ fbq('track', 'PageView');
           <button type="button" class="opcion" data-valor="osteopata">Osteópata</button>
           <button type="button" class="opcion" data-valor="otro">Otra profesión</button>
       </div>
+    </div>
+
+    <div class="paso" data-paso="2" data-campo="ejerce" hidden>
+      <p class="paso-n">Paso 2 de 5</p>
+      <h2 id="pregunta-ejerce">¿Ya trabajás con clientes?</h2>
+      <div class="opciones">
+          <button type="button" class="opcion" data-valor="si">Sí, ya tengo clientes</button>
+          <button type="button" class="opcion" data-valor="no">Todavía no</button>
+      </div>
       <button type="button" class="volver">← Volver</button>
     </div>
 
     <div class="paso" data-paso="3" data-campo="facturacion" hidden>
-      <p class="paso-n">Paso 3 de 4</p>
+      <p class="paso-n">Paso 3 de 5</p>
       <h2>¿Cuánto facturás hoy por mes con tu profesión?</h2>
       <div class="opciones">
           <button type="button" class="opcion" data-valor="menos-1000">Menos de $1k</button>
@@ -98,8 +98,19 @@ fbq('track', 'PageView');
       <button type="button" class="volver">← Volver</button>
     </div>
 
-    <div class="paso" data-paso="4" hidden>
-      <p class="paso-n">Paso 4 de 4</p>
+    <div class="paso" data-paso="4" data-campo="momento" hidden>
+      <p class="paso-n">Paso 4 de 5</p>
+      <h2>¿Cuándo querés empezar a llevar tu profesión a lo online?</h2>
+      <div class="opciones">
+          <button type="button" class="opcion" data-valor="ahora">Ahora mismo</button>
+          <button type="button" class="opcion" data-valor="3-meses">En los próximos 3 meses</button>
+          <button type="button" class="opcion" data-valor="mirando">Solo estoy mirando</button>
+      </div>
+      <button type="button" class="volver">← Volver</button>
+    </div>
+
+    <div class="paso" data-paso="5" hidden>
+      <p class="paso-n">Paso 5 de 5</p>
       <h2>¿A dónde te mandamos tu roadmap?</h2>
       <label class="campo"><span>Nombre</span><input type="text" name="nombre" autocomplete="given-name" required></label>
       <label class="campo"><span>Email</span><input type="email" name="email" autocomplete="email" inputmode="email" required></label>
