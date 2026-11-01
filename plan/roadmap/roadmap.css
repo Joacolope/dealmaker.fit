@@ -14,7 +14,7 @@
   --z: 1;
 }
 * { box-sizing: border-box; }
-html, body { margin: 0; background: var(--banda); color: var(--tinta); font-family: var(--font); -webkit-font-smoothing: antialiased; }
+html, body { font-optical-sizing: auto; margin: 0; background: var(--banda); color: var(--tinta); font-family: var(--font); -webkit-font-smoothing: antialiased; }
 
 /* ===== Visor ===== */
 .doc { display: grid; grid-template-columns: 260px 1fr; gap: 32px; max-width: 1240px; margin: 0 auto; padding: 32px 24px 64px; }

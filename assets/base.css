@@ -12,7 +12,7 @@
   --line: #E6E6E1;
   --card-dark: #161616;
 }
-html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: var(--font); -webkit-font-smoothing: antialiased; }
+html, body { font-optical-sizing: auto; margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: var(--font); -webkit-font-smoothing: antialiased; }
 html { scroll-behavior: smooth; }
 *, *::before, *::after { box-sizing: border-box; }
 img { max-width: 100%; }
