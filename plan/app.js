@@ -89,7 +89,7 @@
           return;
         }
         try {
-          sessionStorage.setItem('lm', JSON.stringify({ n: nombre.split(/\s+/)[0], ig: ig, pr: respuestas.ejerce === 'si' ? respuestas.profesion : '' }));
+          sessionStorage.setItem('lm', JSON.stringify({ n: nombre.split(/\s+/)[0], ig: ig, pr: respuestas.profesion }));
         } catch (err) {}
         location.href = '/confirmacion-2?e=' + j.etapa + '&c=' + c + '&v=' + encodeURIComponent(respuestas.profesion);
       })

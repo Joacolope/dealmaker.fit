@@ -63,12 +63,13 @@ fbq('track', 'PageView');
     3: 'hacer mi negocio más predecible y mejorar la retención de mis clientes',
     4: 'que el negocio deje de depender completamente de mí'
   };
-  var PROFESION = { entrenador: 'entrenador', nutricionista: 'nutricionista', kinesiologo: 'kinesiólogo', osteopata: 'osteópata' };
+  var PROFESION = { entrenador: 'coach fitness', nutricionista: 'nutricionista', kinesiologo: 'kinesiólogo', osteopata: 'osteópata' };
 
   var q = new URLSearchParams(location.search);
   var lm = {};
   try { lm = JSON.parse(sessionStorage.getItem('lm') || '{}'); } catch (e) {}
-  var profesion = PROFESION[lm.pr];
+  // La profesión viene en el link (v); si no, de lo que guardó el formulario
+  var profesion = PROFESION[q.get('v')] || PROFESION[lm.pr];
   var rango = RANGO[q.get('c')];
   var cuello = CUELLO[parseInt(q.get('e'), 10)];
 
