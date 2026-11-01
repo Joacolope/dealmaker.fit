@@ -112,21 +112,33 @@ module.exports = async (req, res) => {
   });
 };
 
+// GHL a veces tarda: cada intento tiene su tope (5 s y 3 s) para que el lead nunca se quede esperando.
+// Si GHL no responde, igual se le contesta al formulario y el calificado sigue a WhatsApp.
 async function enviarGHL(datos) {
   const destino = process.env.GHL_WEBHOOK_URL;
   if (!destino) return { ok: false, motivo: 'falta GHL_WEBHOOK_URL' };
-  for (let intento = 1; intento <= 2; intento++) {
+  const TOPES = [5000, 3000];
+  let motivo = 'sin respuesta';
+  for (let intento = 0; intento < TOPES.length; intento++) {
+    const control = new AbortController();
+    const timer = setTimeout(() => control.abort(), TOPES[intento]);
+    const inicio = Date.now();
     try {
       const r = await fetch(destino, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(datos),
+        signal: control.signal,
       });
+      console.log('recurso: GHL respondió', r.status, 'en', Date.now() - inicio, 'ms');
       if (r.ok) return { ok: true };
-      if (intento === 2) return { ok: false, motivo: 'HTTP ' + r.status };
+      motivo = 'HTTP ' + r.status;
     } catch (e) {
-      if (intento === 2) return { ok: false, motivo: e.message };
+      motivo = e.name === 'AbortError' ? 'GHL tardó más de ' + TOPES[intento] / 1000 + ' s' : e.message;
+      console.error('recurso: GHL intento', intento + 1, motivo);
+    } finally {
+      clearTimeout(timer);
     }
   }
-  return { ok: false, motivo: 'sin respuesta' };
+  return { ok: false, motivo };
 }

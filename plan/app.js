@@ -128,8 +128,13 @@
       test_event_code: q.get('test_event_code') || ''
     };
 
-    fetch('/api/recurso', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(cuerpo) })
-      .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+    // Si falla una vez (red, servidor lento), se reintenta solo a los 1,5 s antes de avisar
+    var pedir = function () {
+      return fetch('/api/recurso', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(cuerpo) })
+        .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); });
+    };
+    pedir()
+      .catch(function () { return new Promise(function (ok) { setTimeout(ok, 1500); }).then(pedir); })
       .then(function (j) {
         var c = encodeURIComponent(respuestas.facturacion);
         // No califica (otra profesión, no trabaja con clientes o menos de $1k): va directo a su roadmap.
