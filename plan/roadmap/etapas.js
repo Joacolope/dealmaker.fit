@@ -396,7 +396,7 @@ window.ESTANCAN = {
 window.VEHICULO = {
   p: 'DealMaker FIT está diseñado para ayudar a profesionales de la salud deportiva a crear o escalar un negocio online alrededor de su profesión. Trabajando sobre:',
   pildoras: ['Fundaciones', 'Mini Brand Funnel', 'Adquisición', 'Ventas', 'Métricas', 'Backend', 'Retención', 'Procesos', 'Delegación'],
-  promesa: 'Ayudamos a profesionales de la salud deportiva a crear o escalar un negocio online que gire alrededor de su profesión, con el objetivo de generar entre $3.000 y $5.000 mensuales y construir las bases para seguir escalando.',
+  promesa: 'Ayudamos a profesionales de la salud deportiva a crear o escalar un negocio online que gire alrededor de su profesión, con el objetivo de generar $5k al mes y construir las bases para seguir escalando.',
 };
 
 // Cierre: siguiente paso
