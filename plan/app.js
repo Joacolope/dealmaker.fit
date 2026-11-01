@@ -84,7 +84,9 @@
       .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
       .then(function (j) {
         var c = encodeURIComponent(respuestas.facturacion);
-        if (!j.etapa || j.etapa < 2) {
+        // Cualquier respuesta negativa (no ejerce, otra profesión o menos de $1k) = no califica: va directo a su roadmap.
+        // Solo el que califica pasa a WhatsApp. La etapa (qué documento recibe) sale siempre de la facturación.
+        if (!j.califica) {
           location.href = '/confirmacion-1?e=' + (j.etapa || 1) + '&c=' + c;
           return;
         }

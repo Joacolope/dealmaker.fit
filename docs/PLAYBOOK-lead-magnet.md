@@ -25,7 +25,7 @@ Slugs: `tecnico` (Etapa 01), `crecimiento` (02), `emprendedor` (03), `empresario
 4. Nombre · Email · Instagram · prefijo + WhatsApp.
 
 `califica = ejerce === 'si' && profesion !== 'otro' && facturacion !== 'menos-1000'`.
-El ruteo va por etapa (1 → confirmación 1; 2 a 4 → confirmación 2); el Lead va por calificación.
+El ruteo va por calificación: cualquier respuesta negativa (no ejerce, otra profesión o menos de $1k) → confirmación 1 con el botón a su roadmap; solo el que califica → confirmación 2 (WhatsApp) y Lead por CAPI. La etapa (qué documento recibe) sale siempre de la facturación. Diferencia con el original: allá el ruteo era por etapa.
 
 ## Diferencias con el original
 
