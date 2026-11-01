@@ -1,5 +1,5 @@
 // POST /api/recurso — registro del Roadmap DealMaker FIT (plan.dealmakerconsulting.com)
-// Califica en el servidor, manda el lead a GHL y dispara el Lead por CAPI (solo si califica).
+// Califica en el servidor; solo si califica manda el lead a GHL y dispara el Lead por CAPI.
 // Variables de entorno: GHL_WEBHOOK_URL, META_CAPI_TOKEN, META_PIXEL_ID (opc.), META_TEST_EVENT_CODE (opc.)
 const { enviarLead } = require('./_meta-capi');
 
@@ -63,11 +63,13 @@ module.exports = async (req, res) => {
   const url = SITIO_PLAN + '/roadmap/' + SLUG[etapa] + '?c=' + d.facturacion;
   const prueba = email.endsWith('@resend.dev') || d.utm_source === 'prueba-tecnica';
 
-  // 1. GoHighLevel (Inbound Webhook): ahí queda guardado el lead
-  const ghl = await enviarGHL({
-    ...d, recurso: RECURSO, califica, etapa, etapa_nombre: NOMBRE[etapa], roadmap_url: url,
-    prueba, consentimiento: true, fecha: new Date().toISOString(),
-  });
+  // 1. GoHighLevel (Inbound Webhook): solo los que califican. El que no califica recibe su roadmap y no se guarda.
+  const ghl = califica
+    ? await enviarGHL({
+        ...d, recurso: RECURSO, califica, etapa, etapa_nombre: NOMBRE[etapa], roadmap_url: url,
+        prueba, consentimiento: true, fecha: new Date().toISOString(),
+      })
+    : { ok: false, motivo: 'no se manda (no califica)' };
 
   // 2. Lead por CAPI: solo si califica y el lead quedó guardado
   let capi = false;
@@ -86,7 +88,7 @@ module.exports = async (req, res) => {
       capi = 'no se manda (prueba sin test_event_code)';
     }
   }
-  if (!ghl.ok) console.error('recurso: GHL no recibió el lead', ghl.motivo, email);
+  if (califica && !ghl.ok) console.error('recurso: GHL no recibió el lead', ghl.motivo, email);
 
   return res.status(200).json({
     ok: true, califica, etapa, url,

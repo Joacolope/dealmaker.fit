@@ -25,7 +25,7 @@ Slugs: `tecnico` (Etapa 01), `crecimiento` (02), `emprendedor` (03), `empresario
    Si en el paso 3 respondió `no`, este paso se saltea y la facturación queda en `menos-1000`.
 5. ¿Cuándo querés empezar a llevar tu profesión a lo online? `ahora` / `3-meses` / `mirando` → al tocar la respuesta se envía.
 
-El lead llega a GHL recién al terminar el paso 5: quien deja los datos y abandona en las preguntas no se guarda.
+A GHL llegan **solo los leads que califican**, recién al terminar el paso 5. El que no califica recibe su roadmap y no se guarda en ningún lado; el que abandona en las preguntas, tampoco.
 
 `califica = profesion !== "otro" && ejerce === "si" && facturacion !== "menos-1000" && momento !== "mirando"`.
 Cualquier respuesta negativa → confirmación 1 con el botón a su roadmap. Solo el que califica → confirmación 2 (WhatsApp)
@@ -33,7 +33,7 @@ y Lead por CAPI. La etapa (qué documento recibe) sale siempre de la facturació
 
 ## Diferencias con el original
 
-- **Datos:** en vez de Supabase, cada lead se manda a un **Inbound Webhook de GoHighLevel** (`GHL_WEBHOOK_URL`).
+- **Datos:** en vez de Supabase, cada lead **calificado** se manda a un **Inbound Webhook de GoHighLevel** (`GHL_WEBHOOK_URL`).
   Como no hay base propia, el "repetido" lo resuelve GHL (contacto por email) y Meta (mismo `event_id` por email).
 - **Mail:** no se manda. El no calificado tiene el botón directo a su roadmap en la confirmación 1.
 - **Práctica constante (roleplay):** el roadmap de DealMaker no la define, así que las etapas no tienen esa hoja.
