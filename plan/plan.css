@@ -88,6 +88,10 @@ main > * { width: 100%; max-width: 560px; min-width: 0; }
 .campo textarea::placeholder { color: #aeaeb2; }
 .campo textarea:focus { outline: none; border-color: var(--tinta); box-shadow: 0 0 0 3px rgba(29, 29, 31, .1); }
 .campo--texto { margin-bottom: 10px; }
+.otro-texto { margin-top: 10px; }
+.otro-texto[hidden] { display: none; }
+.opcion--otro::after { transform: rotate(135deg); margin-top: -7px; }
+.opcion--otro.elegida::after { transform: rotate(-45deg); margin-top: -2px; }
 .campo select { -webkit-appearance: none; appearance: none; padding-right: 30px; cursor: pointer; background: #fff url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2712%27 height=%278%27%3E%3Cpath d=%27M1 1.5l5 5 5-5%27 fill=%27none%27 stroke=%27%2386868b%27 stroke-width=%271.8%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27/%3E%3C/svg%3E") no-repeat right 12px center; }
 .campo select:invalid { color: #aeaeb2; }
 .campo input:focus, .campo select:focus { outline: none; border-color: var(--tinta); box-shadow: 0 0 0 3px rgba(29, 29, 31, .1); }

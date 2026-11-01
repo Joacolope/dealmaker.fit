@@ -23,7 +23,8 @@ Slugs: `tecnico` (Etapa 01), `crecimiento` (02), `emprendedor` (03), `empresario
 3. ¿Ya trabajás como <profesión> con clientes? `si` / `no`
 4. ¿Cuánto facturás hoy por mes? `menos-1000` / `1000-3000` / `3000-5000` / `mas-5000` → define la etapa 1 a 4.
    Si en el paso 3 respondió `no`, este paso se saltea y la facturación queda en `menos-1000`.
-5. ¿Cuál es tu principal cuello de botella hoy? Texto libre (10 a 600 caracteres), llega a GHL como `cuello_botella`. El botón "Recibir mi roadmap" envía.
+5. ¿Cuál es tu principal cuello de botella hoy? `leads` / `anuncios` / `cierre` / `tiempo` / `otro` (abre un campo de texto, 10 a 600 caracteres).
+   Tocar una opción envía; con `otro` se envía con el botón. Llega a GHL como `bottleneck` (el valor) y `bottleneck_texto` (la frase de la opción o lo que escribió).
 
 A GHL llegan **solo los leads que califican**, recién al terminar el paso 5. El que no califica recibe su roadmap y no se guarda en ningún lado; el que abandona en las preguntas, tampoco.
 
