@@ -7,7 +7,7 @@ el mismo sistema de diseño; cambia el contenido (Roadmap DealMaker FIT, 4 etapa
 
 | Pieza | URL (subdominio) | Archivo |
 |---|---|---|
-| Landing con formulario (4 pasos) | `/` | `plan/index.html`, `plan/app.js`, `plan/plan.css` |
+| Landing con formulario (5 pasos) | `/` | `plan/index.html`, `plan/app.js`, `plan/plan.css` |
 | Endpoint que califica | `POST /api/recurso` | `api/recurso.js`, `api/_meta-capi.js` |
 | Confirmación 1 (no califica) | `/confirmacion-1?e=1&c=…` | `plan/confirmacion-1/index.html` |
 | Confirmación 2 (califica) | `/confirmacion-2?e=N&c=…&v=…` | `plan/confirmacion-2/index.html` |
@@ -18,12 +18,14 @@ Slugs: `tecnico` (Etapa 01), `crecimiento` (02), `emprendedor` (03), `empresario
 
 ## Formulario y calificación
 
-1. ¿Cuál es tu profesión? `entrenador` (Coach fitness) / `nutricionista` / `kinesiologo` / `osteopata` / `otro`
-2. ¿Ya trabajás como <profesión> con clientes? `si` / `no`
-3. ¿Cuánto facturás hoy por mes? `menos-1000` / `1000-3000` / `3000-5000` / `mas-5000` → define la etapa 1 a 4.
-   Si en el paso 2 respondió `no`, este paso se saltea y la facturación queda en `menos-1000`.
-4. ¿Cuándo querés empezar a llevar tu profesión a lo online? `ahora` / `3-meses` / `mirando`
-5. Nombre · Email · Instagram · prefijo + WhatsApp.
+1. Nombre · Email · Instagram · prefijo + WhatsApp (se valida el formato y pasa a las preguntas; todavía no se envía nada).
+2. ¿Cuál es tu profesión? `entrenador` (Coach fitness) / `nutricionista` / `kinesiologo` / `osteopata` / `otro`
+3. ¿Ya trabajás como <profesión> con clientes? `si` / `no`
+4. ¿Cuánto facturás hoy por mes? `menos-1000` / `1000-3000` / `3000-5000` / `mas-5000` → define la etapa 1 a 4.
+   Si en el paso 3 respondió `no`, este paso se saltea y la facturación queda en `menos-1000`.
+5. ¿Cuándo querés empezar a llevar tu profesión a lo online? `ahora` / `3-meses` / `mirando` → al tocar la respuesta se envía.
+
+El lead llega a GHL recién al terminar el paso 5: quien deja los datos y abandona en las preguntas no se guarda.
 
 `califica = profesion !== "otro" && ejerce === "si" && facturacion !== "menos-1000" && momento !== "mirando"`.
 Cualquier respuesta negativa → confirmación 1 con el botón a su roadmap. Solo el que califica → confirmación 2 (WhatsApp)

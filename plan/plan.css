@@ -65,6 +65,8 @@ main > * { width: 100%; max-width: 560px; min-width: 0; }
 .volver { margin-top: 12px; padding: 6px 0; border: 0; background: none; color: var(--sec); font-size: 14px; cursor: pointer; }
 .campo { display: grid; gap: 5px; margin-bottom: 10px; }
 .campo span { font-size: 14px; font-weight: 600; }
+.campo .oculto { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.campo input::placeholder { color: #8E8E93; }
 .campo input, .campo select { width: 100%; min-height: 50px; padding: 12px 14px; border: 1px solid var(--borde); border-radius: 12px; background: #fff; font: inherit; font-size: 16px; color: var(--tinta); }
 .campo input:focus, .campo select:focus { outline: none; border-color: var(--tinta); box-shadow: 0 0 0 3px rgba(29, 29, 31, .12); }
 .tel { display: grid; grid-template-columns: 112px 1fr; gap: 8px; }
@@ -108,7 +110,7 @@ main > * { width: 100%; max-width: 560px; min-width: 0; }
 
 /* Pantallas bajas: la vista previa se achica para que el formulario entre sin scroll */
 @media (max-height: 760px) and (max-width: 699px) {
-  .previa { height: 150px; max-width: 205px; }
+  .previa { height: 122px; max-width: 168px; }
 }
 @media (max-height: 700px) and (max-width: 699px) {
   .previa { display: none; }
