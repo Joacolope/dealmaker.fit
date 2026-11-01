@@ -59,3 +59,25 @@
   }
   window.addEventListener('scroll', revealPassed, { passive: true });
 })();
+
+// Calendario diferido: el iframe de GHL (y su script) se cargan cuando la agenda está cerca o al tocar "Agendar"
+(function () {
+  var cal = document.querySelector('iframe[data-src]');
+  if (!cal) return;
+  var listo = false;
+  function cargar() {
+    if (listo) return;
+    listo = true;
+    cal.src = cal.getAttribute('data-src');
+    var s = document.createElement('script');
+    s.src = 'https://link.msgsndr.com/js/form_embed.js';
+    document.body.appendChild(s);
+  }
+  document.querySelectorAll('a[href="#agenda"]').forEach(function (a) { a.addEventListener('click', cargar); });
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (e) { if (e[0].isIntersecting) { cargar(); io.disconnect(); } }, { rootMargin: '1200px 0px' });
+    io.observe(cal);
+  } else {
+    cargar();
+  }
+})();

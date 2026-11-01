@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>DealMaker · Sistema de Monetización Profesional</title>
 <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+<script>(function(fn){var h=0;function g(){if(!h){h=1;fn()}}if(document.readyState==='complete')g();else addEventListener('load',g);setTimeout(g,3500)})(function(){(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-NQ8RKDRH');</script>
+})(window,document,'script','dataLayer','GTM-NQ8RKDRH');});</script>
 <!-- End Google Tag Manager -->
 <!-- Test A/B del título: ?v=a o ?v=b fuerza una variante; si no, se sortea 50/50 y se recuerda en este navegador -->
 <script>
@@ -26,6 +26,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </script>
 <!-- Meta Pixel 1034841362227406: solo PageView (trackSingle para no mezclarse con el pixel que carga GTM) -->
 <script>
+(function(fn){var h=0;function g(){if(!h){h=1;fn()}}if(document.readyState==='complete')g();else addEventListener('load',g);setTimeout(g,3500)})(function(){
 !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
 n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
 n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
@@ -34,15 +35,14 @@ document,'script','https://connect.facebook.net/en_US/fbevents.js');
 fbq('set', 'autoConfig', false, '1034841362227406');
 fbq('init', '1034841362227406');
 fbq('trackSingle', '1034841362227406', 'PageView', { headline_variant: window.dmHeadline });
+});
 </script>
 <!-- End Meta Pixel -->
 <link rel="icon" href="/assets/logo-dm.svg" type="image/svg+xml">
 <link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <meta name="theme-color" content="#FFFFFF">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..800&display=swap" rel="stylesheet">
+<link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/base.css">
 <link rel="stylesheet" href="/assets/landing.css">
 <!-- Wistia: reproductor del VSL -->
@@ -71,12 +71,12 @@ fbq('trackSingle', '1034841362227406', 'PageView', { headline_variant: window.dm
 
   <!-- ===== Hero + VSL ===== -->
   <section class="hero">
-    <p class="eyebrow">Profesional de la salud deportiva que ya ejerce</p>
+    <p class="eyebrow">Para profesionales de la salud deportiva que ya ejercen</p>
     <h1><span class="headline-a">Convertí tu profesión en un negocio de <mark>$60.000 al año</mark> en 4 meses.</span><span class="headline-b">Convertí tu profesión en un negocio online de <mark>$60k al año</mark> en 4 meses.</span></h1>
 
     <!-- VSL: Wistia oe3asyv4rr -->
     <div class="video-frame vsl">
-      <wistia-player media-id="oe3asyv4rr" aspect="1.7777777777777777"></wistia-player>
+      <wistia-player media-id="oe3asyv4rr" aspect="1.7777777777777777" preload="none"></wistia-player>
     </div>
 
     <div class="cta-row" id="cta-principal">
@@ -94,6 +94,7 @@ fbq('trackSingle', '1034841362227406', 'PageView', { headline_variant: window.dm
     <!-- Los testimonios se cargan desde assets/casos.js -->
     <div class="case-grid" data-casos></div>
     <p class="cases-foot">El próximo caso de éxito podés ser vos</p>
+    <div class="cta-row"><a class="btn btn-lg" href="#agenda">Agendar llamada</a></div>
   </section>
 
   <!-- ===== Preguntas frecuentes ===== -->
@@ -142,7 +143,7 @@ fbq('trackSingle', '1034841362227406', 'PageView', { headline_variant: window.dm
       <p class="section-sub">Si sos entrenador presencial y querés dar el salto a lo online para facturar $5.000 al mes, agendá una llamada.</p>
     </div>
     <div class="calendar-card">
-      <iframe src="https://api.leadconnectorhq.com/widget/booking/JdrYfF1pF3JpMgoEW1Sv" style="width:100%;border:none;overflow:hidden" scrolling="no" id="JdrYfF1pF3JpMgoEW1Sv_presentacion" title="Calendario"></iframe>
+      <iframe data-src="https://api.leadconnectorhq.com/widget/booking/JdrYfF1pF3JpMgoEW1Sv" src="about:blank" style="width:100%;border:none;overflow:hidden" scrolling="no" id="JdrYfF1pF3JpMgoEW1Sv_presentacion" title="Calendario"></iframe>
     </div>
     <p class="calendar-fallback">¿No ves el calendario? <a href="https://api.leadconnectorhq.com/widget/booking/JdrYfF1pF3JpMgoEW1Sv" target="_blank" rel="noopener">Abrilo acá</a></p>
   </section>
@@ -159,7 +160,6 @@ fbq('trackSingle', '1034841362227406', 'PageView', { headline_variant: window.dm
   <a class="btn" href="#agenda">Agendar llamada</a>
 </div>
 
-<script src="https://link.msgsndr.com/js/form_embed.js"></script>
 <script src="/assets/casos.js"></script>
 <script src="/assets/landing.js"></script>
 </body>

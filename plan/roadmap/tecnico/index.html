@@ -10,12 +10,11 @@
 <link rel="icon" href="/logo.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..800&display=swap" rel="stylesheet">
+<link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/roadmap/roadmap.css">
 <!-- Meta Pixel: solo PageView -->
 <script>
+(function(fn){var h=0;function g(){if(!h){h=1;fn()}}if(document.readyState==='complete')g();else addEventListener('load',g);setTimeout(g,3500)})(function(){
 !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
 n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
 n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
@@ -24,6 +23,7 @@ document,'script','https://connect.facebook.net/en_US/fbevents.js');
 fbq('set', 'autoConfig', false, '1034841362227406');
 fbq('init', '1034841362227406');
 fbq('track', 'PageView');
+});
 </script>
 <noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=1034841362227406&ev=PageView&noscript=1"></noscript>
 <!-- End Meta Pixel -->
