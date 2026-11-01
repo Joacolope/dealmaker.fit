@@ -23,12 +23,12 @@ Slugs: `tecnico` (Etapa 01), `crecimiento` (02), `emprendedor` (03), `empresario
 3. ¿Ya trabajás como <profesión> con clientes? `si` / `no`
 4. ¿Cuánto facturás hoy por mes? `menos-1000` / `1000-3000` / `3000-5000` / `mas-5000` → define la etapa 1 a 4.
    Si en el paso 3 respondió `no`, este paso se saltea y la facturación queda en `menos-1000`.
-5. ¿Cuándo querés empezar a llevar tu profesión a lo online? `ahora` / `3-meses` / `mirando` → al tocar la respuesta se envía.
+5. ¿Cuál es tu principal cuello de botella hoy? Texto libre (10 a 600 caracteres), llega a GHL como `cuello_botella`. El botón "Recibir mi roadmap" envía.
 
 A GHL llegan **solo los leads que califican**, recién al terminar el paso 5. El que no califica recibe su roadmap y no se guarda en ningún lado; el que abandona en las preguntas, tampoco.
 
 `califica = profesion !== "otro" && facturacion !== "menos-1000"` (el que no trabaja con clientes queda en `menos-1000`).
-El paso 5 (cuándo empezar) se guarda y viaja a GHL, pero no descalifica.
+El paso 5 (cuello de botella) se guarda y viaja a GHL, pero no califica ni descalifica. No se manda a Meta.
 No califica → confirmación 1 con el botón a su roadmap. Solo el que califica → confirmación 2 (WhatsApp)
 y Lead por CAPI. La etapa (qué documento recibe) sale siempre de la facturación.
 

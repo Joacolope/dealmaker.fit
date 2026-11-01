@@ -10,7 +10,6 @@ const SITIO_PLAN = 'https://plan.dealmakerconsulting.com';
 const EJERCE = ['si', 'no'];
 const PROFESION = ['entrenador', 'nutricionista', 'kinesiologo', 'osteopata', 'otro'];
 const FACTURACION = ['menos-1000', '1000-3000', '3000-5000', 'mas-5000'];
-const MOMENTO = ['ahora', '3-meses', 'mirando'];
 
 // La etapa sale solo del rango de facturación
 const ETAPA = { 'menos-1000': 1, '1000-3000': 2, '3000-5000': 3, 'mas-5000': 4 };
@@ -44,18 +43,19 @@ module.exports = async (req, res) => {
     ejerce: texto(b.ejerce, 10),
     profesion: texto(b.profesion, 20),
     facturacion: texto(b.facturacion, 20),
-    momento: texto(b.momento, 20),
+    // Cuello de botella contado por el lead (texto libre del paso 5): se guarda en GHL, no va a Meta
+    cuello_botella: texto(b.cuello_botella, 600).replace(/\s+/g, ' '),
     utm_source: texto(b.utm_source), utm_medium: texto(b.utm_medium), utm_campaign: texto(b.utm_campaign),
     utm_content: texto(b.utm_content), fbclid: texto(b.fbclid, 300), pagina: texto(b.pagina, 500),
   };
 
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || !d.nombre || !d.telefono ||
-      !EJERCE.includes(d.ejerce) || !PROFESION.includes(d.profesion) || !FACTURACION.includes(d.facturacion) || !MOMENTO.includes(d.momento) ||
+      !EJERCE.includes(d.ejerce) || !PROFESION.includes(d.profesion) || !FACTURACION.includes(d.facturacion) || d.cuello_botella.length < 10 ||
       (d.instagram && !/^[a-z0-9._]{1,30}$/.test(d.instagram))) {
     return res.status(400).json({ ok: false, error: 'Datos incompletos o inválidos' });
   }
 
-  // Califica el profesional de la salud deportiva (no "otro") que factura más de $1k al mes. "Cuándo empezar" se guarda pero no descalifica.
+  // Califica el profesional de la salud deportiva (no "otro") que factura más de $1k al mes. El cuello de botella no califica ni descalifica.
   // La etapa no cambia por un "no": sale solo de la facturación. Si no trabaja con clientes, no factura.
   if (d.ejerce === 'no') d.facturacion = 'menos-1000';
   const califica = d.profesion !== 'otro' && d.facturacion !== 'menos-1000';
@@ -86,7 +86,7 @@ module.exports = async (req, res) => {
         fbp, fbc, fbclid: d.fbclid, pagina: d.pagina,
         ip, userAgent: req.headers['user-agent'],
         testEventCode,
-        custom: { recurso: RECURSO, califica, etapa, ejerce: d.ejerce, profesion: d.profesion, facturacion: d.facturacion, momento: d.momento },
+        custom: { recurso: RECURSO, califica, etapa, ejerce: d.ejerce, profesion: d.profesion, facturacion: d.facturacion },
       });
       capi = r.ok ? (r.prueba ? 'prueba' : true) : r.motivo;
     } else {

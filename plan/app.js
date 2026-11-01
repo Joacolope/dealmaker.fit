@@ -1,6 +1,6 @@
 // Formulario del Roadmap DealMaker FIT: 5 pasos, valida solo el formato y la calificación la decide el servidor.
-// Orden: datos de contacto → profesión → ¿ya trabaja con clientes? → facturación (se saltea si no trabaja) → cuándo quiere empezar.
-// Al elegir la última respuesta se envía solo. Nada personal viaja en la URL: nombre, Instagram y profesión van por sessionStorage.
+// Orden: datos de contacto → profesión → ¿ya trabaja con clientes? → facturación (se saltea si no trabaja) → cuello de botella (texto libre).
+// El botón del paso 5 envía todo. Nada personal viaja en la URL: nombre, Instagram y profesión van por sessionStorage.
 (function () {
   var form = document.getElementById('lm-form');
   if (!form) return;
@@ -35,7 +35,7 @@
   }
   function anterior(n) { return n === 5 && respuestas.ejerce === 'no' ? 3 : n - 1; }
 
-  // Opciones: al tocar una, pasa al siguiente paso con 160 ms de demora; la última envía el formulario
+  // Opciones: al tocar una, pasa al siguiente paso con 160 ms de demora
   form.querySelectorAll('.paso[data-campo]').forEach(function (paso) {
     var n = +paso.getAttribute('data-paso');
     paso.querySelectorAll('.opcion').forEach(function (b) {
@@ -44,7 +44,7 @@
         paso.querySelectorAll('.opcion').forEach(function (x) { x.classList.remove('elegida'); });
         b.classList.add('elegida');
         respuestas[paso.getAttribute('data-campo')] = b.getAttribute('data-valor');
-        setTimeout(function () { n === ULTIMO ? enviar(paso, b) : ir(siguiente(n)); }, 160);
+        setTimeout(function () { ir(siguiente(n)); }, 160);
       });
     });
   });
@@ -76,13 +76,14 @@
     var e = paso.querySelector('.error'); e.textContent = t; e.hidden = false;
     if (campo) { campo.classList.add('invalido'); campo.focus(); }
   }
-  form.querySelectorAll('.campo input, .campo select').forEach(function (c) {
+  form.querySelectorAll('.campo input, .campo select, .campo textarea').forEach(function (c) {
     c.addEventListener(c.tagName === 'SELECT' ? 'change' : 'input', function () { c.classList.remove('invalido'); });
   });
 
-  // Paso 1: datos de contacto. Enter o "Continuar" valida y pasa a las preguntas
+  // Paso 1: datos de contacto. Enter o "Continuar" valida y pasa a las preguntas. Paso 5: "Recibir mi roadmap" envía
   form.addEventListener('submit', function (e) {
     e.preventDefault();
+    if (actual === ULTIMO) return enviar(form.querySelector('.paso[data-paso="' + ULTIMO + '"]'));
     if (actual !== 1) return;
     var paso = form.querySelector('.paso[data-paso="1"]');
     paso.querySelector('.error').hidden = true;
@@ -105,21 +106,25 @@
     ir(2);
   });
 
-  // Paso 5: al elegir cuándo empezar se manda todo
-  function enviar(paso, elegida) {
+  // Paso 5: cuello de botella con sus palabras; valida y manda todo
+  function enviar(paso) {
     if (!datos) return ir(1);
-    if (!respuestas.profesion || !respuestas.ejerce || !respuestas.facturacion || !respuestas.momento) return ir(2);
-    var opciones = paso.querySelectorAll('.opcion, .volver');
-    var texto = elegida.textContent;
+    if (!respuestas.profesion || !respuestas.ejerce || !respuestas.facturacion) return ir(2);
+    var campo = form.elements.cuello;
+    var cuello = campo.value.trim().replace(/\s+/g, ' ');
     paso.querySelector('.error').hidden = true;
-    opciones.forEach(function (x) { x.disabled = true; });
-    elegida.textContent = 'Un segundo…';
+    if (cuello.length < 10) return mostrarError(paso, 'Contanos un poco más sobre tu cuello de botella.', campo);
+    var boton = paso.querySelector('button[type="submit"]');
+    var controles = paso.querySelectorAll('button, textarea');
+    var texto = boton.textContent;
+    controles.forEach(function (x) { x.disabled = true; });
+    boton.textContent = 'Un segundo…';
 
     var q = new URLSearchParams(location.search);
     var cuerpo = {
       nombre: datos.nombre, email: datos.email, instagram: datos.ig,
       telefono: datos.telefono, pais: datos.pais, codigo_pais: datos.codigo_pais, zona_horaria: zona,
-      ejerce: respuestas.ejerce, profesion: respuestas.profesion, facturacion: respuestas.facturacion, momento: respuestas.momento,
+      ejerce: respuestas.ejerce, profesion: respuestas.profesion, facturacion: respuestas.facturacion, cuello_botella: cuello,
       utm_source: q.get('utm_source') || '', utm_medium: q.get('utm_medium') || '',
       utm_campaign: q.get('utm_campaign') || '', utm_content: q.get('utm_content') || '',
       fbclid: q.get('fbclid') || '', fbp: cookie('_fbp'), fbc: cookie('_fbc'),
@@ -143,10 +148,9 @@
         location.href = '/confirmacion-2?e=' + j.etapa + '&c=' + c + '&v=' + encodeURIComponent(respuestas.profesion);
       })
       .catch(function () {
-        opciones.forEach(function (x) { x.disabled = false; });
-        elegida.textContent = texto;
-        elegida.classList.remove('elegida');
-        mostrarError(paso, 'No se pudo enviar. Tocá tu respuesta de nuevo.');
+        controles.forEach(function (x) { x.disabled = false; });
+        boton.textContent = texto;
+        mostrarError(paso, 'No se pudo enviar. Probá de nuevo.');
       });
   }
 })();
