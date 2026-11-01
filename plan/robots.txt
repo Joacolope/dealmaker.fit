@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /$
+Disallow: /confirmacion-1
+Disallow: /confirmacion-2
+Disallow: /roadmap
+
+Sitemap: https://plan.dealmakerconsulting.com/sitemap.xml

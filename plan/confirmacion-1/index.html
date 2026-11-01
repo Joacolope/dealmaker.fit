@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tu roadmap está listo · DealMaker</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" href="/logo.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/plan.css">
+<!-- Meta Pixel: solo PageView -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('set', 'autoConfig', false, '1034841362227406');
+fbq('init', '1034841362227406');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=1034841362227406&ev=PageView&noscript=1"></noscript>
+<!-- End Meta Pixel -->
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+<main>
+  <div class="marca"><img src="/logo.svg" alt="DealMaker" width="34" height="34"></div>
+  <section class="conf">
+    <p class="antetitulo">Tu plan está listo</p>
+    <h1>Acá tenés tu <span class="subraya">roadmap</span></h1>
+    <p class="bajada">Armado desde la etapa en la que estás hoy, con lo que tenés que trabajar para pasar a la siguiente.</p>
+    <a class="boton" id="ver" href="/roadmap/tecnico">Ver mi roadmap →</a>
+    <p class="nota">Se abre en esta misma pestaña. Guardá el link para volver cuando quieras.</p>
+  </section>
+</main>
+<footer class="pie">
+  <p>Los resultados individuales pueden variar. Lo que logra cada profesional depende de su punto de partida, su dedicación y su implementación.</p>
+  <p>© 2026 DealMaker</p>
+</footer>
+<script>
+// Lleva al documento de la etapa (e) con el rango declarado (c). Si e no es válido, va a la etapa 1.
+(function () {
+  var SLUG = [null, 'tecnico', 'crecimiento', 'emprendedor', 'empresario'];
+  var q = new URLSearchParams(location.search);
+  var slug = SLUG[parseInt(q.get('e'), 10)] || SLUG[1];
+  var c = q.get('c');
+  document.getElementById('ver').href = '/roadmap/' + slug + (c ? '?c=' + encodeURIComponent(c) : '');
+})();
+</script>
+</body>
+</html>
