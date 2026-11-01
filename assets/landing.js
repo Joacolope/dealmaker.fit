@@ -47,7 +47,10 @@
       if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
     });
   }, { rootMargin: '0px 0px -10% 0px' });
-  items.forEach(function (el) { el.classList.add('reveal'); io.observe(el); });
+  items.forEach(function (el) {
+    if (el.getBoundingClientRect().top < window.innerHeight) return; // ya visible al abrir: sin animación
+    el.classList.add('reveal'); io.observe(el);
+  });
 
   // Respaldo: si se saltea un bloque (por ejemplo con el link a #agenda), se muestra igual
   function revealPassed() {

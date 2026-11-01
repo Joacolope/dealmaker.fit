@@ -222,6 +222,8 @@
   visor.addEventListener('scroll', contador, { passive: true });
   window.addEventListener('resize', function () { escalar(); contador(); });
 
+  // Si la fuente ya cargó, una sola pasada; si no, se repagina cuando llega (cambia el largo de las líneas)
+  var fuenteLista = !document.fonts || document.fonts.status === 'loaded';
   paginar();
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(paginar);
+  if (!fuenteLista) document.fonts.ready.then(paginar);
 })();

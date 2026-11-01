@@ -58,6 +58,7 @@ iframe[src="about:blank"] { background: var(--soft); }
 
 /* Agenda (página /booking-page) */
 .calendar-wrap { max-width: 1000px; margin: 0 auto; padding: 0 5px; }
+.calendar-wrap iframe { min-height: 760px; }
 
 /* Footer legal */
 .site-footer { padding: 24px 16px 32px; }
