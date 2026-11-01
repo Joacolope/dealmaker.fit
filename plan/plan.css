@@ -30,15 +30,15 @@ main > * { width: 100%; max-width: 560px; min-width: 0; }
 .cifra { background: var(--acento-claro); border-radius: 6px; padding: 0 .1em; }
 
 /* ===== Landing ===== */
-.prueba { display: flex; flex-wrap: nowrap; white-space: nowrap; align-items: center; justify-content: center; gap: 10px; margin: 0 auto 14px; width: auto; max-width: none; padding: 5px 14px 5px 6px; border-radius: 999px; background: var(--banda); font-size: 13.5px; font-weight: 600; }
-.avatares { display: flex; }
+.prueba { display: flex; text-align: left; align-items: center; justify-content: center; gap: 10px; margin: 0 auto 14px; width: auto; max-width: 100%; line-height: 1.25; padding: 5px 16px 5px 6px; border-radius: 22px; background: var(--banda); font-size: 13.5px; font-weight: 600; }
+.avatares { display: flex; flex: none; }
 .avatares img { width: 32px; height: 32px; border-radius: 50%; border: 2px solid var(--banda); object-fit: cover; margin-left: -9px; }
 .avatares img:first-child { margin-left: 0; }
 
 .titular { margin: 0 0 16px; max-width: 760px; text-align: center; font-size: min(41px, 5.15vw); font-weight: 800; line-height: 1.12; letter-spacing: -.025em; }
 .titular span { display: block; white-space: nowrap; }
 
-.previa { position: relative; height: 250px; margin: 0 auto 6px; perspective: 1200px; max-width: 330px; }
+.previa { position: relative; height: 178px; margin: 0 auto 8px; perspective: 1200px; max-width: 240px; }
 .previa img { position: absolute; top: 8px; width: 46%; height: auto; aspect-ratio: 560 / 792; border-radius: 4px; box-shadow: 0 18px 36px -16px rgba(0, 0, 0, .45), 0 2px 6px rgba(0, 0, 0, .12); background: #fff; }
 .previa .p1 { left: 2%; transform: rotateY(18deg) rotateZ(-6deg) translateY(14px); z-index: 1; }
 .previa .p2 { left: 27%; transform: translateZ(40px); z-index: 3; }
@@ -90,7 +90,7 @@ main > * { width: 100%; max-width: 560px; min-width: 0; }
 
 @media (min-width: 700px) {
   main { padding-top: 30px; }
-  .previa { max-width: 520px; height: 378px; }
+  .previa { max-width: 360px; height: 266px; }
 }
 @media (max-width: 380px) {
   .prueba { font-size: 12px; gap: 8px; padding-right: 10px; }
