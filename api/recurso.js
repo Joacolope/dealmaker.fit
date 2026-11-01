@@ -1,7 +1,7 @@
 // POST /api/recurso — registro del Roadmap DealMaker FIT (plan.dealmakerconsulting.com)
 // Califica en el servidor; solo si califica manda el lead a GHL y dispara el Lead por CAPI.
 // Variables de entorno: GHL_WEBHOOK_URL, META_CAPI_TOKEN, META_PIXEL_ID (opc.), META_TEST_EVENT_CODE (opc.)
-const { enviarLead } = require('./_meta-capi');
+const { enviarLead, idDeRespaldo } = require('./_meta-capi');
 
 const RECURSO = 'roadmap-dealmaker-fit';
 const SITIO_PLAN = 'https://plan.dealmakerconsulting.com';
@@ -62,11 +62,16 @@ module.exports = async (req, res) => {
   const etapa = ETAPA[d.facturacion];
   const url = SITIO_PLAN + '/roadmap/' + SLUG[etapa] + '?c=' + d.facturacion;
   const prueba = email.endsWith('@resend.dev') || d.utm_source === 'prueba-tecnica';
+  const ip = (req.headers['x-forwarded-for'] || '').split(',')[0].trim();
+  const fbp = texto(b.fbp, 200);
+  const fbc = texto(b.fbc, 300) || (d.fbclid ? 'fb.1.' + Date.now() + '.' + d.fbclid : '');
 
   // 1. GoHighLevel (Inbound Webhook): solo los que califican. El que no califica recibe su roadmap y no se guarda.
+  // Lleva fbp, fbc, IP, navegador y event_id para que la acción "Meta Conversion API" del workflow atribuya el Lead.
   const ghl = califica
     ? await enviarGHL({
         ...d, recurso: RECURSO, califica, etapa, etapa_nombre: NOMBRE[etapa], roadmap_url: url,
+        fbp, fbc, ip, user_agent: texto(req.headers['user-agent'], 400), event_id: idDeRespaldo(email, RECURSO),
         prueba, consentimiento: true, fecha: new Date().toISOString(),
       })
     : { ok: false, motivo: 'no se manda (no califica)' };
@@ -78,8 +83,8 @@ module.exports = async (req, res) => {
     if (!prueba || testEventCode) {
       const r = await enviarLead({
         email, nombre: d.nombre, telefono: d.telefono, pais: d.pais, recurso: RECURSO,
-        fbp: texto(b.fbp, 200), fbc: texto(b.fbc, 300), fbclid: d.fbclid, pagina: d.pagina,
-        ip: (req.headers['x-forwarded-for'] || '').split(',')[0].trim(), userAgent: req.headers['user-agent'],
+        fbp, fbc, fbclid: d.fbclid, pagina: d.pagina,
+        ip, userAgent: req.headers['user-agent'],
         testEventCode,
         custom: { recurso: RECURSO, califica, etapa, ejerce: d.ejerce, profesion: d.profesion, facturacion: d.facturacion, momento: d.momento },
       });
