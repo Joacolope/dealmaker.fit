@@ -18,7 +18,7 @@ Slugs: `tecnico` (Etapa 01), `crecimiento` (02), `emprendedor` (03), `empresario
 
 ## Formulario y calificación
 
-1. Nombre · Email · Instagram · prefijo + WhatsApp (se valida el formato y pasa a las preguntas; todavía no se envía nada).
+1. Nombre · Email · Instagram · país + WhatsApp, todos obligatorios (el país se completa solo por IP o zona horaria; si no se detecta, hay que elegirlo). Se valida el formato y pasa a las preguntas; todavía no se envía nada.
 2. ¿Cuál es tu profesión? `entrenador` (Coach fitness) / `nutricionista` / `kinesiologo` / `osteopata` / `otro`
 3. ¿Ya trabajás como <profesión> con clientes? `si` / `no`
 4. ¿Cuánto facturás hoy por mes? `menos-1000` / `1000-3000` / `3000-5000` / `mas-5000` → define la etapa 1 a 4.

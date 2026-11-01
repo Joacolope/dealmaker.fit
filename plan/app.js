@@ -9,10 +9,15 @@
   var datos = null;
   var actual = 1;
   var ULTIMO = 5;
+  var pasoN = form.querySelector('.progreso .paso-n');
 
   function ir(n) {
     actual = n;
     pasos.forEach(function (p) { p.hidden = p.getAttribute('data-paso') !== String(n); });
+    form.style.setProperty('--avance', n / ULTIMO);
+    pasoN.textContent = 'Paso ' + n + ' de ' + ULTIMO;
+    // Si el teclado del celular dejó el formulario arriba de la pantalla, se vuelve a mostrar desde el principio
+    if (form.getBoundingClientRect().top < 0) form.scrollIntoView({ block: 'start', behavior: 'smooth' });
   }
 
   var NOMBRE_PROFESION = { entrenador: 'coach fitness', nutricionista: 'nutricionista', kinesiologo: 'kinesiólogo/a', osteopata: 'osteópata' };
@@ -47,7 +52,7 @@
     b.addEventListener('click', function () { ir(anterior(+b.closest('.paso').getAttribute('data-paso'))); });
   });
 
-  // Prefijo: cookie del país de la IP, si no la zona horaria, si no Argentina
+  // País obligatorio: se completa solo con la cookie del país de la IP o la zona horaria; si no se detecta, lo elige la persona
   var ZONAS = {
     'America/Argentina': 'AR', 'America/Buenos_Aires': 'AR', 'America/Montevideo': 'UY', 'America/Santiago': 'CL',
     'America/Asuncion': 'PY', 'America/La_Paz': 'BO', 'America/Lima': 'PE', 'America/Bogota': 'CO', 'America/Guayaquil': 'EC',
@@ -60,13 +65,20 @@
   var zona = '';
   try { zona = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch (e) {}
   var cookie = function (k) { var m = document.cookie.match(new RegExp('(?:^|;\\s*)' + k + '=([^;]*)')); return m ? decodeURIComponent(m[1]) : ''; };
-  var pais = cookie('pais_ip') || ZONAS[zona] || ZONAS[zona.split('/').slice(0, 2).join('/')] || 'AR';
+  var pais = cookie('pais_ip') || ZONAS[zona] || ZONAS[zona.split('/').slice(0, 2).join('/')] || '';
   var select = form.elements.prefijo;
-  for (var i = 0; i < select.options.length; i++) {
+  for (var i = 0; pais && i < select.options.length; i++) {
     if (select.options[i].value.indexOf(pais + '|') === 0) { select.selectedIndex = i; break; }
   }
 
-  function mostrarError(paso, t) { var e = paso.querySelector('.error'); e.textContent = t; e.hidden = false; }
+  // Error: mensaje debajo de los campos y el campo en rojo (con foco) hasta que se corrija
+  function mostrarError(paso, t, campo) {
+    var e = paso.querySelector('.error'); e.textContent = t; e.hidden = false;
+    if (campo) { campo.classList.add('invalido'); campo.focus(); }
+  }
+  form.querySelectorAll('.campo input, .campo select').forEach(function (c) {
+    c.addEventListener(c.tagName === 'SELECT' ? 'change' : 'input', function () { c.classList.remove('invalido'); });
+  });
 
   // Paso 1: datos de contacto. Enter o "Continuar" valida y pasa a las preguntas
   form.addEventListener('submit', function (e) {
@@ -82,10 +94,11 @@
     var digitos = f.whatsapp.value.replace(/\D/g, '');
     var pre = select.value.split('|');
 
-    if (!nombre) return mostrarError(paso, 'Escribí tu nombre.');
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return mostrarError(paso, 'Revisá tu email.');
-    if (!/^[A-Za-z0-9._]{1,30}$/.test(ig)) return mostrarError(paso, 'Revisá tu usuario de Instagram.');
-    if (digitos.length < 6) return mostrarError(paso, 'Revisá tu número de WhatsApp.');
+    if (!nombre) return mostrarError(paso, 'Escribí tu nombre.', f.nombre);
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return mostrarError(paso, 'Revisá tu email.', f.email);
+    if (!/^[A-Za-z0-9._]{1,30}$/.test(ig)) return mostrarError(paso, 'Escribí tu usuario de Instagram, por ejemplo @ramiro.previley.', f.instagram);
+    if (!select.value) return mostrarError(paso, 'Elegí tu país.', select);
+    if (digitos.length < 8) return mostrarError(paso, 'Revisá tu número de WhatsApp.', f.whatsapp);
 
     datos = { nombre: nombre, email: email, ig: ig, telefono: pre[1] + ' ' + digitos, pais: pre[0], codigo_pais: pre[1] };
     if (document.activeElement) document.activeElement.blur();
