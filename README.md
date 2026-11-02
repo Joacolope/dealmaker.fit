@@ -7,7 +7,7 @@ Estilo: paleta DealMaker sobre fondo blanco (texto `#0A0A0A`, acento amarillo `#
 | Paso | Ruta | Archivo |
 |---|---|---|
 | Presentación | `/` (y `/presentacion`) | `index.html` |
-| Agenda | `/booking-page` | `booking-page.html` |
+| Agenda | `/agenda` (`/booking-page` redirige) | `agenda.html` |
 | Gracias | `/gracias` | `gracias.html` |
 | Página de nutrición | `/nutrigr-704299` | `nutrigr-704299.html` |
 | No califica | `/nc` | `nc.html` |
@@ -15,7 +15,7 @@ Estilo: paleta DealMaker sobre fondo blanco (texto `#0A0A0A`, acento amarillo `#
 ## Flujo
 
 1. **Presentación**: hero + VSL, debajo el botón "Agendar llamada" (la promesa aparece en la barra fija al scrollear), casos de éxito, preguntas frecuentes y al final el calendario de GHL (`#agenda`). Todos los botones bajan al calendario.
-2. **Agenda**: calendario de GHL `Sesión de Diagnóstico Profesional` (`JdrYfF1pF3JpMgoEW1Sv`).
+2. **Agenda**: calendario de GHL `pRFjQaIoSsOr8Kms5skX` (link de respaldo: https://api.leadconnectorhq.com/widget/booking/pRFjQaIoSsOr8Kms5skX).
    La redirección después de agendar se configura en GHL (Calendario → Confirmación → redirect a `/gracias`).
 3. **Gracias**: aviso de que les hablamos por WhatsApp (sin botones), videos antes de la llamada, propuesta de valor, preguntas y casos de éxito. Usa el mismo diseño que la Presentación (`assets/landing.css` + `assets/gracias.css`).
 4. **Nutrición**: información previa a la llamada en texto (propuesta de valor, preguntas) + aviso de WhatsApp, mismo diseño que Gracias.

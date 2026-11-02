@@ -1,6 +1,9 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
+  "redirects": [
+    { "source": "/booking-page", "destination": "/agenda", "permanent": true }
+  ],
   "rewrites": [
     {
       "source": "/presentacion",

@@ -1,7 +1,7 @@
 // Contenido del Roadmap DealMaker FIT (fuente: ETAPAS.pdf). Para cambiar texto se toca solo este archivo.
 // Bloques: {p}, {lista:[]}, {lineas:[]}, {grande}, {cita}, {cadena:[]}, {preguntas:[]}
 window.RECURSO_NOMBRE = 'Roadmap DealMaker FIT';
-window.AGENDA = 'https://dealmakerconsulting.com/#agenda';
+window.AGENDA = 'https://dealmakerconsulting.com/agenda';
 
 // Valor del formulario -> texto legible
 window.RANGO = {
