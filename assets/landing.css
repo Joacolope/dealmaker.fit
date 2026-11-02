@@ -136,6 +136,9 @@ mark {
 /* Casos de éxito */
 .cases { background: var(--yellow); }
 .cases .kicker, .cases .section-sub { color: rgba(10, 10, 10, .7); }
+/* Sobre el fondo amarillo, el botón va en negro con texto blanco */
+.cases .btn { background: var(--ink); color: #fff; }
+.cases .btn:hover { background: #2A2A2A; }
 .case-grid {
   max-width: 1120px;
   margin: 0 auto;
