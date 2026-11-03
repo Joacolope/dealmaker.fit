@@ -37,6 +37,8 @@ y Lead por CAPI. La etapa (qué documento recibe) sale siempre de la facturació
 
 - **Datos:** en vez de Supabase, cada lead **calificado** se manda a un **Inbound Webhook de GoHighLevel** (`GHL_WEBHOOK_URL`).
   Como no hay base propia, el "repetido" lo resuelve GHL (contacto por email) y Meta (mismo `event_id` por email).
+  Lleva: contacto, respuestas (`ejerce`, `profesion`, `facturacion`, `bottleneck`, cada una con su `_texto`), etapa,
+  `utm_source/medium/campaign/content/term/id`, `fbclid`, `fbc`, `fbp`, `ip`, `user_agent`, `event_id`, `pagina` y `prueba`.
 - **Mail:** no se manda. El no calificado tiene el botón directo a su roadmap en la confirmación 1.
 - **Práctica constante (roleplay):** el roadmap de DealMaker no la define, así que las etapas no tienen esa hoja.
   Cada etapa cierra con su trampa, su señal de avance y lo que hace falta para pasar a la siguiente.

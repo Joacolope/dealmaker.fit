@@ -6,11 +6,22 @@ const { enviarLead, idDeRespaldo } = require('./_meta-capi');
 const RECURSO = 'roadmap-dealmaker-fit';
 const SITIO_PLAN = 'https://plan.dealmakerconsulting.com';
 
-// Valores permitidos de cada pregunta
-const EJERCE = ['si', 'no'];
-const PROFESION = ['entrenador', 'nutricionista', 'kinesiologo', 'osteopata', 'otro'];
-const FACTURACION = ['menos-1000', '1000-3000', '3000-5000', 'mas-5000'];
-// Cuello de botella (paso 5): valor → texto que va a GHL como bottleneck_texto
+// Valores permitidos de cada pregunta: valor → texto de la opción, que va a GHL como <campo>_texto
+const EJERCE = { si: 'Sí, ya tengo clientes', no: 'Todavía no' };
+const PROFESION = {
+  entrenador: 'Coach fitness',
+  nutricionista: 'Nutricionista',
+  kinesiologo: 'Kinesiólogo/a',
+  osteopata: 'Osteópata',
+  otro: 'Otra profesión',
+};
+const FACTURACION = {
+  'menos-1000': 'Menos de $1k',
+  '1000-3000': 'Entre $1k y $3k',
+  '3000-5000': 'Entre $3k y $5k',
+  'mas-5000': 'Más de $5k',
+};
+// Cuello de botella (paso 5)
 const BOTTLENECK = {
   diferenciacion: 'Diferenciarme en mi mercado',
   leads: 'No tengo suficientes leads',
@@ -25,6 +36,7 @@ const SLUG = [null, 'tecnico', 'crecimiento', 'emprendedor', 'empresario'];
 const NOMBRE = [null, 'Profesional Técnico', 'Profesional en Crecimiento', 'Profesional Emprendedor', 'Profesional Empresario'];
 
 const texto = (v, max) => String(v == null ? '' : v).trim().slice(0, max || 200);
+const permitido = (lista, v) => Object.prototype.hasOwnProperty.call(lista, v);
 
 module.exports = async (req, res) => {
   res.setHeader('Cache-Control', 'no-store');
@@ -54,21 +66,24 @@ module.exports = async (req, res) => {
     // Cuello de botella: se guarda en GHL, no va a Meta
     bottleneck: texto(b.bottleneck, 20),
     utm_source: texto(b.utm_source), utm_medium: texto(b.utm_medium), utm_campaign: texto(b.utm_campaign),
-    utm_content: texto(b.utm_content), fbclid: texto(b.fbclid, 300), pagina: texto(b.pagina, 500),
+    utm_content: texto(b.utm_content), utm_term: texto(b.utm_term), utm_id: texto(b.utm_id),
+    fbclid: texto(b.fbclid, 300), pagina: texto(b.pagina, 500),
   };
 
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || !d.nombre || !d.telefono ||
-      !EJERCE.includes(d.ejerce) || !PROFESION.includes(d.profesion) || !FACTURACION.includes(d.facturacion) ||
-      !Object.prototype.hasOwnProperty.call(BOTTLENECK, d.bottleneck) ||
+      !permitido(EJERCE, d.ejerce) || !permitido(PROFESION, d.profesion) || !permitido(FACTURACION, d.facturacion) ||
+      !permitido(BOTTLENECK, d.bottleneck) ||
       (d.instagram && !/^[a-z0-9._]{1,30}$/.test(d.instagram))) {
     return res.status(400).json({ ok: false, error: 'Datos incompletos o inválidos' });
   }
 
-  d.bottleneck_texto = BOTTLENECK[d.bottleneck];
-
   // Califica el profesional de la salud deportiva (no "otro") que factura más de $1k al mes. El cuello de botella no califica ni descalifica.
   // La etapa no cambia por un "no": sale solo de la facturación. Si no trabaja con clientes, no factura.
   if (d.ejerce === 'no') d.facturacion = 'menos-1000';
+  d.ejerce_texto = EJERCE[d.ejerce];
+  d.profesion_texto = PROFESION[d.profesion];
+  d.facturacion_texto = FACTURACION[d.facturacion];
+  d.bottleneck_texto = BOTTLENECK[d.bottleneck];
   const califica = d.profesion !== 'otro' && d.facturacion !== 'menos-1000';
   const etapa = ETAPA[d.facturacion];
   const url = SITIO_PLAN + '/roadmap/' + SLUG[etapa] + '?c=' + d.facturacion;
