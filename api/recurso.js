@@ -1,5 +1,5 @@
 // POST /api/recurso — registro del Roadmap DealMaker FIT (plan.dealmakerconsulting.com)
-// Califica en el servidor; solo si califica manda el lead a GHL y dispara el Lead por CAPI.
+// Califica en el servidor; solo si califica manda el lead a GHL y, en paralelo, el Lead a Meta por CAPI desde acá.
 // Variables de entorno: GHL_WEBHOOK_URL, META_CAPI_TOKEN, META_PIXEL_ID (opc.), META_TEST_EVENT_CODE (opc.)
 const { enviarLead, idDeRespaldo } = require('./_meta-capi');
 
@@ -93,37 +93,40 @@ module.exports = async (req, res) => {
   const fbc = texto(b.fbc, 300) || (d.fbclid ? 'fb.1.' + Date.now() + '.' + d.fbclid : '');
 
   // 1. GoHighLevel (Inbound Webhook): solo los que califican. El que no califica recibe su roadmap y no se guarda.
-  // Lleva fbp, fbc, IP, navegador y event_id para que la acción "Meta Conversion API" del workflow atribuya el Lead.
-  const ghl = califica
-    ? await enviarGHL({
+  // GHL guarda el contacto; el Lead a Meta ya no sale de su workflow, sale de acá (paso 2).
+  const pedidoGHL = califica
+    ? enviarGHL({
         ...d, recurso: RECURSO, califica, etapa, etapa_nombre: NOMBRE[etapa], roadmap_url: url,
         fbp, fbc, ip, user_agent: texto(req.headers['user-agent'], 400), event_id: idDeRespaldo(email, RECURSO),
         prueba, consentimiento: true, fecha: new Date().toISOString(),
       })
-    : { ok: false, motivo: 'no se manda (no califica)' };
+    : Promise.resolve({ ok: false, motivo: 'no se manda (no califica)' });
 
-  // 2. Lead por CAPI: solo si califica y el lead quedó guardado
-  let capi = false;
-  if (califica && ghl.ok) {
+  // 2. Lead por CAPI: solo si califica, aunque GHL falle o tarde
+  let pedidoCAPI = Promise.resolve('no corresponde (no califica)');
+  if (califica) {
     const testEventCode = email.endsWith('@resend.dev') ? texto(b.test_event_code || process.env.META_TEST_EVENT_CODE, 40) : '';
     if (!prueba || testEventCode) {
-      const r = await enviarLead({
+      pedidoCAPI = enviarLead({
         email, nombre: d.nombre, telefono: d.telefono, pais: d.pais, recurso: RECURSO,
         fbp, fbc, fbclid: d.fbclid, pagina: d.pagina,
         ip, userAgent: req.headers['user-agent'],
         testEventCode,
         custom: { recurso: RECURSO, califica, etapa, ejerce: d.ejerce, profesion: d.profesion, facturacion: d.facturacion },
+      }).then(r => {
+        if (!r.ok) console.error('recurso: Meta no recibió el Lead', r.motivo, email);
+        return r.ok ? (r.prueba ? 'prueba' : true) : r.motivo;
       });
-      capi = r.ok ? (r.prueba ? 'prueba' : true) : r.motivo;
     } else {
-      capi = 'no se manda (prueba sin test_event_code)';
+      pedidoCAPI = Promise.resolve('no se manda (prueba sin test_event_code)');
     }
   }
+  const [ghl, capi] = await Promise.all([pedidoGHL, pedidoCAPI]);
   if (califica && !ghl.ok) console.error('recurso: GHL no recibió el lead', ghl.motivo, email);
 
   return res.status(200).json({
     ok: true, califica, etapa, url,
-    guardado: { ghl: ghl.ok || ghl.motivo, mail: 'no se manda', capi: califica ? capi : 'no corresponde (no califica)', califica, etapa },
+    guardado: { ghl: ghl.ok || ghl.motivo, mail: 'no se manda', capi, califica, etapa },
   });
 };
 

@@ -44,10 +44,11 @@ async function enviarLead(d) {
   if (d.testEventCode) cuerpo.test_event_code = d.testEventCode;
 
   try {
-    const r = await fetch('https://graph.facebook.com/v21.0/' + pixel + '/events?access_token=' + encodeURIComponent(token), {
+    const r = await fetch('https://graph.facebook.com/v24.0/' + pixel + '/events?access_token=' + encodeURIComponent(token), {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(cuerpo),
+      signal: AbortSignal.timeout(8000),
     });
     const j = await r.json().catch(() => ({}));
     if (!r.ok) return { ok: false, motivo: (j.error && j.error.message) || 'HTTP ' + r.status };
