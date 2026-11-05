@@ -40,6 +40,10 @@
     }
   ],
   "functions": {
-    "api/recurso.js": { "maxDuration": 20 }
-  }
+    "api/recurso.js": { "maxDuration": 20 },
+    "api/reintentar-meta.js": { "maxDuration": 60 }
+  },
+  "crons": [
+    { "path": "/api/reintentar-meta", "schedule": "0 12 * * *" }
+  ]
 }

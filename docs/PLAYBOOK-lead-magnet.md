@@ -54,6 +54,8 @@ Base propia: cada registro (califique o no) va a **Neon** (Vercel Marketplace, r
 `roadmap_registros`, `docs/neon-roadmap.sql`) y de respaldo a Vercel Blob privado (`dealmaker-leads`). Ver `api/_leads.js`.
 Exportar a CSV: `node herramientas/exportar-leads.js leads.csv [--calificados]` (lee `DATABASE_URL` de `.env.local`).
 El Lead a Meta sale de `/api/recurso` por CAPI (no del workflow de GHL), en paralelo con GHL y aunque GHL falle.
+Si Meta no responde, se reintenta en el momento (2 intentos) y, si igual falla, el cron diario `/api/reintentar-meta`
+(12:00 UTC, `CRON_SECRET`) lo vuelve a mandar desde Neon con el mismo `event_id`, hasta 7 días.
 Para reenviar calificados que no llegaron (máx. 7 días): exportar el CSV de GHL y correr
 `node herramientas/reenviar-leads-meta.js leads.csv --probar` (después sin `--probar`, con `META_CAPI_TOKEN`).
 

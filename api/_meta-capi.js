@@ -26,8 +26,12 @@ async function enviarLead(d) {
     fbp: d.fbp || undefined,
     fbc: d.fbc || (d.fbclid ? 'fb.1.' + Date.now() + '.' + d.fbclid : undefined),
   };
-  if (d.nombre) user.fn = [sha256(d.nombre.split(/\s+/)[0])];
-  if (d.telefono) user.ph = [sha256(d.telefono.replace(/\D/g, ''))];
+  if (d.nombre) {
+    const partes = d.nombre.trim().split(/\s+/);
+    user.fn = [sha256(partes[0])];
+    if (partes.length > 1) user.ln = [sha256(partes[partes.length - 1])];
+  }
+  if (d.telefono) user.ph = telefonos(d.telefono).map(sha256);
   if (d.pais) user.country = [sha256(d.pais)];
 
   const cuerpo = {
@@ -43,19 +47,38 @@ async function enviarLead(d) {
   };
   if (d.testEventCode) cuerpo.test_event_code = d.testEventCode;
 
-  try {
-    const r = await fetch('https://graph.facebook.com/v24.0/' + pixel + '/events?access_token=' + encodeURIComponent(token), {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(cuerpo),
-      signal: AbortSignal.timeout(8000),
-    });
-    const j = await r.json().catch(() => ({}));
-    if (!r.ok) return { ok: false, motivo: (j.error && j.error.message) || 'HTTP ' + r.status };
-    return { ok: true, recibidos: j.events_received, prueba: !!d.testEventCode };
-  } catch (e) {
-    return { ok: false, motivo: e.message };
+  // Dos intentos (6 s y 4 s): se reintenta si Meta no responde o da error de su lado (5xx o 429).
+  // Un error de datos (4xx) no se reintenta. Si igual falla, el reintento diario (api/reintentar-meta.js) lo vuelve a mandar.
+  const TOPES = [6000, 4000];
+  let motivo = 'sin respuesta';
+  for (let intento = 0; intento < TOPES.length; intento++) {
+    try {
+      const r = await fetch('https://graph.facebook.com/v24.0/' + pixel + '/events?access_token=' + encodeURIComponent(token), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(cuerpo),
+        signal: AbortSignal.timeout(TOPES[intento]),
+      });
+      const j = await r.json().catch(() => ({}));
+      if (r.ok) return { ok: true, recibidos: j.events_received, prueba: !!d.testEventCode };
+      motivo = (j.error && j.error.message) || 'HTTP ' + r.status;
+      if (r.status < 500 && r.status !== 429) break;
+    } catch (e) {
+      motivo = e.name === 'TimeoutError' ? 'Meta tardó más de ' + TOPES[intento] / 1000 + ' s' : e.message;
+    }
+    console.error('meta-capi: intento', intento + 1, motivo);
   }
+  return { ok: false, motivo };
+}
+
+// Teléfono en formato internacional sin "+". Argentina: va con y sin el 9 de celular, así Meta lo encuentra como lo tenga.
+function telefonos(t) {
+  let d = String(t).replace(/\D/g, '');
+  if (!d.startsWith('54')) return [d];
+  d = d.slice(2);
+  if (d.startsWith('54') && d.length > 11) d = d.slice(2);   // cargó el código de país dos veces
+  d = d.replace(/^9/, '').replace(/^0/, '');
+  return ['54' + d, '549' + d];
 }
 
 module.exports = { enviarLead, idDeRespaldo };
