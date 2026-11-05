@@ -1,0 +1,48 @@
+-- Tabla de registros del Roadmap DealMaker FIT (plan.dealmakerconsulting.com)
+-- Pegar en Supabase → SQL Editor → Run. Solo escribe el servidor (clave service_role), por eso RLS sin políticas.
+create table if not exists public.roadmap_registros (
+  id bigint generated always as identity primary key,
+  creado timestamptz not null default now(),
+  fecha timestamptz,
+  califica boolean not null,
+  etapa smallint,
+  etapa_nombre text,
+  nombre text,
+  email text,
+  telefono text,
+  instagram text,
+  pais text,
+  codigo_pais text,
+  zona_horaria text,
+  ejerce text,
+  profesion text,
+  facturacion text,
+  bottleneck text,
+  ejerce_texto text,
+  profesion_texto text,
+  facturacion_texto text,
+  bottleneck_texto text,
+  utm_source text,
+  utm_medium text,
+  utm_campaign text,
+  utm_content text,
+  utm_term text,
+  utm_id text,
+  fbclid text,
+  fbc text,
+  fbp text,
+  ip text,
+  user_agent text,
+  event_id text,
+  pagina text,
+  roadmap_url text,
+  prueba boolean not null default false,
+  envio_ghl text,
+  envio_capi text,
+  datos jsonb
+);
+
+create index if not exists roadmap_registros_creado on public.roadmap_registros (creado desc);
+create index if not exists roadmap_registros_email on public.roadmap_registros (email);
+
+alter table public.roadmap_registros enable row level security;
