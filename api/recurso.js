@@ -1,7 +1,7 @@
 // POST /api/recurso — registro del Roadmap DealMaker FIT (plan.dealmakerconsulting.com)
 // Califica en el servidor; solo si califica manda el lead a GHL y, en paralelo, el Lead a Meta por CAPI desde acá.
-// Todos los registros (califiquen o no) quedan en la base propia (Supabase + respaldo en Vercel Blob, ver _leads.js).
-// Variables de entorno: GHL_WEBHOOK_URL, META_CAPI_TOKEN, BLOB_READ_WRITE_TOKEN, META_PIXEL_ID (opc.), META_TEST_EVENT_CODE (opc.)
+// Todos los registros (califiquen o no) quedan en la base propia (Neon + respaldo en Vercel Blob, ver _leads.js).
+// Variables de entorno: GHL_WEBHOOK_URL, META_CAPI_TOKEN, DATABASE_URL, BLOB_READ_WRITE_TOKEN, META_PIXEL_ID (opc.), META_TEST_EVENT_CODE (opc.)
 const { enviarLead, idDeRespaldo } = require('./_meta-capi');
 const { guardarRegistro } = require('./_leads');
 

@@ -35,7 +35,7 @@ y Lead por CAPI. La etapa (qué documento recibe) sale siempre de la facturació
 
 ## Diferencias con el original
 
-- **Datos:** en vez de Supabase, cada lead **calificado** se manda a un **Inbound Webhook de GoHighLevel** (`GHL_WEBHOOK_URL`).
+- **Datos:** en vez de Supabase, todo registro queda en Neon y cada lead **calificado** además va al **Inbound Webhook de GoHighLevel** (`GHL_WEBHOOK_URL`), que manda la notificación.
   Como no hay base propia, el "repetido" lo resuelve GHL (contacto por email) y Meta (mismo `event_id` por email).
   Lleva: contacto, respuestas (`ejerce`, `profesion`, `facturacion`, `bottleneck`, cada una con su `_texto`), etapa,
   `utm_source/medium/campaign/content/term/id`, `fbclid`, `fbc`, `fbp`, `ip`, `user_agent`, `event_id`, `pagina` y `prueba`.
@@ -50,8 +50,9 @@ y Lead por CAPI. La etapa (qué documento recibe) sale siempre de la facturació
 
 `GHL_WEBHOOK_URL` · `META_CAPI_TOKEN` · `META_PIXEL_ID` (opcional, por defecto 1034841362227406) · `META_TEST_EVENT_CODE` (opcional).
 
-Base propia: cada registro (califique o no) queda como JSON privado en Vercel Blob (store `dealmaker-leads`,
-`api/_leads.js`). Exportar a CSV: `node herramientas/exportar-leads.js leads.csv [--calificados]` con `BLOB_READ_WRITE_TOKEN`.
+Base propia: cada registro (califique o no) va a **Neon** (Vercel Marketplace, recurso `dealmaker-leads`, tabla
+`roadmap_registros`, `docs/neon-roadmap.sql`) y de respaldo a Vercel Blob privado (`dealmaker-leads`). Ver `api/_leads.js`.
+Exportar a CSV: `node herramientas/exportar-leads.js leads.csv [--calificados]` (lee `DATABASE_URL` de `.env.local`).
 El Lead a Meta sale de `/api/recurso` por CAPI (no del workflow de GHL), en paralelo con GHL y aunque GHL falle.
 Para reenviar calificados que no llegaron (máx. 7 días): exportar el CSV de GHL y correr
 `node herramientas/reenviar-leads-meta.js leads.csv --probar` (después sin `--probar`, con `META_CAPI_TOKEN`).

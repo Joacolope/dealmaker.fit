@@ -1,5 +1,5 @@
 -- Tabla de registros del Roadmap DealMaker FIT (plan.dealmakerconsulting.com)
--- Pegar en Supabase → SQL Editor → Run. Solo escribe el servidor (clave service_role), por eso RLS sin políticas.
+-- Base Neon (Vercel Marketplace, recurso dealmaker-leads). Se crea con: node herramientas/crear-tabla.js
 create table if not exists public.roadmap_registros (
   id bigint generated always as identity primary key,
   creado timestamptz not null default now(),
@@ -44,5 +44,3 @@ create table if not exists public.roadmap_registros (
 
 create index if not exists roadmap_registros_creado on public.roadmap_registros (creado desc);
 create index if not exists roadmap_registros_email on public.roadmap_registros (email);
-
-alter table public.roadmap_registros enable row level security;
