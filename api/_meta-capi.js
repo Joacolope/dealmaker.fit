@@ -33,7 +33,7 @@ async function enviarLead(d) {
   const cuerpo = {
     data: [{
       event_name: 'Lead',
-      event_time: Math.floor(Date.now() / 1000),
+      event_time: d.eventTime || Math.floor(Date.now() / 1000),
       event_id: idDeRespaldo(d.email, d.recurso),
       action_source: 'website',
       event_source_url: d.pagina || undefined,

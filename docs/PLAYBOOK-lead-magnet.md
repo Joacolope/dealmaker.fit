@@ -50,6 +50,10 @@ y Lead por CAPI. La etapa (qué documento recibe) sale siempre de la facturació
 
 `GHL_WEBHOOK_URL` · `META_CAPI_TOKEN` · `META_PIXEL_ID` (opcional, por defecto 1034841362227406) · `META_TEST_EVENT_CODE` (opcional).
 
+El Lead a Meta sale de `/api/recurso` por CAPI (no del workflow de GHL), en paralelo con GHL y aunque GHL falle.
+Para reenviar calificados que no llegaron (máx. 7 días): exportar el CSV de GHL y correr
+`node herramientas/reenviar-leads-meta.js leads.csv --probar` (después sin `--probar`, con `META_CAPI_TOKEN`).
+
 ## Pruebas
 
 Siempre con emails `@resend.dev` y `utm_source=prueba-tecnica`. Un lead de prueba que califica solo manda Lead a Meta
