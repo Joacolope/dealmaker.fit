@@ -1,42 +1,43 @@
-// Formulario del Roadmap DealMaker FIT: 6 pasos, valida solo el formato y la calificación la decide el servidor.
-// Orden: nombre (microcompromiso) → profesión → ¿ya trabaja con clientes? → facturación (se saltea si no trabaja)
-// → principal desafío → email, Instagram y WhatsApp. "Recibir mi roadmap" envía todo.
+// Formulario del Roadmap DealMaker FIT: 5 pasos, valida solo el formato y la calificación la decide el servidor.
+// Orden (como ivansanchezcoach.com): arranca con un toque, sin escribir nada. ¿A qué te dedicás? → ¿ya trabaja con clientes?
+// → facturación (se saltea si no trabaja) → principal desafío → nombre, email, WhatsApp e Instagram. "Recibir mi roadmap" envía todo.
 // Nada personal viaja en la URL: nombre, Instagram y profesión van por sessionStorage.
 (function () {
   var form = document.getElementById('lm-form');
   if (!form) return;
   var pasos = form.querySelectorAll('.paso');
   var respuestas = {};
-  var nombre = '';
   var actual = 1;
-  var ULTIMO = 6;
+  var ULTIMO = 5;
   var pasoN = form.querySelector('.progreso .paso-n');
+  var pct = form.querySelector('.progreso .pct');
+  var atras = form.querySelector('.progreso .atras');
 
   function ir(n) {
     actual = n;
     pasos.forEach(function (p) { p.hidden = p.getAttribute('data-paso') !== String(n); });
     form.style.setProperty('--avance', n / ULTIMO);
     pasoN.textContent = 'Paso ' + n + ' de ' + ULTIMO;
+    pct.textContent = Math.round(n / ULTIMO * 100) + '%';
+    atras.hidden = n === 1;
     // Si el teclado del celular dejó el formulario arriba de la pantalla, se vuelve a mostrar desde el principio
     if (form.getBoundingClientRect().top < 0) form.scrollIntoView({ block: 'start', behavior: 'smooth' });
   }
 
   var NOMBRE_PROFESION = { entrenador: 'coach fitness', nutricionista: 'nutricionista', kinesiologo: 'kinesiólogo/a', osteopata: 'osteópata' };
   var preguntaEjerce = document.getElementById('pregunta-ejerce');
-  var preguntaProfesion = document.getElementById('pregunta-profesion');
-  var preguntaContacto = document.getElementById('pregunta-contacto');
 
   // Siguiente paso según lo respondido: si todavía no trabaja con clientes, no factura y se saltea la facturación
   function siguiente(n) {
-    if (n === 2) {
+    if (n === 1) {
       var p = NOMBRE_PROFESION[respuestas.profesion];
       preguntaEjerce.textContent = p ? '¿Ya trabajás como ' + p + ' con clientes?' : '¿Ya trabajás en tu profesión con clientes?';
     }
-    if (n === 3 && respuestas.ejerce === 'no') { respuestas.facturacion = 'menos-1000'; return 5; }
-    if (n === 3) delete respuestas.facturacion;
+    if (n === 2 && respuestas.ejerce === 'no') { respuestas.facturacion = 'menos-1000'; return 4; }
+    if (n === 2) delete respuestas.facturacion;
     return n + 1;
   }
-  function anterior(n) { return n === 5 && respuestas.ejerce === 'no' ? 3 : n - 1; }
+  function anterior(n) { return n === 4 && respuestas.ejerce === 'no' ? 2 : n - 1; }
 
   // Opciones: al tocar una, pasa al siguiente paso con 160 ms de demora
   form.querySelectorAll('.paso[data-campo]').forEach(function (paso) {
@@ -51,9 +52,7 @@
       });
     });
   });
-  form.querySelectorAll('.volver').forEach(function (b) {
-    b.addEventListener('click', function () { ir(anterior(+b.closest('.paso').getAttribute('data-paso'))); });
-  });
+  atras.addEventListener('click', function () { if (actual > 1) ir(anterior(actual)); });
 
   // País obligatorio: se completa solo con la cookie del país de la IP o la zona horaria; si no se detecta, lo elige la persona
   var ZONAS = {
@@ -83,45 +82,34 @@
     c.addEventListener(c.tagName === 'SELECT' ? 'change' : 'input', function () { c.classList.remove('invalido'); });
   });
 
-  // Paso 1: solo el nombre. Enter o "Continuar" pasa a las preguntas, que ya lo llaman por su nombre.
-  // Paso 6: Enter o "Recibir mi roadmap" valida el contacto y envía todo.
+  // Último paso: Enter o "Recibir mi roadmap" valida el contacto y envía todo
   form.addEventListener('submit', function (e) {
     e.preventDefault();
+    if (actual !== ULTIMO) return;
     var paso = form.querySelector('.paso[data-paso="' + actual + '"]');
     var f = form.elements;
-    if (actual === 1) {
-      paso.querySelector('.error').hidden = true;
-      nombre = f.nombre.value.trim();
-      if (!nombre) return mostrarError(paso, 'Escribí tu nombre.', f.nombre);
-      var primero = nombre.split(/\s+/)[0];
-      primero = primero.charAt(0).toUpperCase() + primero.slice(1);
-      preguntaProfesion.textContent = 'Un gusto, ' + primero + '. ¿Cuál es tu profesión?';
-      preguntaContacto.textContent = 'Último paso, ' + primero + ': ¿a dónde te mandamos tu roadmap?';
-      if (document.activeElement) document.activeElement.blur();
-      return ir(2);
-    }
-    if (actual !== ULTIMO) return;
     paso.querySelector('.error').hidden = true;
+    var nombre = f.nombre.value.trim();
     var email = f.email.value.trim().toLowerCase();
     // Instagram: acepta @usuario, el link completo o el usuario pelado
     var ig = f.instagram.value.trim().replace(/^https?:\/\/(www\.)?instagram\.com\//i, '').replace(/[/?#].*$/, '').replace(/^@/, '').toLowerCase();
     var digitos = f.whatsapp.value.replace(/\D/g, '');
     var pre = select.value.split('|');
 
+    if (!nombre) return mostrarError(paso, 'Escribí tu nombre.', f.nombre);
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return mostrarError(paso, 'Revisá tu email.', f.email);
-    if (!/^[A-Za-z0-9._]{1,30}$/.test(ig)) return mostrarError(paso, 'Escribí tu usuario de Instagram, por ejemplo @ramiro.previley.', f.instagram);
     if (!select.value) return mostrarError(paso, 'Elegí tu país.', select);
     if (digitos.length < 8) return mostrarError(paso, 'Revisá tu número de WhatsApp.', f.whatsapp);
+    if (!/^[A-Za-z0-9._]{1,30}$/.test(ig)) return mostrarError(paso, 'Escribí tu usuario de Instagram, por ejemplo @ramiro.previley.', f.instagram);
 
     if (document.activeElement) document.activeElement.blur();
     enviar(paso, { nombre: nombre, email: email, ig: ig, telefono: pre[1] + ' ' + digitos, pais: pre[0], codigo_pais: pre[1] });
   });
 
-  // Envío: el botón del paso 6 muestra "Un segundo…" mientras tanto
+  // Envío: el botón del último paso muestra "Un segundo…" mientras tanto
   function enviar(paso, datos) {
-    if (!nombre) return ir(1);
-    if (!respuestas.profesion || !respuestas.ejerce || !respuestas.facturacion) return ir(2);
-    if (!respuestas.bottleneck) return ir(5);
+    if (!respuestas.profesion || !respuestas.ejerce || !respuestas.facturacion) return ir(1);
+    if (!respuestas.bottleneck) return ir(4);
     var boton = paso.querySelector('.boton');
     var controles = paso.querySelectorAll('button, input, select');
     var texto = boton.textContent;

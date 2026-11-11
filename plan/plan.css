@@ -58,8 +58,14 @@ main > * { width: 100%; max-width: 560px; min-width: 0; }
 
 /* Formulario: tarjeta blanca donde "apoyan" las hojas */
 .lm-form { position: relative; z-index: 1; padding: 40px 18px 14px; border: 1px solid #e8e8ed; border-radius: 28px; background: #fff; box-shadow: 0 30px 60px -36px rgba(0, 0, 0, .28), 0 1px 2px rgba(0, 0, 0, .04); }
-.progreso { display: flex; align-items: center; gap: 12px; margin: 0 0 10px; }
-.barra { flex: 1; height: 4px; border-radius: 4px; background: #ececf0; overflow: hidden; }
+.progreso { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; margin: 0 0 14px; }
+.barra { flex: 1 0 100%; height: 5px; border-radius: 5px; background: #ececf0; overflow: hidden; }
+/* Flecha para volver (arriba a la izquierda) y porcentaje (a la derecha), como en ivansanchezcoach.com */
+.atras { flex: none; position: relative; width: 28px; height: 28px; margin: -4px 0; padding: 0; border: 1px solid #e3e3e8; border-radius: 50%; background: #fff; cursor: pointer; }
+.atras[hidden] { display: none; }
+.atras::before { content: ""; position: absolute; left: 11px; top: 9px; width: 7px; height: 7px; border-left: 2px solid var(--sec); border-bottom: 2px solid var(--sec); transform: rotate(45deg); }
+.atras:hover { border-color: var(--tinta); }
+.pct { margin: 0 0 0 auto; font-size: 13px; font-weight: 700; color: var(--tinta); }
 .barra span { display: block; width: calc(var(--avance, .2) * 100%); height: 100%; border-radius: inherit; background: var(--tinta); transition: width .35s ease; }
 .paso { animation: entra .28s ease both; }
 .paso[hidden] { display: none; }
@@ -68,17 +74,15 @@ main > * { width: 100%; max-width: 560px; min-width: 0; }
 .paso-n { flex: none; margin: 0; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--sec); }
 .paso h2 { margin: 0 0 12px; font-size: min(21px, 4.7vw); font-weight: 700; line-height: 1.2; letter-spacing: -.015em; }
 
-/* Opciones: fila gris con flecha; la elegida se pone negra */
+/* Opciones: fila gris con un círculo a la izquierda; la elegida se pone negra con el círculo marcado */
 .opciones { display: grid; gap: 8px; }
-.opcion { position: relative; width: 100%; min-height: 50px; padding: 12px 40px 12px 16px; border: 1px solid transparent; border-radius: 14px; background: var(--banda); font-size: 16px; font-weight: 600; text-align: left; cursor: pointer; transition: background .15s, border-color .15s, color .15s, transform .1s; }
-.opcion::after { content: ""; position: absolute; right: 17px; top: 50%; width: 8px; height: 8px; margin-top: -5px; border-top: 2px solid currentColor; border-right: 2px solid currentColor; transform: rotate(45deg); opacity: .35; }
+.opcion { position: relative; width: 100%; min-height: 50px; padding: 12px 16px 12px 48px; border: 1px solid transparent; border-radius: 14px; background: var(--banda); font-size: 16px; font-weight: 600; text-align: left; cursor: pointer; transition: background .15s, border-color .15s, color .15s, transform .1s; }
+.opcion::before { content: ""; position: absolute; left: 16px; top: 50%; width: 20px; height: 20px; margin-top: -10px; border: 2px solid #c7c7cc; border-radius: 50%; background: #fff; box-sizing: border-box; transition: border-color .15s, box-shadow .15s; }
 .opcion:hover { border-color: #c7c7cc; background: #fff; }
 .opcion:active { transform: scale(.985); }
 .opcion.elegida { border-color: var(--tinta); background: var(--tinta); color: #fff; }
-.opcion.elegida::after { opacity: 1; }
+.opcion.elegida::before { border-color: #fff; background: var(--acento-vivo); box-shadow: inset 0 0 0 3px var(--tinta); }
 .opcion:disabled { cursor: wait; }
-.volver { margin-top: 10px; padding: 6px 0; border: 0; background: none; color: var(--sec); font-size: 14px; cursor: pointer; }
-.volver:hover { color: var(--tinta); }
 
 /* Campos con la etiqueta adentro (siempre visible) y un ejemplo debajo */
 .campo { position: relative; display: block; margin-bottom: 6px; }
@@ -101,9 +105,9 @@ main > * { width: 100%; max-width: 560px; min-width: 0; }
 .boton--wa { background: var(--wa); }
 .boton--wa svg { width: 22px; height: 22px; fill: currentColor; }
 
-.bullets { margin: 22px 0 0; padding: 0; list-style: none; display: grid; gap: 10px; }
-.bullets li { position: relative; padding-left: 30px; font-size: 16px; }
-.bullets li::before { content: "✓"; position: absolute; left: 0; top: 0; width: 20px; height: 20px; border-radius: 50%; background: var(--tinta); color: #fff; font-size: 12px; font-weight: 800; display: grid; place-items: center; margin-top: 2px; }
+.confianza { margin: 18px auto 0; padding: 0; width: auto; list-style: none; display: grid; gap: 8px; font-size: 14.5px; font-weight: 500; }
+.confianza li { position: relative; padding-left: 28px; }
+.confianza li::before { content: "✓"; position: absolute; left: 0; top: 0; width: 19px; height: 19px; border-radius: 50%; background: var(--acento-vivo); color: var(--tinta); font-size: 11px; font-weight: 800; display: grid; place-items: center; }
 .legal--lm { margin: 18px 0 0; font-size: 12.5px; line-height: 1.45; color: var(--sec); }
 
 .pie { width: 100%; max-width: 560px; margin: 0 auto; padding: 22px 16px 32px; border-top: 1px solid var(--div); text-align: center; font-size: 12px; color: var(--sec); }

@@ -67,18 +67,10 @@ src="https://www.facebook.com/tr?id=1034841362227406&ev=PageView&noscript=1"
 
   <form class="lm-form" id="lm-form" novalidate>
     <input class="trampa-bot" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
-    <div class="progreso"><p class="paso-n" aria-live="polite">Paso 1 de 6</p><div class="barra" aria-hidden="true"><span></span></div></div>
+    <div class="progreso"><button type="button" class="atras" aria-label="Volver al paso anterior" hidden></button><p class="paso-n" aria-live="polite">Paso 1 de 5</p><p class="pct" aria-hidden="true">20%</p><div class="barra" aria-hidden="true"><span></span></div></div>
 
-    <div class="paso" data-paso="1">
-      <h2>Empecemos: ¿cómo te llamás?</h2>
-      <label class="campo"><span>Nombre</span><input type="text" name="nombre" placeholder="Tu nombre" autocomplete="given-name" enterkeyhint="next" required></label>
-      <p class="error" hidden></p>
-      <button type="submit" class="boton">Continuar →</button>
-      <p class="seguro">Te lleva menos de 1 minuto · Es gratis</p>
-    </div>
-
-    <div class="paso" data-paso="2" data-campo="profesion" hidden>
-      <h2 id="pregunta-profesion">¿Cuál es tu profesión?</h2>
+    <div class="paso" data-paso="1" data-campo="profesion">
+      <h2>¿Hoy a qué te dedicás?</h2>
       <div class="opciones">
           <button type="button" class="opcion" data-valor="entrenador">Coach fitness</button>
           <button type="button" class="opcion" data-valor="nutricionista">Nutricionista</button>
@@ -86,19 +78,17 @@ src="https://www.facebook.com/tr?id=1034841362227406&ev=PageView&noscript=1"
           <button type="button" class="opcion" data-valor="osteopata">Osteópata</button>
           <button type="button" class="opcion" data-valor="otro">Otra profesión</button>
       </div>
-      <button type="button" class="volver">← Volver</button>
     </div>
 
-    <div class="paso" data-paso="3" data-campo="ejerce" hidden>
+    <div class="paso" data-paso="2" data-campo="ejerce" hidden>
       <h2 id="pregunta-ejerce">¿Ya trabajás con clientes?</h2>
       <div class="opciones">
           <button type="button" class="opcion" data-valor="si">Sí, ya tengo clientes</button>
           <button type="button" class="opcion" data-valor="no">Todavía no</button>
       </div>
-      <button type="button" class="volver">← Volver</button>
     </div>
 
-    <div class="paso" data-paso="4" data-campo="facturacion" hidden>
+    <div class="paso" data-paso="3" data-campo="facturacion" hidden>
       <h2>¿Cuánto facturás hoy por mes con tu profesión?</h2>
       <div class="opciones">
           <button type="button" class="opcion" data-valor="menos-1000">Menos de $1k</button>
@@ -106,10 +96,9 @@ src="https://www.facebook.com/tr?id=1034841362227406&ev=PageView&noscript=1"
           <button type="button" class="opcion" data-valor="3000-5000">Entre $3k y $5k</button>
           <button type="button" class="opcion" data-valor="mas-5000">Más de $5k</button>
       </div>
-      <button type="button" class="volver">← Volver</button>
     </div>
 
-    <div class="paso" data-paso="5" data-campo="bottleneck" hidden>
+    <div class="paso" data-paso="4" data-campo="bottleneck" hidden>
       <h2>¿Cuál es tu principal desafío hoy en día?</h2>
       <div class="opciones">
           <button type="button" class="opcion" data-valor="clientes">Necesito más clientes</button>
@@ -118,13 +107,12 @@ src="https://www.facebook.com/tr?id=1034841362227406&ev=PageView&noscript=1"
           <button type="button" class="opcion" data-valor="precios">Cobro poco por lo que hago</button>
           <button type="button" class="opcion" data-valor="tiempo">No me da el tiempo, todo depende de mí</button>
       </div>
-      <button type="button" class="volver">← Volver</button>
     </div>
 
-    <div class="paso" data-paso="6" hidden>
-      <h2 id="pregunta-contacto">Último paso: ¿a dónde te mandamos tu roadmap?</h2>
+    <div class="paso" data-paso="5" hidden>
+      <h2>¿A dónde te mandamos tu roadmap?</h2>
+      <label class="campo"><span>Nombre</span><input type="text" name="nombre" placeholder="Tu nombre" autocomplete="given-name" enterkeyhint="next" required></label>
       <label class="campo"><span>Email</span><input type="email" name="email" placeholder="tu@email.com" autocomplete="email" inputmode="email" autocapitalize="none" spellcheck="false" enterkeyhint="next" required></label>
-      <label class="campo"><span>Instagram</span><input type="text" name="instagram" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="@ramiro.previley" enterkeyhint="next" required></label>
       <div class="tel">
         <label class="campo campo--pais"><span>País</span>
           <select name="prefijo" required>
@@ -152,20 +140,20 @@ src="https://www.facebook.com/tr?id=1034841362227406&ev=PageView&noscript=1"
             <option value="BR|+55">🇧🇷 +55</option>
           </select>
         </label>
-        <label class="campo"><span>WhatsApp</span><input type="tel" name="whatsapp" placeholder="Tu número" autocomplete="tel-national" inputmode="tel" enterkeyhint="send" required></label>
+        <label class="campo"><span>WhatsApp</span><input type="tel" name="whatsapp" placeholder="Tu número" autocomplete="tel-national" inputmode="tel" enterkeyhint="next" required></label>
       </div>
+      <label class="campo"><span>Instagram</span><input type="text" name="instagram" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="@ramiro.previley" enterkeyhint="send" required></label>
       <p class="error" hidden></p>
       <button type="submit" class="boton">Recibir mi roadmap →</button>
       <p class="seguro">Campos obligatorios · No compartimos tus datos</p>
-      <button type="button" class="volver">← Volver</button>
     </div>
 
   </form>
 
-  <ul class="bullets">
-    <li>Tu roadmap según tu etapa: lo que tenés que trabajar hoy para pasar a la siguiente.</li>
-    <li>Tu etapa de hoy y la que sigue, con la trampa de cada una y la señal de que ya la pasaste.</li>
-    <li>100% gratuito — acceso instantáneo.</li>
+  <ul class="confianza">
+    <li>Menos de 1 minuto</li>
+    <li>100% gratis · Sin tarjeta</li>
+    <li>Acceso inmediato a tu roadmap</li>
   </ul>
 
   <p class="legal--lm">Al dejar tus datos aceptás que DealMaker se ponga en contacto con vos por teléfono, mensaje o email usando la información ingresada. No vendemos tu información personal.</p>
