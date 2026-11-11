@@ -1,14 +1,15 @@
-// Formulario del Roadmap DealMaker FIT: 5 pasos, valida solo el formato y la calificación la decide el servidor.
-// Orden: datos de contacto → profesión → ¿ya trabaja con clientes? → facturación (se saltea si no trabaja) → cuello de botella.
-// Tocar una opción del paso 5 envía todo. Nada personal viaja en la URL: nombre, Instagram y profesión van por sessionStorage.
+// Formulario del Roadmap DealMaker FIT: 6 pasos, valida solo el formato y la calificación la decide el servidor.
+// Orden: nombre (microcompromiso) → profesión → ¿ya trabaja con clientes? → facturación (se saltea si no trabaja)
+// → principal desafío → email, Instagram y WhatsApp. "Recibir mi roadmap" envía todo.
+// Nada personal viaja en la URL: nombre, Instagram y profesión van por sessionStorage.
 (function () {
   var form = document.getElementById('lm-form');
   if (!form) return;
   var pasos = form.querySelectorAll('.paso');
   var respuestas = {};
-  var datos = null;
+  var nombre = '';
   var actual = 1;
-  var ULTIMO = 5;
+  var ULTIMO = 6;
   var pasoN = form.querySelector('.progreso .paso-n');
 
   function ir(n) {
@@ -22,6 +23,8 @@
 
   var NOMBRE_PROFESION = { entrenador: 'coach fitness', nutricionista: 'nutricionista', kinesiologo: 'kinesiólogo/a', osteopata: 'osteópata' };
   var preguntaEjerce = document.getElementById('pregunta-ejerce');
+  var preguntaProfesion = document.getElementById('pregunta-profesion');
+  var preguntaContacto = document.getElementById('pregunta-contacto');
 
   // Siguiente paso según lo respondido: si todavía no trabaja con clientes, no factura y se saltea la facturación
   function siguiente(n) {
@@ -35,7 +38,7 @@
   }
   function anterior(n) { return n === 5 && respuestas.ejerce === 'no' ? 3 : n - 1; }
 
-  // Opciones: al tocar una, pasa al siguiente paso con 160 ms de demora. En el último paso, envía todo.
+  // Opciones: al tocar una, pasa al siguiente paso con 160 ms de demora
   form.querySelectorAll('.paso[data-campo]').forEach(function (paso) {
     var n = +paso.getAttribute('data-paso');
     paso.querySelectorAll('.opcion').forEach(function (b) {
@@ -44,7 +47,7 @@
         paso.querySelectorAll('.opcion').forEach(function (x) { x.classList.remove('elegida'); });
         b.classList.add('elegida');
         respuestas[paso.getAttribute('data-campo')] = b.getAttribute('data-valor');
-        setTimeout(function () { n === ULTIMO ? enviar(paso, b) : ir(siguiente(n)); }, 160);
+        setTimeout(function () { ir(siguiente(n)); }, 160);
       });
     });
   });
@@ -80,37 +83,47 @@
     c.addEventListener(c.tagName === 'SELECT' ? 'change' : 'input', function () { c.classList.remove('invalido'); });
   });
 
-  // Paso 1: datos de contacto. Enter o "Continuar" valida y pasa a las preguntas. Paso 5: "Recibir mi roadmap" envía
+  // Paso 1: solo el nombre. Enter o "Continuar" pasa a las preguntas, que ya lo llaman por su nombre.
+  // Paso 6: Enter o "Recibir mi roadmap" valida el contacto y envía todo.
   form.addEventListener('submit', function (e) {
     e.preventDefault();
-    if (actual !== 1) return;
-    var paso = form.querySelector('.paso[data-paso="1"]');
-    paso.querySelector('.error').hidden = true;
+    var paso = form.querySelector('.paso[data-paso="' + actual + '"]');
     var f = form.elements;
-    var nombre = f.nombre.value.trim();
+    if (actual === 1) {
+      paso.querySelector('.error').hidden = true;
+      nombre = f.nombre.value.trim();
+      if (!nombre) return mostrarError(paso, 'Escribí tu nombre.', f.nombre);
+      var primero = nombre.split(/\s+/)[0];
+      primero = primero.charAt(0).toUpperCase() + primero.slice(1);
+      preguntaProfesion.textContent = 'Un gusto, ' + primero + '. ¿Cuál es tu profesión?';
+      preguntaContacto.textContent = 'Último paso, ' + primero + ': ¿a dónde te mandamos tu roadmap?';
+      if (document.activeElement) document.activeElement.blur();
+      return ir(2);
+    }
+    if (actual !== ULTIMO) return;
+    paso.querySelector('.error').hidden = true;
     var email = f.email.value.trim().toLowerCase();
     // Instagram: acepta @usuario, el link completo o el usuario pelado
     var ig = f.instagram.value.trim().replace(/^https?:\/\/(www\.)?instagram\.com\//i, '').replace(/[/?#].*$/, '').replace(/^@/, '').toLowerCase();
     var digitos = f.whatsapp.value.replace(/\D/g, '');
     var pre = select.value.split('|');
 
-    if (!nombre) return mostrarError(paso, 'Escribí tu nombre.', f.nombre);
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return mostrarError(paso, 'Revisá tu email.', f.email);
     if (!/^[A-Za-z0-9._]{1,30}$/.test(ig)) return mostrarError(paso, 'Escribí tu usuario de Instagram, por ejemplo @ramiro.previley.', f.instagram);
     if (!select.value) return mostrarError(paso, 'Elegí tu país.', select);
     if (digitos.length < 8) return mostrarError(paso, 'Revisá tu número de WhatsApp.', f.whatsapp);
 
-    datos = { nombre: nombre, email: email, ig: ig, telefono: pre[1] + ' ' + digitos, pais: pre[0], codigo_pais: pre[1] };
     if (document.activeElement) document.activeElement.blur();
-    ir(2);
+    enviar(paso, { nombre: nombre, email: email, ig: ig, telefono: pre[1] + ' ' + digitos, pais: pre[0], codigo_pais: pre[1] });
   });
 
-  // Paso 5: al elegir el cuello de botella se manda todo. La opción tocada muestra "Un segundo…".
-  function enviar(paso, boton) {
-    if (!datos) return ir(1);
+  // Envío: el botón del paso 6 muestra "Un segundo…" mientras tanto
+  function enviar(paso, datos) {
+    if (!nombre) return ir(1);
     if (!respuestas.profesion || !respuestas.ejerce || !respuestas.facturacion) return ir(2);
-    paso.querySelector('.error').hidden = true;
-    var controles = paso.querySelectorAll('button');
+    if (!respuestas.bottleneck) return ir(5);
+    var boton = paso.querySelector('.boton');
+    var controles = paso.querySelectorAll('button, input, select');
     var texto = boton.textContent;
     controles.forEach(function (x) { x.disabled = true; });
     boton.textContent = 'Un segundo…';
@@ -147,7 +160,7 @@
         try {
           sessionStorage.setItem('lm', JSON.stringify({ n: datos.nombre.split(/\s+/)[0], ig: datos.ig, pr: respuestas.profesion, cb: respuestas.bottleneck }));
         } catch (err) {}
-        // b = opción del cuello de botella (no es un dato personal)
+        // b = opción del principal desafío (no es un dato personal)
         location.href = '/confirmacion-2?e=' + j.etapa + '&c=' + c + '&v=' + encodeURIComponent(respuestas.profesion) + '&b=' + encodeURIComponent(respuestas.bottleneck);
       })
       .catch(function () {

@@ -18,18 +18,20 @@ Slugs: `tecnico` (Etapa 01), `crecimiento` (02), `emprendedor` (03), `empresario
 
 ## Formulario y calificación
 
-1. Nombre · Email · Instagram · país + WhatsApp, todos obligatorios (el país se completa solo por IP o zona horaria; si no se detecta, hay que elegirlo). Se valida el formato y pasa a las preguntas; todavía no se envía nada.
-2. ¿Cuál es tu profesión? `entrenador` (Coach fitness) / `nutricionista` / `kinesiologo` / `osteopata` / `otro`
+1. ¿Cómo te llamás? Solo el nombre (microcompromiso, pedido del 2026-11-11). Las preguntas siguientes lo usan.
+2. Un gusto, <nombre>. ¿Cuál es tu profesión? `entrenador` (Coach fitness) / `nutricionista` / `kinesiologo` / `osteopata` / `otro`
 3. ¿Ya trabajás como <profesión> con clientes? `si` / `no`
 4. ¿Cuánto facturás hoy por mes? `menos-1000` / `1000-3000` / `3000-5000` / `mas-5000` → define la etapa 1 a 4.
    Si en el paso 3 respondió `no`, este paso se saltea y la facturación queda en `menos-1000`.
-5. ¿Cuál es tu principal cuello de botella hoy? `diferenciacion` / `leads` / `calificados` / `conversion` / `escalar` → al tocar la opción se envía.
-   Llega a GHL como `bottleneck` (el valor) y `bottleneck_texto` (la frase de la opción), y arma el mensaje de WhatsApp de la confirmación 2.
+5. ¿Cuál es tu principal desafío hoy en día? En lenguaje simple, sin "leads": `clientes` / `contenido` / `convertir` / `precios` / `tiempo`.
+   Llega a GHL y a la base como `bottleneck` (el valor) y `bottleneck_texto` (la frase de la opción), y arma el mensaje de WhatsApp
+   de la confirmación 2 ("mi principal desafío es …"). Las opciones viejas siguen aceptadas en el servidor.
+6. Email · Instagram · país + WhatsApp, todos obligatorios (el país se completa solo por IP o zona horaria). "Recibir mi roadmap" envía.
 
-A GHL llegan **solo los leads que califican**, recién al terminar el paso 5. El que no califica recibe su roadmap y no se guarda en ningún lado; el que abandona en las preguntas, tampoco.
+A GHL llegan **solo los leads que califican**, recién al terminar el paso 6. El que abandona en las preguntas no se guarda.
 
 `califica = profesion !== "otro" && facturacion !== "menos-1000"` (el que no trabaja con clientes queda en `menos-1000`).
-El paso 5 (cuello de botella) se guarda y viaja a GHL, pero no califica ni descalifica. No se manda a Meta.
+El paso 5 (desafío) se guarda y viaja a GHL, pero no califica ni descalifica. No se manda a Meta.
 No califica → confirmación 1 con el botón a su roadmap. Solo el que califica → confirmación 2 (WhatsApp)
 y Lead por CAPI. La etapa (qué documento recibe) sale siempre de la facturación.
 
@@ -70,4 +72,4 @@ En la vista previa de Vercel, `/?plan=1` hace que ese navegador vea el subdomini
 - Texto del roadmap: solo `plan/roadmap/etapas.js`. Después, regenerar los PDFs:
   `npx serve -l 4190 plan` y `bash herramientas/armar-roadmap-pdf.sh`.
 - Imagen de vista previa: `plan/previa-*.webp` son capturas de hojas reales (`/roadmap/crecimiento?solo=<sección>`).
-- Número de WhatsApp, mensaje y cuello de botella por etapa: `plan/confirmacion-2/index.html`.
+- Número de WhatsApp, mensaje y desafío: `plan/confirmacion-2/index.html`.

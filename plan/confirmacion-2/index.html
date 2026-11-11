@@ -61,8 +61,14 @@ src="https://www.facebook.com/tr?id=1034841362227406&ev=PageView&noscript=1"
   var WHATSAPP = '5492235910559';   // +54 9 2235 91-0559
   // Rango declarado (c) -> texto del mensaje
   var RANGO = { 'menos-1000': 'menos de 1.000', '1000-3000': 'entre 1.000 y 3.000', '3000-5000': 'entre 3.000 y 5.000', 'mas-5000': 'más de 5.000' };
-  // Cuello de botella elegido en el paso 5 (b), para "mi cuello de botella es …"
+  // Principal desafío elegido en el paso 5 (b), para "mi principal desafío es …"
   var CUELLO = {
+    clientes: 'conseguir más clientes',
+    contenido: 'saber qué contenido subir para atraer clientes',
+    convertir: 'convertir en clientes a los seguidores que ya tengo',
+    precios: 'cobrar más por lo que hago',
+    tiempo: 'que todo depende de mí y no me da el tiempo',
+    // Opciones anteriores del formulario
     diferenciacion: 'diferenciarme en mi mercado',
     leads: 'que no tengo suficientes leads',
     calificados: 'que tengo leads pero no son calificados',
@@ -79,11 +85,11 @@ src="https://www.facebook.com/tr?id=1034841362227406&ev=PageView&noscript=1"
   var rango = RANGO[q.get('c')];
   var cuello = CUELLO[q.get('b')] || CUELLO[lm.cb];
 
-  // Plantilla: "Hola, envíame mi plan personalizado. Soy {profesión}, estoy facturando {rango} USD al mes y mi cuello de botella es {cuello}."
-  // Sin cuello: "Soy {profesión} y estoy facturando {rango} USD al mes." Si falta un dato, esa parte no va.
+  // Plantilla: "Hola, envíame mi plan personalizado. Soy {profesión}, estoy facturando {rango} USD al mes y mi principal desafío es {desafío}."
+  // Sin desafío: "Soy {profesión} y estoy facturando {rango} USD al mes." Si falta un dato, esa parte no va.
   var partes = [];
   if (rango) partes.push('estoy facturando ' + rango + ' USD al mes');
-  if (cuello) partes.push('mi cuello de botella es ' + cuello);
+  if (cuello) partes.push('mi principal desafío es ' + cuello);
   var cuerpo = partes.join(' y ');
   var mensaje = 'Hola, envíame mi plan personalizado.';
   if (profesion) mensaje += ' Soy ' + profesion + (cuerpo ? (partes.length > 1 ? ', ' : ' y ') + cuerpo : '') + '.';

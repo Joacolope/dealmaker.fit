@@ -23,8 +23,14 @@ const FACTURACION = {
   '3000-5000': 'Entre $3k y $5k',
   'mas-5000': 'Más de $5k',
 };
-// Cuello de botella (paso 5)
+// Principal desafío (paso 5). Se sigue llamando "bottleneck" en GHL y en la base.
 const BOTTLENECK = {
+  clientes: 'Necesito más clientes',
+  contenido: 'No sé qué contenido subir para atraer clientes',
+  convertir: 'Tengo seguidores, pero no se convierten en clientes',
+  precios: 'Cobro poco por lo que hago',
+  tiempo: 'No me da el tiempo, todo depende de mí',
+  // Opciones anteriores: las acepta por si alguien tenía la página vieja abierta
   diferenciacion: 'Diferenciarme en mi mercado',
   leads: 'No tengo suficientes leads',
   calificados: 'Tengo leads pero no son calificados',
@@ -79,7 +85,7 @@ module.exports = async (req, res) => {
     return res.status(400).json({ ok: false, error: 'Datos incompletos o inválidos' });
   }
 
-  // Califica el profesional de la salud deportiva (no "otro") que factura más de $1k al mes. El cuello de botella no califica ni descalifica.
+  // Califica el profesional de la salud deportiva (no "otro") que factura más de $1k al mes. El desafío no califica ni descalifica.
   // La etapa no cambia por un "no": sale solo de la facturación. Si no trabaja con clientes, no factura.
   if (d.ejerce === 'no') d.facturacion = 'menos-1000';
   d.ejerce_texto = EJERCE[d.ejerce];
