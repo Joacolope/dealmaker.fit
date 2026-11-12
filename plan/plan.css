@@ -45,7 +45,7 @@ main > * { width: 100%; max-width: 560px; min-width: 0; }
 .avatares img { width: 26px; height: 26px; border-radius: 50%; border: 2px solid var(--banda); object-fit: cover; margin-left: -8px; }
 .avatares img:first-child { margin-left: 0; }
 
-.titular { margin: 0 0 10px; max-width: 760px; text-align: center; font-size: min(41px, 5.5vw); font-weight: 700; line-height: 1.1; letter-spacing: -.03em; }
+.titular { margin: 0 0 10px; max-width: 760px; text-align: center; font-size: min(44px, 6.2vw); font-weight: 700; line-height: 1.1; letter-spacing: -.03em; }
 /* El título se acomoda solo (líneas parejas, 3 en celular, usando todo el ancho); la cifra resaltada no se corta */
 .titular { text-wrap: balance; width: calc(100% + 12px); margin-inline: -6px; }
 .titular .cifra { white-space: nowrap; }

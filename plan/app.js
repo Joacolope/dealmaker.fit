@@ -24,7 +24,7 @@
     if (form.getBoundingClientRect().top < 0) form.scrollIntoView({ block: 'start', behavior: 'smooth' });
   }
 
-  var NOMBRE_PROFESION = { entrenador: 'coach fitness', nutricionista: 'nutricionista', kinesiologo: 'kinesiólogo/a', osteopata: 'osteópata' };
+  var NOMBRE_PROFESION = { entrenador: 'entrenador', nutricionista: 'nutricionista', online: 'entrenador online' };
   var preguntaEjerce = document.getElementById('pregunta-ejerce');
 
   // Siguiente paso según lo respondido: si todavía no trabaja con clientes, no factura y se saltea la facturación

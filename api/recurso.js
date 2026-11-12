@@ -11,11 +11,13 @@ const SITIO_PLAN = 'https://plan.dealmakerconsulting.com';
 // Valores permitidos de cada pregunta: valor → texto de la opción, que va a GHL como <campo>_texto
 const EJERCE = { si: 'Sí, ya tengo clientes', no: 'Todavía no' };
 const PROFESION = {
-  entrenador: 'Coach fitness',
+  entrenador: 'Entrenador / coach presencial',
   nutricionista: 'Nutricionista',
+  online: 'Entrenador online',
+  otro: 'Otro',
+  // Opciones anteriores: las acepta por si alguien tenía la página vieja abierta
   kinesiologo: 'Kinesiólogo/a',
   osteopata: 'Osteópata',
-  otro: 'Otra profesión',
 };
 const FACTURACION = {
   'menos-1000': 'Menos de $1k',
@@ -93,14 +95,14 @@ module.exports = async (req, res) => {
     return res.status(400).json({ ok: false, error: 'Datos incompletos o inválidos' });
   }
 
-  // Califica el profesional de la salud deportiva (no "otro") que factura más de $1k al mes. El desafío no califica ni descalifica.
+  // Califica el que factura $1k o más al mes, sea cual sea su profesión ("Otro" también, desde el 2026-11-11). El desafío no califica ni descalifica.
   // La etapa no cambia por un "no": sale solo de la facturación. Si no trabaja con clientes, no factura.
   if (d.ejerce === 'no') d.facturacion = 'menos-1000';
   d.ejerce_texto = EJERCE[d.ejerce];
   d.profesion_texto = PROFESION[d.profesion];
   d.facturacion_texto = FACTURACION[d.facturacion];
   d.bottleneck_texto = BOTTLENECK[d.bottleneck];
-  const califica = d.profesion !== 'otro' && d.facturacion !== 'menos-1000';
+  const califica = d.facturacion !== 'menos-1000';
   const etapa = ETAPA[d.facturacion];
   const url = SITIO_PLAN + '/roadmap/' + SLUG[etapa] + '?c=' + d.facturacion;
   const prueba = email.endsWith('@resend.dev') || d.utm_source === 'prueba-tecnica';

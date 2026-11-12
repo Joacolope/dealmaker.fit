@@ -21,7 +21,8 @@ Slugs: `tecnico` (Etapa 01), `crecimiento` (02), `emprendedor` (03), `empresario
 Desde el 2026-11-11, inspirado en ivansanchezcoach.com: arranca con un toque (sin escribir) y todo el contacto va al final.
 Barra con "Paso X de 5", porcentaje y flecha para volver arriba a la izquierda; opciones con círculo de selección.
 
-1. ¿Hoy a qué te dedicás? `entrenador` (Coach fitness) / `nutricionista` / `kinesiologo` / `osteopata` / `otro`
+1. ¿Hoy a qué te dedicás? `entrenador` (Entrenador / coach presencial) / `nutricionista` / `online` (Entrenador online) / `otro`
+   (las 4 de ivansanchezcoach.com, desde el 2026-11-11; "Otro" también califica)
 2. ¿Ya trabajás como <profesión> con clientes? `si` / `no`
 3. ¿Cuánto facturás hoy por mes? `menos-1000` / `1000-2000` / `2000-3000` / `3000-4000` / `4000-5000` / `mas-5000`
    (de a $1k desde el 2026-11-11). Etapa: menos de $1k → 1 · $1k a $3k → 2 · $3k a $5k → 3 · más de $5k → 4.
@@ -33,7 +34,7 @@ Barra con "Paso X de 5", porcentaje y flecha para volver arriba a la izquierda; 
 
 A GHL llegan **solo los leads que califican**, recién al terminar el paso 5. El que abandona en las preguntas no se guarda.
 
-`califica = profesion !== "otro" && facturacion !== "menos-1000"` (el que no trabaja con clientes queda en `menos-1000`).
+`califica = facturacion !== "menos-1000"` (el que no trabaja con clientes queda en `menos-1000`). Desde el 2026-11-11 la profesión no descalifica.
 El paso 4 (desafío) se guarda y viaja a GHL, pero no califica ni descalifica. No se manda a Meta.
 No califica → confirmación 1 con el botón a su roadmap. Solo el que califica → confirmación 2 (WhatsApp)
 y Lead por CAPI. La etapa (qué documento recibe) sale siempre de la facturación.
