@@ -19,9 +19,14 @@ const PROFESION = {
 };
 const FACTURACION = {
   'menos-1000': 'Menos de $1k',
+  '1000-2000': 'Entre $1k y $2k',
+  '2000-3000': 'Entre $2k y $3k',
+  '3000-4000': 'Entre $3k y $4k',
+  '4000-5000': 'Entre $4k y $5k',
+  'mas-5000': 'Más de $5k',
+  // Rangos anteriores: los acepta por si alguien tenía la página vieja abierta
   '1000-3000': 'Entre $1k y $3k',
   '3000-5000': 'Entre $3k y $5k',
-  'mas-5000': 'Más de $5k',
 };
 // Principal desafío (paso 5). Se sigue llamando "bottleneck" en GHL y en la base.
 const BOTTLENECK = {
@@ -39,7 +44,10 @@ const BOTTLENECK = {
 };
 
 // La etapa sale solo del rango de facturación
-const ETAPA = { 'menos-1000': 1, '1000-3000': 2, '3000-5000': 3, 'mas-5000': 4 };
+const ETAPA = {
+  'menos-1000': 1, '1000-2000': 2, '2000-3000': 2, '3000-4000': 3, '4000-5000': 3, 'mas-5000': 4,
+  '1000-3000': 2, '3000-5000': 3,
+};
 const SLUG = [null, 'tecnico', 'crecimiento', 'emprendedor', 'empresario'];
 const NOMBRE = [null, 'Profesional Técnico', 'Profesional en Crecimiento', 'Profesional Emprendedor', 'Profesional Empresario'];
 

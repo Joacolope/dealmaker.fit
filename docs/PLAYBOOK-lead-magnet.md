@@ -23,7 +23,8 @@ Barra con "Paso X de 5", porcentaje y flecha para volver arriba a la izquierda; 
 
 1. ¿Hoy a qué te dedicás? `entrenador` (Coach fitness) / `nutricionista` / `kinesiologo` / `osteopata` / `otro`
 2. ¿Ya trabajás como <profesión> con clientes? `si` / `no`
-3. ¿Cuánto facturás hoy por mes? `menos-1000` / `1000-3000` / `3000-5000` / `mas-5000` → define la etapa 1 a 4.
+3. ¿Cuánto facturás hoy por mes? `menos-1000` / `1000-2000` / `2000-3000` / `3000-4000` / `4000-5000` / `mas-5000`
+   (de a $1k desde el 2026-11-11). Etapa: menos de $1k → 1 · $1k a $3k → 2 · $3k a $5k → 3 · más de $5k → 4.
    Si en el paso 2 respondió `no`, este paso se saltea y la facturación queda en `menos-1000`.
 4. ¿Cuál es tu principal desafío hoy en día? En lenguaje simple, sin "leads": `clientes` / `contenido` / `convertir` / `precios` / `tiempo`.
    Llega a GHL y a la base como `bottleneck` (el valor) y `bottleneck_texto` (la frase de la opción), y arma el mensaje de WhatsApp

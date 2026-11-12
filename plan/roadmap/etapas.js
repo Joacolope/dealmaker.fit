@@ -6,6 +6,10 @@ window.AGENDA = 'https://dealmakerconsulting.com/agenda';
 // Valor del formulario -> texto legible
 window.RANGO = {
   'menos-1000': 'menos de $1k',
+  '1000-2000': 'entre $1k y $2k',
+  '2000-3000': 'entre $2k y $3k',
+  '3000-4000': 'entre $3k y $4k',
+  '4000-5000': 'entre $4k y $5k',
   '1000-3000': 'entre $1k y $3k',
   '3000-5000': 'entre $3k y $5k',
   'mas-5000': 'más de $5k',
