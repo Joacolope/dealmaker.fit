@@ -46,7 +46,9 @@ main > * { width: 100%; max-width: 560px; min-width: 0; }
 .avatares img:first-child { margin-left: 0; }
 
 .titular { margin: 0 0 10px; max-width: 760px; text-align: center; font-size: min(41px, 6.8vw); font-weight: 700; line-height: 1.1; letter-spacing: -.03em; }
-.titular span { display: block; white-space: nowrap; }
+/* El título se acomoda solo (líneas parejas); la cifra resaltada no se corta */
+.titular { text-wrap: balance; }
+.titular .cifra { white-space: nowrap; }
 
 .previa { position: relative; z-index: 2; height: 230px; margin: 0 auto -40px; perspective: 1200px; max-width: 310px; }
 /* Brillo amarillo detrás de las hojas: las une con la tarjeta del formulario */
