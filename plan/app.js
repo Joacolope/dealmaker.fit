@@ -156,3 +156,32 @@
       });
   }
 })();
+
+// Tiras de testimonios y casos: avanzan solas una tarjeta cada 3 s y vuelven al principio al llegar al final.
+// Se frenan 8 s cuando la persona las toca o desliza, mientras hay un video abierto y cuando no están en pantalla.
+(function () {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  document.querySelectorAll('.tira').forEach(function (tira, i) {
+    var visible = false;
+    var pausaHasta = 0;
+    var pausar = function () { pausaHasta = Date.now() + 8000; };
+    ['pointerdown', 'touchstart', 'wheel', 'keydown'].forEach(function (ev) { tira.addEventListener(ev, pausar, { passive: true }); });
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (e) { visible = e[0].isIntersecting; }, { threshold: .4 }).observe(tira);
+    } else {
+      visible = true;
+    }
+    // Las dos tiras no se mueven al mismo tiempo
+    setTimeout(function () {
+      setInterval(function () {
+        var video = document.querySelector('.case-modal');
+        if (!visible || document.hidden || Date.now() < pausaHasta || (video && !video.hidden)) return;
+        var tarjeta = tira.firstElementChild;
+        if (!tarjeta) return;
+        var paso = tarjeta.getBoundingClientRect().width + 12;
+        var fin = tira.scrollLeft + tira.clientWidth >= tira.scrollWidth - 8;
+        tira.scrollTo({ left: fin ? 0 : tira.scrollLeft + paso, behavior: 'smooth' });
+      }, 3000);
+    }, i * 1500);
+  });
+})();
