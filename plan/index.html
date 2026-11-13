@@ -44,24 +44,47 @@ src="https://www.facebook.com/tr?id=1034841362227406&ev=PageView&noscript=1"
 </head>
 <body>
 <main>
-  <p class="prueba">
+  <div class="prueba">
     <span class="avatares">
       <img src="/av-juancruz.webp" alt="" width="32" height="32"><img src="/av-yuki.webp" alt="" width="32" height="32"><img src="/av-cris.webp" alt="" width="32" height="32"><img src="/av-gonza.webp" alt="" width="32" height="32"><img src="/av-carlos.webp" alt="" width="32" height="32">
     </span>
-    <span>Profesionales de la salud deportiva como vos ya lo aplican</span>
-  </p>
+    <p class="prueba-texto"><strong>De USD 5.000 a <span class="cifra">USD 10.000/mes</span></strong><span><span class="estrellas" role="img" aria-label="5 estrellas">★★★★★</span> +200 entrenadores facturando</span></p>
+  </div>
 
   <h1 class="titular">Recibí tu plan para generar <span class="cifra">$5k/mes</span> como entrenador o nutricionista online en menos de 30&nbsp;segundos</h1>
 
+  <!-- Vista previa del roadmap: tarjetas dibujadas con HTML (sin imágenes); el formulario las tapa por abajo -->
   <div class="previa" aria-hidden="true">
-    <img class="p1" src="/previa-mapa.webp" alt="" width="560" height="792" fetchpriority="high" decoding="async">
-    <img class="p2" src="/previa-portada.webp" alt="" width="560" height="792" fetchpriority="high" decoding="async">
-    <img class="p3" src="/previa-tecnica.webp" alt="" width="560" height="792" fetchpriority="high" decoding="async">
+    <div class="hoja hoja--izq">
+      <p class="hoja-ruta"><img src="/logo.svg" alt="" width="14" height="14">DealMaker / Roadmap</p>
+      <p class="hoja-titulo">Etapa 03 · Emprendedor</p>
+      <div class="hoja-item"><i></i><span><b>Contenido</b><em>Que atrae clientes</em></span></div>
+    </div>
+    <div class="hoja hoja--der">
+      <p class="hoja-ruta"><img src="/logo.svg" alt="" width="14" height="14">DealMaker / Roadmap</p>
+      <p class="hoja-titulo">La trampa</p>
+      <div class="hoja-nota"><i></i><i></i><i></i></div>
+    </div>
+    <div class="hoja hoja--centro">
+      <p class="hoja-ruta"><img src="/logo.svg" alt="" width="14" height="14">DealMaker / Roadmap FIT</p>
+      <p class="hoja-titulo">Tu plan a $5k/mes</p>
+      <div class="hoja-panel">
+        <div class="anillo">
+          <svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="27"/><circle class="arco" cx="32" cy="32" r="27"/></svg>
+          <p><b>02</b>de 04 etapas</p>
+        </div>
+        <ul class="hoja-leyenda">
+          <li class="ok">Etapa completada <b>1</b></li>
+          <li class="hoy">Etapa actual <b>Crecimiento</b></li>
+          <li>Restantes para $5k <b>2</b></li>
+        </ul>
+      </div>
+    </div>
   </div>
 
   <form class="lm-form" id="lm-form" novalidate>
     <input class="trampa-bot" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
-    <div class="progreso"><button type="button" class="atras" aria-label="Volver al paso anterior" hidden></button><p class="paso-n" aria-live="polite">Paso 1 de 5</p><p class="pct" aria-hidden="true">20%</p><div class="barra" aria-hidden="true"><span></span></div></div>
+    <div class="progreso"><button type="button" class="atras" aria-label="Volver al paso anterior" hidden></button><div class="barra" role="progressbar" aria-label="Avance del formulario" aria-valuemin="1" aria-valuemax="5" aria-valuenow="1"><span></span></div></div>
 
     <div class="paso" data-paso="1" data-campo="profesion">
       <h2>¿Hoy a qué te dedicás?</h2>
@@ -152,11 +175,44 @@ src="https://www.facebook.com/tr?id=1034841362227406&ev=PageView&noscript=1"
   </ul>
 
   <p class="legal--lm">Al dejar tus datos aceptás que DealMaker se ponga en contacto con vos por teléfono, mensaje o email usando la información ingresada. No vendemos tu información personal.</p>
+
+  <!-- Testimonios en video: la lista es la misma de la landing principal (/assets/casos.js) -->
+  <section class="prueba-social">
+    <p class="sobre">En primera persona</p>
+    <h2>Testimonios en video</h2>
+    <div class="tira tira--videos" data-casos></div>
+  </section>
+
+  <!-- Portadas de los casos de éxito (1080 × 1350, pasadas a webp en /casos) -->
+  <section class="prueba-social">
+    <p class="sobre">Resultados reales</p>
+    <h2>Casos de éxito</h2>
+    <div class="tira tira--portadas">
+      <img src="/casos/carlos.webp" alt="Carlos: de USD 1.800 a USD 4.000 al mes y abrió su segunda sede" width="720" height="900" loading="lazy" decoding="async">
+      <img src="/casos/chiara.webp" alt="Chiara: de USD 2.500 a USD 5.000 al mes en menos de 3 meses" width="720" height="900" loading="lazy" decoding="async">
+      <img src="/casos/gonzalo.webp" alt="Gonzalo: de cobrar menos de USD 50 la consulta a USD 5.000 al mes" width="720" height="900" loading="lazy" decoding="async">
+      <img src="/casos/juancruz.webp" alt="Juan Cruz: de la facultad a USD 3.000 al mes en 4 meses" width="720" height="900" loading="lazy" decoding="async">
+      <img src="/casos/nahuel.webp" alt="Nahuel: de cobrar menos de USD 70 a facturar USD 3.000 al mes" width="720" height="900" loading="lazy" decoding="async">
+      <img src="/casos/tato.webp" alt="Tato: de depender de la plaza a USD 3.000 al mes" width="720" height="900" loading="lazy" decoding="async">
+      <img src="/casos/ezequiel.webp" alt="Ezequiel: de depender del consultorio a más de USD 4.600 al mes" width="720" height="900" loading="lazy" decoding="async">
+      <img src="/casos/cristian.webp" alt="Cristian: de arrancar en cero a vender programas de más de USD 400" width="720" height="900" loading="lazy" decoding="async">
+      <img src="/casos/yuki.webp" alt="Yuki: con 18 años, de 0 a USD 3.000 al mes en 60 días" width="720" height="900" loading="lazy" decoding="async">
+      <img src="/casos/andres.webp" alt="Andrés: se recibió de kinesiólogo y en 4 meses ya vivía de su coaching" width="720" height="900" loading="lazy" decoding="async">
+      <img src="/casos/jael.webp" alt="Jael: de 0 a USD 2.000 al mes con solo 10 clientes" width="720" height="900" loading="lazy" decoding="async">
+      <img src="/casos/lucas.webp" alt="Lucas: de 0 a fundar su escuela de hipertrofia para entrenadores, con ticket promedio de más de USD 800" width="720" height="900" loading="lazy" decoding="async">
+    </div>
+  </section>
 </main>
 <footer class="pie">
+  <p class="pie-marca" aria-hidden="true">DealMaker <span>FIT</span></p>
+  <ul class="pie-sellos">
+    <li>+200 clientes</li>
+    <li>Salud deportiva</li>
+  </ul>
   <p>Los resultados individuales pueden variar. Lo que logra cada profesional depende de su punto de partida, su dedicación y su implementación.</p>
-  <p>© 2026 DealMaker</p>
+  <p>© 2026 DealMaker · Todos los derechos reservados</p>
 </footer>
 <script src="/app.js"></script>
+<script src="/assets/casos.js" defer></script>
 </body>
 </html>

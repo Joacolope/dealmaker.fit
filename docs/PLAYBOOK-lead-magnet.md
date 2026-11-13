@@ -75,5 +75,7 @@ En la vista previa de Vercel, `/?plan=1` hace que ese navegador vea el subdomini
 
 - Texto del roadmap: solo `plan/roadmap/etapas.js`. Después, regenerar los PDFs:
   `npx serve -l 4190 plan` y `bash herramientas/armar-roadmap-pdf.sh`.
-- Imagen de vista previa: `plan/previa-*.webp` son capturas de hojas reales (`/roadmap/crecimiento?solo=<sección>`).
+- Vista previa del hero: tarjetas dibujadas con HTML/CSS en `plan/index.html` (`.previa`, `.hoja`), sin imágenes. `plan/previa-portada.webp` queda solo para `og:image`.
+- Prueba social: testimonios en video desde `/assets/casos.js` (misma lista que la landing principal) y portadas de casos en `plan/casos/*.webp` (720 × 900).
+- Vista local igual a producción: `node herramientas/servir-plan.js` (puerto 4191; sirve `/plan` en la raíz y `/assets`).
 - Número de WhatsApp, mensaje y desafío: `plan/confirmacion-2/index.html`.

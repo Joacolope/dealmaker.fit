@@ -9,16 +9,14 @@
   var respuestas = {};
   var actual = 1;
   var ULTIMO = 5;
-  var pasoN = form.querySelector('.progreso .paso-n');
-  var pct = form.querySelector('.progreso .pct');
+  var barra = form.querySelector('.progreso .barra');
   var atras = form.querySelector('.progreso .atras');
 
   function ir(n) {
     actual = n;
     pasos.forEach(function (p) { p.hidden = p.getAttribute('data-paso') !== String(n); });
     form.style.setProperty('--avance', n / ULTIMO);
-    pasoN.textContent = 'Paso ' + n + ' de ' + ULTIMO;
-    pct.textContent = Math.round(n / ULTIMO * 100) + '%';
+    barra.setAttribute('aria-valuenow', n);
     atras.hidden = n === 1;
     // Si el teclado del celular dejó el formulario arriba de la pantalla, se vuelve a mostrar desde el principio
     if (form.getBoundingClientRect().top < 0) form.scrollIntoView({ block: 'start', behavior: 'smooth' });
