@@ -17,7 +17,7 @@ window.RANGO = {
 
 window.ETAPAS = [
   {
-    n: 1, slug: 'tecnico', nombre: 'Profesional Técnico', rango: '$0 – $1k / mes', c: 'menos-1000',
+    n: 1, slug: 'tecnico', nombre: 'Coach Técnico', rango: '$0 – $1k / mes', c: 'menos-1000',
     corto: 'Sabés ejercer tu profesión. Todavía no sabés convertirla en un negocio online.',
     cita: '“Sé hacer mi trabajo, pero todavía no sé convertirlo en negocio.”',
     comoSeVe: [
@@ -86,7 +86,7 @@ window.ETAPAS = [
       { titulo: 'Lo que necesitás', bloques: [{ lineas: ['Más implementación.', 'Más conversaciones.', 'Más contenido.', 'Más ofertas.', 'Más clientes reales.', 'Más feedback.'] }] },
     ],
     senal: [
-      { p: 'Sabés que estás saliendo de Profesional Técnico cuando:' },
+      { p: 'Sabés que estás saliendo de Coach Técnico cuando:' },
       { lista: ['definiste un nicho;', 'entendés mejor a tu cliente;', 'tenés una oferta;', 'ya vendiste online;', 'trabajaste con aproximadamente 10 clientes;', 'empezaste a crear contenido;', 'dejaste de preguntarte si alguien pagaría.'] },
       { p: 'Porque ya pagaron.' },
     ],
@@ -96,11 +96,11 @@ window.ETAPAS = [
     ],
     resumen: { problema: 'validación', prioridad: 'nicho + oferta + primeros clientes', trampa: 'estudiar eternamente', objetivo: 'primeros 10 clientes + primeras ventas online' },
     transicion: { de: 'Profesión', a: 'Oferta', p: 'De saber hacer algo a saber vender una solución.' },
-    principio: ['Un Profesional Técnico no necesita obsesionarse con contratar equipo.', 'Necesita clientes.'],
+    principio: ['Un Coach Técnico no necesita obsesionarse con contratar equipo.', 'Necesita clientes.'],
   },
 
   {
-    n: 2, slug: 'crecimiento', nombre: 'Profesional en Crecimiento', rango: '$1k – $3k / mes', c: '1000-3000',
+    n: 2, slug: 'crecimiento', nombre: 'Coach en Crecimiento', rango: '$1k – $3k / mes', c: '1000-3000',
     corto: 'Ya validaste que alguien está dispuesto a pagarte online. Ahora necesitás convertir ventas aisladas en un sistema.',
     cita: '“Ya validé que puedo vender online, pero todavía no tengo previsibilidad.”',
     comoSeVe: [
@@ -186,7 +186,7 @@ window.ETAPAS = [
     ],
     extra: [],
     senal: [
-      { p: 'Sabés que dejaste de ser simplemente un Profesional en Crecimiento cuando podés explicar:' },
+      { p: 'Sabés que dejaste de ser simplemente un Coach en Crecimiento cuando podés explicar:' },
       { lineas: ['de dónde vienen tus clientes;', 'cuántas conversaciones necesitás;', 'cómo las calificás;', 'cómo vendés;', 'cuánto convertís;', 'y qué variable necesitás mejorar.'] },
       { p: 'Dejás de decir:' }, { cita: '“Este mes vendí bastante.”' },
       { p: 'Y empezás a decir:' }, { cita: '“Mi sistema produjo X conversaciones, Y llamadas y Z ventas.”' },
@@ -197,15 +197,15 @@ window.ETAPAS = [
     ],
     resumen: { problema: 'inconsistencia', prioridad: 'Mini Brand Funnel + adquisición + ventas + métricas', trampa: 'perseguir viralidad y delegar demasiado pronto', objetivo: 'convertir ventas aisladas en un sistema' },
     transicion: { de: 'Oferta', a: 'Sistema', p: 'De conseguir clientes ocasionales a poder generar demanda.' },
-    principio: ['Un Profesional en Crecimiento no necesita construir una empresa enorme.', 'Necesita previsibilidad.'],
+    principio: ['Un Coach en Crecimiento no necesita construir una empresa enorme.', 'Necesita previsibilidad.'],
   },
 
   {
-    n: 3, slug: 'emprendedor', nombre: 'Profesional Emprendedor', rango: '$3k – $5k / mes', c: '3000-5000',
+    n: 3, slug: 'emprendedor', nombre: 'Coach Emprendedor', rango: '$3k – $5k / mes', c: '3000-5000',
     corto: 'Ya existe un negocio. Ahora necesitás previsibilidad, mejores números, retención y una operación más eficiente.',
     cita: '“Tengo un negocio online. Ahora necesito optimizarlo.”',
     comoSeVe: [
-      { p: 'Acá ya existe un negocio. No solamente una profesión monetizada ocasionalmente. El Profesional Emprendedor tiene:' },
+      { p: 'Acá ya existe un negocio. No solamente una profesión monetizada ocasionalmente. El Coach Emprendedor tiene:' },
       { lista: ['nicho validado;', 'oferta validada;', 'clientes;', 'adquisición;', 'ventas;', 'métricas;', 'Mini Brand Funnel;', 'experiencia comercial.'] },
       { p: 'Ya comprobó que puede conseguir clientes online.' },
       { sub: 'La presencialidad ya no es una necesidad' },
@@ -251,7 +251,7 @@ window.ETAPAS = [
         { p: 'cuando el modelo de servicio y capacidad operativa lo permitan. El objetivo no es simplemente meter más personas. Es poder sostenerlas con calidad.' },
       ] },
       { titulo: 'Mejorar delivery', bloques: [
-        { p: 'Más clientes con una mala entrega no es escala. Es un problema más grande. El Profesional Emprendedor necesita trabajar:' },
+        { p: 'Más clientes con una mala entrega no es escala. Es un problema más grande. El Coach Emprendedor necesita trabajar:' },
         { lista: ['onboarding;', 'seguimiento;', 'experiencia;', 'comunicación;', 'resultados;', 'sistemas;', 'continuidad.'] },
       ] },
       { titulo: 'Publicidad', bloques: [
@@ -289,15 +289,15 @@ window.ETAPAS = [
     ],
     resumen: { problema: 'optimización', prioridad: 'previsibilidad + retención + backend + delivery', trampa: 'pensar que solamente necesita más clientes', objetivo: 'negocio online predecible, rentable y menos dependiente de presencialidad' },
     transicion: { de: 'Sistema', a: 'Negocio', p: 'De vender consistentemente a controlar adquisición, ventas, retención y operación.' },
-    principio: ['Un Profesional Emprendedor no necesita llenar su agenda indiscriminadamente.', 'Necesita optimizar.'],
+    principio: ['Un Coach Emprendedor no necesita llenar su agenda indiscriminadamente.', 'Necesita optimizar.'],
   },
 
   {
-    n: 4, slug: 'empresario', nombre: 'Profesional Empresario', rango: '+$5k / mes', c: 'mas-5000',
+    n: 4, slug: 'empresario', nombre: 'Coach Empresario', rango: '+$5k / mes', c: 'mas-5000',
     corto: 'El negocio funciona. Ahora necesitás que pueda seguir creciendo sin que absolutamente todo dependa de vos.',
     cita: '“El negocio funciona. Ahora necesito que deje de depender completamente de mí.”',
     comoSeVe: [
-      { p: 'El Profesional Empresario ya tiene una máquina comercial validada. Tiene:' },
+      { p: 'El Coach Empresario ya tiene una máquina comercial validada. Tiene:' },
       { lista: ['oferta;', 'nicho;', 'posicionamiento;', 'adquisición;', 'ventas;', 'delivery;', 'backend;', 'métricas;', 'clientes;', 'cash flow.'] },
       { p: 'Ya no necesita comprobar que su modelo funciona. Ahora necesita conseguir que funcione:' },
       { grande: 'MEJOR.' },
@@ -365,13 +365,13 @@ window.ETAPAS = [
     ],
     extra: [],
     senal: [
-      { p: 'El Profesional Empresario empieza a consolidarse cuando:' },
+      { p: 'El Coach Empresario empieza a consolidarse cuando:' },
       { lista: ['existe adquisición predecible;', 'el sistema comercial está medido;', 'la entrega tiene procesos;', 'la retención está controlada;', 'existen tareas delegadas;', 'existe equipo cuando es necesario;', 'el fundador dejó de ser indispensable en cada interacción;', 'el negocio mantiene calidad mientras crece.'] },
     ],
     siguiente: [],
     resumen: { problema: 'dependencia del fundador', prioridad: 'procesos + capacidad + delegación + rentabilidad', trampa: 'seguir comportándose como autoempleado', objetivo: 'construir una empresa capaz de crecer sin multiplicar el caos' },
     transicion: { de: 'Negocio', a: 'Empresa', p: 'De depender del fundador a construir procesos, equipo y capacidad.' },
-    principio: ['Un Profesional Empresario no necesita hacer más cosas personalmente.', 'Necesita construir estructura.'],
+    principio: ['Un Coach Empresario no necesita hacer más cosas personalmente.', 'Necesita construir estructura.'],
   },
 ];
 

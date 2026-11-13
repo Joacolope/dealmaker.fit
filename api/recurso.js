@@ -11,9 +11,9 @@ const SITIO_PLAN = 'https://plan.dealmakerconsulting.com';
 // Valores permitidos de cada pregunta: valor → texto de la opción, que va a GHL como <campo>_texto
 const EJERCE = { si: 'Sí, ya tengo clientes', no: 'Todavía no' };
 const PROFESION = {
-  entrenador: 'Entrenador / coach presencial',
+  online: 'Coach Fitness / Entrenador online',
   nutricionista: 'Nutricionista',
-  online: 'Entrenador online',
+  entrenador: 'Entrenador / Coach Presencial',
   otro: 'Otro',
   // Opciones anteriores: las acepta por si alguien tenía la página vieja abierta
   kinesiologo: 'Kinesiólogo/a',
@@ -51,7 +51,7 @@ const ETAPA = {
   '1000-3000': 2, '3000-5000': 3,
 };
 const SLUG = [null, 'tecnico', 'crecimiento', 'emprendedor', 'empresario'];
-const NOMBRE = [null, 'Profesional Técnico', 'Profesional en Crecimiento', 'Profesional Emprendedor', 'Profesional Empresario'];
+const NOMBRE = [null, 'Coach Técnico', 'Coach en Crecimiento', 'Coach Emprendedor', 'Coach Empresario'];
 
 const texto = (v, max) => String(v == null ? '' : v).trim().slice(0, max || 200);
 const permitido = (lista, v) => Object.prototype.hasOwnProperty.call(lista, v);
