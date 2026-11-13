@@ -22,14 +22,14 @@
     if (form.getBoundingClientRect().top < 0) form.scrollIntoView({ block: 'start', behavior: 'smooth' });
   }
 
-  var NOMBRE_PROFESION = { entrenador: 'entrenador', nutricionista: 'nutricionista', online: 'coach fitness' };
+  var NOMBRE_PROFESION = { entrenador: 'coach fitness o entrenador', nutricionista: 'nutricionista' };
   var preguntaEjerce = document.getElementById('pregunta-ejerce');
 
   // Siguiente paso según lo respondido: si todavía no trabaja con clientes, no factura y se saltea la facturación
   function siguiente(n) {
     if (n === 1) {
       var p = NOMBRE_PROFESION[respuestas.profesion];
-      preguntaEjerce.textContent = p ? '¿Ya trabajás como ' + p + ' con clientes?' : '¿Ya trabajás en tu profesión con clientes?';
+      preguntaEjerce.textContent = p ? '¿Ya trabajás como ' + p + ' con clientes?' : '¿Ya trabajás con clientes?';
     }
     if (n === 2 && respuestas.ejerce === 'no') { respuestas.facturacion = 'menos-1000'; return 4; }
     if (n === 2) delete respuestas.facturacion;
