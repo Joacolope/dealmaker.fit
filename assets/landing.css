@@ -5,8 +5,9 @@
 html[data-headline="B"] .headline-a { display: none; }
 html[data-headline="B"] .headline-b { display: inline; }
 
+/* Resaltado limpio (igual que el plan): franja recta en amarillo suave detrás de la mitad de abajo del texto */
 mark {
-  background: linear-gradient(transparent 60%, rgba(255, 238, 7, .5) 60%, rgba(255, 238, 7, .5) 90%, transparent 90%);
+  background: linear-gradient(transparent 54%, rgba(255, 214, 0, .35) 54%, rgba(255, 214, 0, .35) 90%, transparent 90%);
   color: inherit;
   padding: 0 .06em;
   -webkit-box-decoration-break: clone;
@@ -83,8 +84,8 @@ mark {
   margin: 0 auto 40px;
   font-size: clamp(32px, 4.6vw, 56px);
   font-weight: 700;
-  line-height: 1.08;
-  letter-spacing: -0.035em;
+  line-height: 1.14;
+  letter-spacing: -0.015em;
 }
 
 .video-frame {
@@ -268,7 +269,7 @@ mark {
   .landing section { padding: 56px 16px; }
   .hero { padding-top: 28px !important; }
   .eyebrow { font-size: 13px; margin-bottom: 18px; }
-  .hero h1 { font-size: clamp(21px, 6.4vw, 30px); line-height: 1.14; text-wrap: balance; letter-spacing: -0.03em; margin-bottom: 24px; }
+  .hero h1 { font-size: clamp(21px, 6.4vw, 30px); line-height: 1.2; text-wrap: balance; letter-spacing: -0.012em; margin-bottom: 24px; }
   .section-head { margin-bottom: 28px; }
   .section-head h2 { font-size: 30px; line-height: 1.1; }
   .section-sub { font-size: 17px; }

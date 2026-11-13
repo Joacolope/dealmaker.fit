@@ -61,8 +61,13 @@ iframe[src="about:blank"] { background: var(--soft); }
 .calendar-wrap iframe { min-height: 760px; }
 
 /* Footer legal */
-.site-footer { padding: 24px 16px 32px; }
+.site-footer { padding: 24px 16px 32px; overflow: hidden; text-align: center; }
 .site-footer p { font-family: var(--font); color: var(--text-3); font-size: 13px; line-height: 1.4; text-align: center; margin: 0 auto; max-width: 900px; }
+/* Marca gigante "DealMaker FIT" que se desvanece hacia abajo, con el sello apoyado encima (igual que plan.dealmakerconsulting.com) */
+.site-footer .pie-marca { margin: 6px 0 0; font-size: min(96px, 15vw); font-weight: 800; line-height: 1; letter-spacing: -.05em; white-space: nowrap; max-width: none; color: transparent; background: linear-gradient(180deg, #cfcfd4 10%, rgba(207, 207, 212, .12) 92%); -webkit-background-clip: text; background-clip: text; user-select: none; }
+.pie-marca span { color: transparent; background: linear-gradient(180deg, var(--yellow) 10%, rgba(255, 238, 7, .15) 92%); -webkit-background-clip: text; background-clip: text; }
+.pie-sellos { position: relative; display: flex; justify-content: center; gap: 8px; margin: -14px 0 20px; padding: 0; list-style: none; }
+.pie-sellos li { padding: 7px 14px; border: 1px solid #d9d9de; border-radius: 999px; background: rgba(255, 255, 255, .7); font-family: var(--font); font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #55555a; }
 
 /* Espaciado superior por página (igual que las secciones de GHL) */
 .page--pad10 { padding-top: 10px; }
