@@ -52,10 +52,11 @@ main > * { width: 100%; max-width: 560px; min-width: 0; }
 .avatares img { width: 22px; height: 22px; border-radius: 50%; border: 1.5px solid #fff; object-fit: cover; margin-left: -7px; }
 .avatares img:first-child { margin-left: 0; }
 
-.titular { margin: 20px 0 12px; max-width: 760px; text-align: center; font-size: min(44px, 6.8vw); font-weight: 700; line-height: 1.1; letter-spacing: -.03em; }
+.titular { margin: 20px 0 12px; max-width: 760px; text-align: center; font-size: min(44px, 6.8vw); font-weight: 700; line-height: 1.18; letter-spacing: -.012em; }
 /* El título se acomoda solo (líneas parejas, 3 en celular, usando todo el ancho); la cifra resaltada no se corta */
 .titular { text-wrap: balance; padding-inline: 6px; }
-.titular .cifra { white-space: nowrap; }
+/* $5k subrayado en amarillo (no resaltado); no se corta en dos líneas */
+.titular .subraya { white-space: nowrap; background: linear-gradient(transparent 78%, var(--acento-vivo) 78%, var(--acento-vivo) 94%, transparent 94%); }
 
 /* Vista previa del roadmap: tres tarjetas oscuras dibujadas con CSS, repartidas en abanico; el formulario tapa la parte de abajo */
 .previa { position: relative; z-index: 0; height: 212px; max-width: 400px; margin: 0 auto -38px; overflow: hidden; text-align: left; color: #fff;
