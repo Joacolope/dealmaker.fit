@@ -60,12 +60,12 @@ main > * { width: 100%; max-width: 560px; min-width: 0; }
 /* Vista previa del roadmap: tres tarjetas oscuras dibujadas con CSS, repartidas en abanico; el formulario tapa la parte de abajo */
 .previa { position: relative; z-index: 0; height: 212px; max-width: 400px; margin: 0 auto -38px; overflow: hidden; text-align: left; color: #fff;
   -webkit-mask-image: linear-gradient(#000 60%, transparent 98%); mask-image: linear-gradient(#000 60%, transparent 98%); }
-.hoja { position: absolute; top: 26px; width: 46%; height: 260px; padding: 11px; border: 1px solid #303036; border-radius: 16px; background: #26262a; }
+.hoja { position: absolute; top: 26px; width: 46%; height: 260px; padding: 9px; border: 1px solid #303036; border-radius: 16px; background: #26262a; }
 /* Laterales: etapa anterior (lista) y siguiente (bloqueada), apenas giradas hacia afuera */
 .hoja--izq, .hoja--der { display: flex; flex-direction: column; gap: 7px; }
 .hoja--izq { left: 1%; transform: rotate(-3deg); transform-origin: 100% 0; }
 .hoja--der { right: 1%; transform: rotate(3deg); transform-origin: 0 0; align-items: flex-end; }
-.hoja--centro { top: 6px; left: 50%; width: 58%; transform: translateX(-50%); padding: 10px 11px; background: #131315; border-color: #36363c; box-shadow: 0 16px 34px -10px rgba(0, 0, 0, .6); }
+.hoja--centro { top: 6px; left: 50%; width: max(55%, 200px); transform: translateX(-50%); padding: 10px 11px; background: #131315; border-color: #36363c; box-shadow: 0 16px 34px -10px rgba(0, 0, 0, .6); }
 .hoja p { margin: 0; }
 .hoja-etapa { display: flex; align-items: center; gap: 6px; font-size: 8px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #a1a1a6; white-space: nowrap; }
 .hoja--der .hoja-etapa { flex-direction: row-reverse; }
@@ -83,6 +83,10 @@ main > * { width: 100%; max-width: 560px; min-width: 0; }
 .hoja-fila b { height: 4px; border-radius: 4px; background: #4a4a50; }
 .hoja-fila b:last-child { width: 62%; background: #3a3a40; }
 .hoja--der .hoja-fila span { justify-items: end; }
+/* Filas con nombre (etapa 1: Contenido y Anuncios) */
+.hoja-fila--texto { gap: 4px; padding: 7px 5px; }
+.hoja-fila--texto i { width: 6px; height: 6px; border-radius: 2px; background: var(--acento-vivo); }
+.hoja-fila--texto b { font-size: 7.5px; font-weight: 700; color: #ececf0; white-space: nowrap; }
 .hoja-nota { display: grid; gap: 4px; width: 100%; padding: 8px; border-radius: 8px; background: rgba(255, 225, 0, .13); border-right: 3px solid var(--acento-vivo); justify-items: end; }
 .hoja-nota i { width: 38px; height: 4px; border-radius: 4px; background: rgba(255, 255, 255, .5); }
 .hoja-nota i:last-child { width: 24px; }
@@ -220,11 +224,15 @@ main > * { width: 100%; max-width: 560px; min-width: 0; }
   .lm-form { padding: 26px 28px 24px; }
   .titular { margin-top: 30px; }
 }
+/* Celulares angostos: sin el punto amarillo, para que entren "Contenido" y "Anuncios" */
+@media (max-width: 380px) {
+  .hoja-fila--texto i { display: none; }
+  .hoja--izq { padding-left: 7px; }
+}
 @media (max-width: 350px) {
   .prueba-texto strong { font-size: 10.5px; }
   .prueba-texto > span { font-size: 9.5px; }
   .avatares img:last-child { display: none; }
-  .hoja--centro { width: 68%; }
   .anillo { width: 44px; height: 44px; }
 }
 
