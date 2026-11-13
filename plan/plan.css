@@ -52,7 +52,7 @@ main > * { width: 100%; max-width: 560px; min-width: 0; }
 .avatares img { width: 22px; height: 22px; border-radius: 50%; border: 1.5px solid #fff; object-fit: cover; margin-left: -7px; }
 .avatares img:first-child { margin-left: 0; }
 
-.titular { margin: 20px 0 12px; max-width: 760px; text-align: center; font-size: min(44px, 5.8vw); font-weight: 700; line-height: 1.1; letter-spacing: -.03em; }
+.titular { margin: 20px 0 12px; max-width: 760px; text-align: center; font-size: min(44px, 6.8vw); font-weight: 700; line-height: 1.1; letter-spacing: -.03em; }
 /* El título se acomoda solo (líneas parejas, 3 en celular, usando todo el ancho); la cifra resaltada no se corta */
 .titular { text-wrap: balance; padding-inline: 6px; }
 .titular .cifra { white-space: nowrap; }
@@ -232,7 +232,7 @@ main > * { width: 100%; max-width: 560px; min-width: 0; }
 @media (max-width: 350px) {
   .prueba-texto strong { font-size: 10.5px; }
   .prueba-texto > span { font-size: 9.5px; }
-  .avatares img:last-child { display: none; }
+  .avatares img:nth-last-child(-n+2) { display: none; }
   .anillo { width: 44px; height: 44px; }
 }
 
