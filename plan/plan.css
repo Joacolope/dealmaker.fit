@@ -56,7 +56,10 @@ main > * { width: 100%; max-width: 560px; min-width: 0; }
 /* El título se acomoda solo (líneas parejas, 3 en celular, usando todo el ancho); la cifra resaltada no se corta */
 .titular { text-wrap: balance; padding-inline: 6px; }
 /* $5k subrayado en amarillo (no resaltado); no se corta en dos líneas */
-.titular .subraya { white-space: nowrap; background: linear-gradient(transparent 78%, var(--acento-vivo) 78%, var(--acento-vivo) 94%, transparent 94%); }
+.titular { isolation: isolate; }
+.titular .subraya { position: relative; white-space: nowrap; background: none; }
+/* Línea redondeada, translúcida, apoyada debajo del texto */
+.titular .subraya::after { content: ""; position: absolute; z-index: -1; left: -.04em; right: -.04em; bottom: .04em; height: .2em; border-radius: 99px; background: rgba(255, 214, 0, .5); }
 
 /* Vista previa del roadmap: tres tarjetas oscuras dibujadas con CSS, repartidas en abanico; el formulario tapa la parte de abajo */
 .previa { position: relative; z-index: 0; height: 212px; max-width: 400px; margin: 0 auto -38px; overflow: hidden; text-align: left; color: #fff;
