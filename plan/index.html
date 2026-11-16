@@ -95,49 +95,46 @@ src="https://www.facebook.com/tr?id=1034841362227406&ev=PageView&noscript=1"
 
   <form class="lm-form" id="lm-form" novalidate>
     <input class="trampa-bot" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
-    <div class="progreso"><button type="button" class="atras" aria-label="Volver al paso anterior" hidden></button><div class="barra" role="progressbar" aria-label="Avance del formulario" aria-valuemin="1" aria-valuemax="5" aria-valuenow="1"><span></span></div></div>
+    <div class="progreso"><button type="button" class="atras" aria-label="Volver al paso anterior" hidden></button><div class="barra" role="progressbar" aria-label="Avance del formulario" aria-valuemin="1" aria-valuemax="4" aria-valuenow="1"><span></span></div></div>
 
     <div class="paso" data-paso="1" data-campo="profesion">
       <h2>¿Hoy a qué te dedicás?</h2>
       <div class="opciones">
-          <button type="button" class="opcion" data-valor="entrenador">Coach Fitness / Entrenador</button>
+          <button type="button" class="opcion" data-valor="online">Entrenador online</button>
+          <button type="button" class="opcion" data-valor="entrenador">Entrenador personal o profe de gimnasio</button>
+          <button type="button" class="opcion" data-valor="empleado">Empleado en relación de dependencia</button>
           <button type="button" class="opcion" data-valor="nutricionista">Nutricionista</button>
-          <button type="button" class="opcion" data-valor="otro">Otro</button>
+          <button type="button" class="opcion" data-valor="kinesiologo">Kinesiólogo</button>
+          <button type="button" class="opcion" data-valor="estudiante">Todavía estoy estudiando</button>
       </div>
     </div>
 
-    <div class="paso" data-paso="2" data-campo="ejerce" hidden>
-      <h2 id="pregunta-ejerce">¿Ya trabajás con clientes?</h2>
+    <div class="paso" data-paso="2" data-campo="facturacion" hidden>
+      <h2>¿Cuánto estás generando al mes? (USD)</h2>
       <div class="opciones">
-          <button type="button" class="opcion" data-valor="si">Sí, ya tengo clientes</button>
-          <button type="button" class="opcion" data-valor="no">Todavía no</button>
+          <button type="button" class="opcion" data-valor="nada">Todavía nada</button>
+          <button type="button" class="opcion" data-valor="menos-1000">Menos de 1.000</button>
+          <button type="button" class="opcion" data-valor="1000-2000">Entre 1.000 y 2.000</button>
+          <button type="button" class="opcion" data-valor="2000-3000">Entre 2.000 y 3.000</button>
+          <button type="button" class="opcion" data-valor="3000-4000">Entre 3.000 y 4.000</button>
+          <button type="button" class="opcion" data-valor="4000-5000">Entre 4.000 y 5.000</button>
+          <button type="button" class="opcion" data-valor="mas-5000">Más de 5.000</button>
       </div>
     </div>
 
-    <div class="paso" data-paso="3" data-campo="facturacion" hidden>
-      <h2>¿Cuánto facturás hoy por mes con tu profesión?</h2>
+    <div class="paso" data-paso="3" data-campo="bottleneck" hidden>
+      <h2>¿En qué sentís que necesitás más ayuda?</h2>
       <div class="opciones">
-          <button type="button" class="opcion" data-valor="menos-1000">Menos de $1k</button>
-          <button type="button" class="opcion" data-valor="1000-2000">Entre $1k y $2k</button>
-          <button type="button" class="opcion" data-valor="2000-3000">Entre $2k y $3k</button>
-          <button type="button" class="opcion" data-valor="3000-4000">Entre $3k y $4k</button>
-          <button type="button" class="opcion" data-valor="4000-5000">Entre $4k y $5k</button>
-          <button type="button" class="opcion" data-valor="mas-5000">Más de $5k</button>
+          <button type="button" class="opcion" data-valor="captar">Saber conseguir clientes por redes sociales</button>
+          <button type="button" class="opcion" data-valor="estables">Tener ingresos más estables</button>
+          <button type="button" class="opcion" data-valor="presencial">No depender de lo presencial y generar nuevas fuentes de ingresos</button>
+          <button type="button" class="opcion" data-valor="organico">Mejorar mi contenido orgánico</button>
+          <button type="button" class="opcion" data-valor="publicidad">Optimizar mis campañas de publicidad</button>
+          <button type="button" class="opcion" data-valor="equipo">Armar equipo y saber delegar</button>
       </div>
     </div>
 
-    <div class="paso" data-paso="4" data-campo="bottleneck" hidden>
-      <h2>¿Cuál es tu principal desafío hoy en día?</h2>
-      <div class="opciones">
-          <button type="button" class="opcion" data-valor="clientes">Necesito más clientes</button>
-          <button type="button" class="opcion" data-valor="contenido">No sé qué contenido subir para atraer clientes</button>
-          <button type="button" class="opcion" data-valor="convertir">Tengo seguidores, pero no se convierten en clientes</button>
-          <button type="button" class="opcion" data-valor="precios">Cobro poco por lo que hago</button>
-          <button type="button" class="opcion" data-valor="tiempo">No me da el tiempo, todo depende de mí</button>
-      </div>
-    </div>
-
-    <div class="paso" data-paso="5" hidden>
+    <div class="paso" data-paso="4" hidden>
       <h2>¿A dónde te mandamos tu roadmap?</h2>
       <label class="campo"><span>Nombre</span><input type="text" name="nombre" placeholder="Tu nombre" autocomplete="given-name" enterkeyhint="next" required></label>
       <label class="campo"><span>Email</span><input type="email" name="email" placeholder="tu@email.com" autocomplete="email" inputmode="email" autocapitalize="none" spellcheck="false" enterkeyhint="next" required></label>

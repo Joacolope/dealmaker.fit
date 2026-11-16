@@ -5,6 +5,7 @@ window.AGENDA = 'https://dealmakerconsulting.com/agenda';
 
 // Valor del formulario -> texto legible
 window.RANGO = {
+  nada: '$0',
   'menos-1000': 'menos de $1k',
   '1000-2000': 'entre $1k y $2k',
   '2000-3000': 'entre $2k y $3k',

@@ -1,6 +1,6 @@
-// Formulario del Roadmap DealMaker FIT: 5 pasos, valida solo el formato y la calificación la decide el servidor.
-// Orden (como ivansanchezcoach.com): arranca con un toque, sin escribir nada. ¿A qué te dedicás? → ¿ya trabaja con clientes?
-// → facturación (se saltea si no trabaja) → principal desafío → nombre, email, WhatsApp e Instagram. "Recibir mi roadmap" envía todo.
+// Formulario del Roadmap DealMaker FIT: 4 pasos, valida solo el formato y la calificación la decide el servidor.
+// Orden: arranca con un toque, sin escribir nada. ¿A qué te dedicás? → ¿cuánto estás generando al mes? (USD)
+// → ¿en qué necesitás más ayuda? → nombre, email, WhatsApp e Instagram. "Recibir mi roadmap" envía todo.
 // Nada personal viaja en la URL: nombre, Instagram y profesión van por sessionStorage.
 (function () {
   var form = document.getElementById('lm-form');
@@ -8,7 +8,7 @@
   var pasos = form.querySelectorAll('.paso');
   var respuestas = {};
   var actual = 1;
-  var ULTIMO = 5;
+  var ULTIMO = 4;
   var barra = form.querySelector('.progreso .barra');
   var atras = form.querySelector('.progreso .atras');
 
@@ -22,20 +22,8 @@
     if (form.getBoundingClientRect().top < 0) form.scrollIntoView({ block: 'start', behavior: 'smooth' });
   }
 
-  var NOMBRE_PROFESION = { entrenador: 'coach fitness o entrenador', nutricionista: 'nutricionista' };
-  var preguntaEjerce = document.getElementById('pregunta-ejerce');
-
-  // Siguiente paso según lo respondido: si todavía no trabaja con clientes, no factura y se saltea la facturación
-  function siguiente(n) {
-    if (n === 1) {
-      var p = NOMBRE_PROFESION[respuestas.profesion];
-      preguntaEjerce.textContent = p ? '¿Ya trabajás como ' + p + ' con clientes?' : '¿Ya trabajás con clientes?';
-    }
-    if (n === 2 && respuestas.ejerce === 'no') { respuestas.facturacion = 'menos-1000'; return 4; }
-    if (n === 2) delete respuestas.facturacion;
-    return n + 1;
-  }
-  function anterior(n) { return n === 4 && respuestas.ejerce === 'no' ? 2 : n - 1; }
+  function siguiente(n) { return n + 1; }
+  function anterior(n) { return n - 1; }
 
   // Opciones: al tocar una, pasa al siguiente paso con 160 ms de demora
   form.querySelectorAll('.paso[data-campo]').forEach(function (paso) {
@@ -106,8 +94,9 @@
 
   // Envío: el botón del último paso muestra "Un segundo…" mientras tanto
   function enviar(paso, datos) {
-    if (!respuestas.profesion || !respuestas.ejerce || !respuestas.facturacion) return ir(1);
-    if (!respuestas.bottleneck) return ir(4);
+    if (!respuestas.profesion) return ir(1);
+    if (!respuestas.facturacion) return ir(2);
+    if (!respuestas.bottleneck) return ir(3);
     var boton = paso.querySelector('.boton');
     var controles = paso.querySelectorAll('button, input, select');
     var texto = boton.textContent;
@@ -118,7 +107,7 @@
     var cuerpo = {
       nombre: datos.nombre, email: datos.email, instagram: datos.ig,
       telefono: datos.telefono, pais: datos.pais, codigo_pais: datos.codigo_pais, zona_horaria: zona,
-      ejerce: respuestas.ejerce, profesion: respuestas.profesion, facturacion: respuestas.facturacion,
+      ejerce: respuestas.facturacion === 'nada' ? 'no' : 'si', profesion: respuestas.profesion, facturacion: respuestas.facturacion,
       bottleneck: respuestas.bottleneck,
       utm_source: q.get('utm_source') || '', utm_medium: q.get('utm_medium') || '',
       utm_campaign: q.get('utm_campaign') || '', utm_content: q.get('utm_content') || '',
@@ -137,7 +126,7 @@
       .catch(function () { return new Promise(function (ok) { setTimeout(ok, 1500); }).then(pedir); })
       .then(function (j) {
         var c = encodeURIComponent(respuestas.facturacion);
-        // No califica (otra profesión, no trabaja con clientes o menos de $1k): va directo a su roadmap.
+        // No califica (empleado, estudiante o menos de USD 1.000): va directo a su roadmap.
         // Solo el que califica pasa a WhatsApp. La etapa (qué documento recibe) sale siempre de la facturación.
         if (!j.califica) {
           location.href = '/confirmacion-1?e=' + (j.etapa || 1) + '&c=' + c;

@@ -7,7 +7,7 @@ el mismo sistema de diseño; cambia el contenido (Roadmap DealMaker FIT, 4 etapa
 
 | Pieza | URL (subdominio) | Archivo |
 |---|---|---|
-| Landing con formulario (5 pasos) | `/` | `plan/index.html`, `plan/app.js`, `plan/plan.css` |
+| Landing con formulario (4 pasos) | `/` | `plan/index.html`, `plan/app.js`, `plan/plan.css` |
 | Endpoint que califica | `POST /api/recurso` | `api/recurso.js`, `api/_meta-capi.js` |
 | Confirmación 1 (no califica) | `/confirmacion-1?e=1&c=…` | `plan/confirmacion-1/index.html` |
 | Confirmación 2 (califica) | `/confirmacion-2?e=N&c=…&v=…` | `plan/confirmacion-2/index.html` |
@@ -19,24 +19,24 @@ Slugs: `tecnico` (Etapa 01), `crecimiento` (02), `emprendedor` (03), `empresario
 ## Formulario y calificación
 
 Desde el 2026-11-11, inspirado en ivansanchezcoach.com: arranca con un toque (sin escribir) y todo el contacto va al final.
-Barra con "Paso X de 5", porcentaje y flecha para volver arriba a la izquierda; opciones con círculo de selección.
+Solo una barra de progreso amarilla (sin "Paso X de 4" ni porcentaje) y flecha para volver; opciones con círculo de selección.
+Desde el 2026-11-16 son 4 preguntas (se sacó "¿Ya trabajás con clientes?"), con las opciones de la referencia que pasó el usuario, en argentino.
 
-1. ¿Hoy a qué te dedicás? `entrenador` (Coach Fitness / Entrenador) / `nutricionista` / `otro`
-   (3 opciones desde el 2026-11-13, siguiendo a Francisco: simple y con "coach fitness" para sumar a los que no tienen título;
-   `online`, `kinesiologo` y `osteopata` son opciones viejas que el servidor sigue aceptando). "Otro" no califica.
-2. ¿Ya trabajás como <profesión> con clientes? `si` / `no`
-3. ¿Cuánto facturás hoy por mes? `menos-1000` / `1000-2000` / `2000-3000` / `3000-4000` / `4000-5000` / `mas-5000`
-   (de a $1k desde el 2026-11-11). Etapa: menos de $1k → 1 · $1k a $3k → 2 · $3k a $5k → 3 · más de $5k → 4.
-   Si en el paso 2 respondió `no`, este paso se saltea y la facturación queda en `menos-1000`.
-4. ¿Cuál es tu principal desafío hoy en día? En lenguaje simple, sin "leads": `clientes` / `contenido` / `convertir` / `precios` / `tiempo`.
+1. ¿Hoy a qué te dedicás? `online` (Entrenador online) / `entrenador` (Entrenador personal o profe de gimnasio) /
+   `empleado` (Empleado en relación de dependencia) / `nutricionista` / `kinesiologo` / `estudiante` (Todavía estoy estudiando).
+   Empleado y estudiante no califican. `otro` y `osteopata` son opciones viejas que el servidor sigue aceptando (otro no califica).
+2. ¿Cuánto estás generando al mes? (USD) `nada` (Todavía nada) / `menos-1000` / `1000-2000` / `2000-3000` / `3000-4000` / `4000-5000` / `mas-5000`.
+   Etapa: nada o menos de 1.000 → 1 · 1.000 a 3.000 → 2 · 3.000 a 5.000 → 3 · más de 5.000 → 4.
+   `ejerce` ya no se pregunta: el formulario lo manda como `no` si eligió "Todavía nada" y `si` en el resto.
+3. ¿En qué sentís que necesitás más ayuda? `captar` / `estables` / `presencial` / `organico` / `publicidad` / `equipo`.
    Llega a GHL y a la base como `bottleneck` (el valor) y `bottleneck_texto` (la frase de la opción), y arma el mensaje de WhatsApp
-   de la confirmación 2 ("mi principal desafío es …"). Las opciones viejas siguen aceptadas en el servidor.
-5. Nombre · Email · país + WhatsApp · Instagram, todos obligatorios (el país se completa solo por IP o zona horaria). "Recibir mi roadmap" envía.
+   de la confirmación 2 ("donde más ayuda necesito es en …"). Las opciones viejas siguen aceptadas en el servidor.
+4. Nombre · Email · país + WhatsApp · Instagram, todos obligatorios (el país se completa solo por IP o zona horaria). "Recibir mi roadmap" envía.
 
-A GHL llegan **solo los leads que califican**, recién al terminar el paso 5. El que abandona en las preguntas no se guarda.
+A GHL llegan **solo los leads que califican**, recién al terminar el paso 4. El que abandona en las preguntas no se guarda.
 
-`califica = facturacion !== "menos-1000" && profesion !== "otro"` (el que no trabaja con clientes queda en `menos-1000`). Desde el 2026-11-13 "Otro" vuelve a no calificar.
-El paso 4 (desafío) se guarda y viaja a GHL, pero no califica ni descalifica. No se manda a Meta.
+`califica = facturacion` de 1.000 USD o más `&& profesion` no es `empleado`, `estudiante` ni `otro` (desde el 2026-11-16).
+El paso 3 (ayuda) se guarda y viaja a GHL, pero no califica ni descalifica. No se manda a Meta.
 No califica → confirmación 1 con el botón a su roadmap. Solo el que califica → confirmación 2 (WhatsApp)
 y Lead por CAPI. La etapa (qué documento recibe) sale siempre de la facturación.
 

@@ -11,33 +11,44 @@ const SITIO_PLAN = 'https://plan.dealmakerconsulting.com';
 // Valores permitidos de cada pregunta: valor → texto de la opción, que va a GHL como <campo>_texto
 const EJERCE = { si: 'Sí, ya tengo clientes', no: 'Todavía no' };
 const PROFESION = {
-  entrenador: 'Coach Fitness / Entrenador',
+  online: 'Entrenador online',
+  entrenador: 'Entrenador personal o profe de gimnasio',
+  empleado: 'Empleado en relación de dependencia',
   nutricionista: 'Nutricionista',
-  otro: 'Otro',
+  kinesiologo: 'Kinesiólogo',
+  estudiante: 'Todavía estoy estudiando',
   // Opciones anteriores: las acepta por si alguien tenía la página vieja abierta
-  online: 'Coach Fitness / Entrenador online',
-  kinesiologo: 'Kinesiólogo/a',
+  otro: 'Otro',
   osteopata: 'Osteópata',
 };
+// Profesiones que no califican aunque facturen (desde el 2026-11-16)
+const NO_CALIFICA = ['empleado', 'estudiante', 'otro'];
 const FACTURACION = {
-  'menos-1000': 'Menos de $1k',
-  '1000-2000': 'Entre $1k y $2k',
-  '2000-3000': 'Entre $2k y $3k',
-  '3000-4000': 'Entre $3k y $4k',
-  '4000-5000': 'Entre $4k y $5k',
-  'mas-5000': 'Más de $5k',
+  nada: 'Todavía nada',
+  'menos-1000': 'Menos de 1.000 USD',
+  '1000-2000': 'Entre 1.000 y 2.000 USD',
+  '2000-3000': 'Entre 2.000 y 3.000 USD',
+  '3000-4000': 'Entre 3.000 y 4.000 USD',
+  '4000-5000': 'Entre 4.000 y 5.000 USD',
+  'mas-5000': 'Más de 5.000 USD',
   // Rangos anteriores: los acepta por si alguien tenía la página vieja abierta
   '1000-3000': 'Entre $1k y $3k',
   '3000-5000': 'Entre $3k y $5k',
 };
-// Principal desafío (paso 5). Se sigue llamando "bottleneck" en GHL y en la base.
+// ¿En qué sentís que necesitás más ayuda? (paso 3). Se sigue llamando "bottleneck" en GHL y en la base.
 const BOTTLENECK = {
+  captar: 'Saber conseguir clientes por redes sociales',
+  estables: 'Tener ingresos más estables',
+  presencial: 'No depender de lo presencial y generar nuevas fuentes de ingresos',
+  organico: 'Mejorar mi contenido orgánico',
+  publicidad: 'Optimizar mis campañas de publicidad',
+  equipo: 'Armar equipo y saber delegar',
+  // Opciones anteriores: las acepta por si alguien tenía la página vieja abierta
   clientes: 'Necesito más clientes',
   contenido: 'No sé qué contenido subir para atraer clientes',
   convertir: 'Tengo seguidores, pero no se convierten en clientes',
   precios: 'Cobro poco por lo que hago',
   tiempo: 'No me da el tiempo, todo depende de mí',
-  // Opciones anteriores: las acepta por si alguien tenía la página vieja abierta
   diferenciacion: 'Diferenciarme en mi mercado',
   leads: 'No tengo suficientes leads',
   calificados: 'Tengo leads pero no son calificados',
@@ -47,7 +58,7 @@ const BOTTLENECK = {
 
 // La etapa sale solo del rango de facturación
 const ETAPA = {
-  'menos-1000': 1, '1000-2000': 2, '2000-3000': 2, '3000-4000': 3, '4000-5000': 3, 'mas-5000': 4,
+  nada: 1, 'menos-1000': 1, '1000-2000': 2, '2000-3000': 2, '3000-4000': 3, '4000-5000': 3, 'mas-5000': 4,
   '1000-3000': 2, '3000-5000': 3,
 };
 const SLUG = [null, 'tecnico', 'crecimiento', 'emprendedor', 'empresario'];
@@ -95,14 +106,15 @@ module.exports = async (req, res) => {
     return res.status(400).json({ ok: false, error: 'Datos incompletos o inválidos' });
   }
 
-  // Califica el que factura $1k o más al mes y no eligió "Otro" (desde el 2026-11-13 "Otro" vuelve a no calificar). El desafío no califica ni descalifica.
-  // La etapa no cambia por un "no": sale solo de la facturación. Si no trabaja con clientes, no factura.
+  // Califica el que genera USD 1.000 o más al mes y no es empleado ni estudiante. El paso de ayuda no califica ni descalifica.
+  // Desde el 2026-11-16 no se pregunta si trabaja con clientes: "Todavía nada" cuenta como que no. La etapa sale solo de la facturación.
+  if (!d.ejerce) d.ejerce = d.facturacion === 'nada' ? 'no' : 'si';
   if (d.ejerce === 'no') d.facturacion = 'menos-1000';
   d.ejerce_texto = EJERCE[d.ejerce];
   d.profesion_texto = PROFESION[d.profesion];
   d.facturacion_texto = FACTURACION[d.facturacion];
   d.bottleneck_texto = BOTTLENECK[d.bottleneck];
-  const califica = d.facturacion !== 'menos-1000' && d.profesion !== 'otro';
+  const califica = d.facturacion !== 'menos-1000' && d.facturacion !== 'nada' && !NO_CALIFICA.includes(d.profesion);
   const etapa = ETAPA[d.facturacion];
   const url = SITIO_PLAN + '/roadmap/' + SLUG[etapa] + '?c=' + d.facturacion;
   const prueba = email.endsWith('@resend.dev') || d.utm_source === 'prueba-tecnica';
