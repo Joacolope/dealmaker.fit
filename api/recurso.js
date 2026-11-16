@@ -109,7 +109,7 @@ module.exports = async (req, res) => {
   // Califica el que genera USD 1.000 o más al mes y no es empleado ni estudiante. El paso de ayuda no califica ni descalifica.
   // Desde el 2026-11-16 no se pregunta si trabaja con clientes: "Todavía nada" cuenta como que no. La etapa sale solo de la facturación.
   if (!d.ejerce) d.ejerce = d.facturacion === 'nada' ? 'no' : 'si';
-  if (d.ejerce === 'no') d.facturacion = 'menos-1000';
+  if (d.ejerce === 'no' && d.facturacion !== 'nada') d.facturacion = 'menos-1000';   // formulario viejo (preguntaba si trabaja con clientes)
   d.ejerce_texto = EJERCE[d.ejerce];
   d.profesion_texto = PROFESION[d.profesion];
   d.facturacion_texto = FACTURACION[d.facturacion];
