@@ -98,14 +98,14 @@ src="https://www.facebook.com/tr?id=1034841362227406&ev=PageView&noscript=1"
   var rango = RANGO[q.get('c')];
   var ayuda = AYUDA[q.get('b')] || AYUDA[lm.cb];
 
-  // "¡Hola! Quiero recibir mi plan para escalar a $5k USD/mes. Soy {profesión}, hoy genero {rango} USD al mes
+  // "Hola! Quiero recibir mi plan para escalar a $5k USD/mes. Soy {profesión}, hoy genero {rango} USD al mes
   //  y donde más ayuda necesito es en {ayuda}." Si falta un dato, esa parte no va.
   var partes = [];
   if (profesion) partes.push('Soy ' + profesion);
   if (rango) partes.push((partes.length ? 'hoy genero ' : 'Hoy genero ') + rango + ' USD al mes');
   var frase = partes.join(', ');
   if (ayuda) frase += (frase ? ' y donde' : 'Donde') + ' más ayuda necesito es en ' + ayuda;
-  var mensaje = '¡Hola! Quiero recibir mi plan para escalar a $5k USD/mes.' + (frase ? ' ' + frase + '.' : '');
+  var mensaje = 'Hola! Quiero recibir mi plan para escalar a $5k USD/mes.' + (frase ? ' ' + frase + '.' : '');
   document.getElementById('mensaje').textContent = mensaje;
 
   var boton = document.getElementById('wa');
